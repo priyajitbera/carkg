@@ -4,6 +4,8 @@
     <properties>
         <java.version>17</java.version>
         <spring-ai.version>1.0.2</spring-ai.version>
+        <jena.version>5.1.0</jena.version>
+        <lombok.version>1.18.34</lombok.version>
     </properties>
     <groupId>com.github.priyajitbera</groupId>
     <artifactId>carkg-service-parent</artifactId>
@@ -24,63 +26,9 @@
         <module>carkg-service-lib-jena-fuseki</module>
     </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-model-ollama</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- Apache Jena Core -->
-        <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>apache-jena-libs</artifactId>
-            <version>5.1.0</version>
-            <type>pom</type>
-        </dependency>
-
-        <!-- Jena TDB2 (local graph store) -->
-        <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>jena-tdb2</artifactId>
-            <version>5.1.0</version>
-        </dependency>
-
-        <!-- Jena Fuseki HTTP Client (for remote SPARQL endpoint) -->
-        <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>jena-rdfconnection</artifactId>
-            <version>5.1.0</version>
-        </dependency>
-    </dependencies>
     <dependencyManagement>
         <dependencies>
+            <!-- Import Spring AI BOM -->
             <dependency>
                 <groupId>org.springframework.ai</groupId>
                 <artifactId>spring-ai-bom</artifactId>
@@ -88,25 +36,78 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- Apache Jena versions centralized -->
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>apache-jena-libs</artifactId>
+                <version>${jena.version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>jena-tdb2</artifactId>
+                <version>${jena.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>jena-rdfconnection</artifactId>
+                <version>${jena.version}</version>
+            </dependency>
+
+            <!-- Internal module versions -->
+            <dependency>
+                <groupId>com.github.priyajitbera</groupId>
+                <artifactId>carkg-service-data-jpa</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.priyajitbera</groupId>
+                <artifactId>carkg-service-lib-data-rdf</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.priyajitbera</groupId>
+                <artifactId>carkg-service-lib-jena-fuseki</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
         <plugins>
-            <!-- Annotation Processor -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
+                    <release>${java.version}</release>
+                    <parameters>true</parameters>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.34</version>
+                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <release>${java.version}</release>
+                        <parameters>true</parameters>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project> 

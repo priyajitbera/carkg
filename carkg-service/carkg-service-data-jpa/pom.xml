@@ -35,16 +35,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        local modules as dependencies-->
+        <!-- Local module dependencies - versions managed by parent -->
         <dependency>
             <groupId>com.github.priyajitbera</groupId>
             <artifactId>carkg-service-lib-data-rdf</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.github.priyajitbera</groupId>
             <artifactId>carkg-service-lib-jena-fuseki</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
