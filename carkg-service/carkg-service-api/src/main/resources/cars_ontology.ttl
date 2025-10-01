@@ -1,0 +1,29 @@
+### Ontology in N-TRIPLE format (TBox)
+
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandCountryOfOrigin> <http://www.w3.org/2000/01/rdf-schema#comment> "A car brand's country of origin is the country where the brand was founded and historically developed. For example, Toyota is a Japanese brand, Volkswagen is German, and Ford is American, according to various sources on car brands and manufacturers. While manufacturing may occur in other countries, the \"country of origin\" refers to the brand's original national roots." .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandCountryOfOrigin> <http://www.w3.org/2000/01/rdf-schema#label> "Brand Country of Origin" .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandCountryOfOrigin> <http://www.w3.org/2000/01/rdf-schema#domain> <\u0060https://github.com/priyajitbera/carkg/ontology/\u0060Brand> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandCountryOfOrigin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060Brand> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandId> <http://www.w3.org/2000/01/rdf-schema#comment> "Identifier of the brand" .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandId> <http://www.w3.org/2000/01/rdf-schema#label> "Brand Identifier" .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandId> <http://www.w3.org/2000/01/rdf-schema#domain> <\u0060https://github.com/priyajitbera/carkg/ontology/\u0060Brand> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandId> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandName> <http://www.w3.org/2000/01/rdf-schema#comment> "A \"Brand Name\" of a car brand is the specific name a company uses to market and sell its cars, such as Maruti Suzuki, Hyundai, Tata Motors, Toyota, Honda, Ford, or Volkswagen. These names identify the manufacturer and often have origins in the founders' names (like Toyota) or historical figures (like Cadillac)." .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandName> <http://www.w3.org/2000/01/rdf-schema#label> "Brand Name" .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandName> <http://www.w3.org/2000/01/rdf-schema#domain> <\u0060https://github.com/priyajitbera/carkg/ontology/\u0060Brand> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060brandName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060hasBrand> <http://www.w3.org/2000/01/rdf-schema#comment> "A Car Brand, also known as the make, is the manufacturer or company that designs and builds vehicles, such as Toyota, Ford, or Mercedes-Benz. It identifies the company, while the car model (like the Ford Mustang or Toyota Corolla) is the specific type of vehicle a brand offers." .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060hasBrand> <http://www.w3.org/2000/01/rdf-schema#label> "Car Brand" .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060hasBrand> <http://www.w3.org/2000/01/rdf-schema#range> <\u0060https://github.com/priyajitbera/carkg/ontology/\u0060Brand> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060hasBrand> <http://www.w3.org/2000/01/rdf-schema#domain> <\u0060https://github.com/priyajitbera/carkg/ontology/\u0060Car> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060hasBrand> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060carId> <http://www.w3.org/2000/01/rdf-schema#comment> "Identifier of the Car" .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060carId> <http://www.w3.org/2000/01/rdf-schema#label> "Car Identifier" .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060carId> <http://www.w3.org/2000/01/rdf-schema#domain> <\u0060https://github.com/priyajitbera/carkg/ontology/\u0060Car> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060carId> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060Car> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060carName> <http://www.w3.org/2000/01/rdf-schema#comment> "A \"Car Name\" refers to either the specific model of a vehicle, such as a Toyota Corolla or Ford F-Series, or the make or brand of the car, like Toyota or Ford. To find the name of a specific car, you typically look for the model name, often found on the back of the vehicle." .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060carName> <http://www.w3.org/2000/01/rdf-schema#label> "Car Name" .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060carName> <http://www.w3.org/2000/01/rdf-schema#domain> <\u0060https://github.com/priyajitbera/carkg/ontology/\u0060Car> .
+<\u0060https://github.com/priyajitbera/carkg/ontology/\u0060carName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
