@@ -3,12 +3,13 @@ package com.github.priyajitbera.carkg.service.api.mapper.response;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.priyajitbera.carkg.service.api.mapper.CommonMapperConfig;
 import com.github.priyajitbera.carkg.service.data.jpa.entity.Embedding;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 
-@Mapper(componentModel = "spring")
-public abstract class EmbeddingMapper {
+@Mapper(config = CommonMapperConfig.class)
+public abstract class EmbeddingResponseMapper {
 
     @Named("embeddingToFloatArray")
     float[] map(Embedding embedding) {

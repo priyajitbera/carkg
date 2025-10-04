@@ -1,5 +1,6 @@
 package com.github.priyajitbera.carkg.service.api.mapper.response;
 
+import com.github.priyajitbera.carkg.service.api.mapper.CommonMapperConfig;
 import com.github.priyajitbera.carkg.service.api.model.response.CarModel;
 import com.github.priyajitbera.carkg.service.api.model.response.semanticsearch.CarSemanticSearchModel;
 import com.github.priyajitbera.carkg.service.data.jpa.entity.Car;
@@ -8,8 +9,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring", uses = {BrandMapper.class, EmbeddingMapper.class})
-public abstract class CarMapper {
+@Mapper(config = CommonMapperConfig.class, uses = {BrandResponseMapper.class, EmbeddingResponseMapper.class})
+public abstract class CarResponseMapper {
 
     @Mappings({
             @Mapping(target = "brand", source = "brand"),
