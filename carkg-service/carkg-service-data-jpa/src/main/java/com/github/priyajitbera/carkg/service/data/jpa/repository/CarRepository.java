@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CarRepository extends JpaRepository<Car, String> {
@@ -20,4 +21,6 @@ public interface CarRepository extends JpaRepository<Car, String> {
             JOIN embedding e on c.embedding_id = e.id
             ORDER BY score DESC""", nativeQuery = true)
     List<CarSemanticSearchProjection> cosineSimilarity(@Param("queryEmbedding") String queryEmbedding);
+
+    Optional<Car> findByBrandIdAndName(String brandId, String name);
 }
