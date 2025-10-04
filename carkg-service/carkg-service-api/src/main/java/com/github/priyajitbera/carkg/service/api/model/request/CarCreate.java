@@ -5,11 +5,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CarCreate {
+
     private String name;
     private String brandId;
+    private List<EngineCreate> engines;
+    private List<String> transmissionTypeIds;
+    private List<VariantCreate> variants;
+    private List<ColorOptionCreate> colorOptions;
+    private List<TransmissionTypeCreate> transmissionTypes;
 }
