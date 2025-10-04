@@ -1,6 +1,7 @@
 package com.github.priyajitbera.carkg.service.data.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
 import com.github.priyajitbera.carkg.service.data.rdf.interfaces.Identifiable;
 import jakarta.persistence.*;
@@ -9,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,6 +31,7 @@ public class Car implements Identifiable {
 
     @RdfPredicate(value = "hasBrand", label = "Car Brand", comment = """
             A Car Brand, also known as the make, is the manufacturer or company that designs and builds vehicles, such as Toyota, Ford, or Mercedes-Benz. It identifies the company, while the car model (like the Ford Mustang or Toyota Corolla) is the specific type of vehicle a brand offers.""")
+
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_car_brand"))
     private Brand brand;
@@ -41,4 +45,31 @@ public class Car implements Identifiable {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_car_semantic_object"))
     private SemanticObject semanticObject;
+
+    @RdfPredicate(value = "hasVariants", label = "Car Variants", comment = "List of variants available for this car model")
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Variant> variants;
+
+    @RdfPredicate(value = "hasEngines", label = "Available Engines", comment = "Engines associated with this car model")
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Engine> engines;
+
+    @RdfPredicate(value = "hasColorOptions", label = "Available Color Options", comment = "Colors in which this car is offered")
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    private List<ColorOption> colorOptions;
+
+    @RdfPredicate(value = "hasTransmissionTypes", label = "Available Transmission Types", comment = "Transmission types associated with this car model")
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TransmissionType> transmissionTypes;
+
+
+    public String deriveId() {
+        assert brand != null;
+        assert name != null;
+        return (new IdGen()).generate(brand.deriveId(), name);
+    }
+
+    public void deriveAndSetId() {
+        this.id = deriveId();
+    }
 }
