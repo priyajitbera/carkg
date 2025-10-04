@@ -1,5 +1,23 @@
 ### Ontology in N3 format (TBox)
 
+<https://github.com/priyajitbera/carkg/ontology/hasTransmissionTypes>
+        a       <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+        <http://www.w3.org/2000/01/rdf-schema#comment>
+                "Transmission types associated with this car model";
+        <http://www.w3.org/2000/01/rdf-schema#domain>
+                <https://github.com/priyajitbera/carkg/ontology/Car>;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Available Transmission Types" .
+
+<https://github.com/priyajitbera/carkg/ontology/hasEngines>
+        a       <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+        <http://www.w3.org/2000/01/rdf-schema#comment>
+                "Engines associated with this car model";
+        <http://www.w3.org/2000/01/rdf-schema#domain>
+                <https://github.com/priyajitbera/carkg/ontology/Car>;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Available Engines" .
+
 <https://github.com/priyajitbera/carkg/ontology/brandName>
         a       <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
         <http://www.w3.org/2000/01/rdf-schema#comment>
@@ -34,6 +52,24 @@
                 "Car Brand";
         <http://www.w3.org/2000/01/rdf-schema#range>
                 <https://github.com/priyajitbera/carkg/ontology/Brand> .
+
+<https://github.com/priyajitbera/carkg/ontology/hasVariants>
+        a       <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+        <http://www.w3.org/2000/01/rdf-schema#comment>
+                "List of variants available for this car model";
+        <http://www.w3.org/2000/01/rdf-schema#domain>
+                <https://github.com/priyajitbera/carkg/ontology/Car>;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Car Variants" .
+
+<https://github.com/priyajitbera/carkg/ontology/hasColorOptions>
+        a       <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+        <http://www.w3.org/2000/01/rdf-schema#comment>
+                "Colors in which this car is offered";
+        <http://www.w3.org/2000/01/rdf-schema#domain>
+                <https://github.com/priyajitbera/carkg/ontology/Car>;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Available Color Options" .
 
 <https://github.com/priyajitbera/carkg/ontology/carName>
         a       <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;

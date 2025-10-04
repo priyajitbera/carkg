@@ -3,6 +3,28 @@
 {
     "@graph": [
         {
+            "@id": "https://github.com/priyajitbera/carkg/ontology/hasTransmissionTypes",
+            "http://www.w3.org/2000/01/rdf-schema#comment": "Transmission types associated with this car model",
+            "http://www.w3.org/2000/01/rdf-schema#label": "Available Transmission Types",
+            "http://www.w3.org/2000/01/rdf-schema#domain": {
+                "@id": "https://github.com/priyajitbera/carkg/ontology/Car"
+            },
+            "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+        },
+        {
+            "@id": "https://github.com/priyajitbera/carkg/ontology/Car",
+            "@type": "http://www.w3.org/2000/01/rdf-schema#Class"
+        },
+        {
+            "@id": "https://github.com/priyajitbera/carkg/ontology/hasEngines",
+            "http://www.w3.org/2000/01/rdf-schema#comment": "Engines associated with this car model",
+            "http://www.w3.org/2000/01/rdf-schema#label": "Available Engines",
+            "http://www.w3.org/2000/01/rdf-schema#domain": {
+                "@id": "https://github.com/priyajitbera/carkg/ontology/Car"
+            },
+            "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+        },
+        {
             "@id": "https://github.com/priyajitbera/carkg/ontology/brandName",
             "http://www.w3.org/2000/01/rdf-schema#comment": "A \"Brand Name\" of a car brand is the specific name a company uses to market and sell its cars, such as Maruti Suzuki, Hyundai, Tata Motors, Toyota, Honda, Ford, or Volkswagen. These names identify the manufacturer and often have origins in the founders' names (like Toyota) or historical figures (like Cadillac).",
             "http://www.w3.org/2000/01/rdf-schema#label": "Brand Name",
@@ -13,10 +35,6 @@
         },
         {
             "@id": "https://github.com/priyajitbera/carkg/ontology/Brand",
-            "@type": "http://www.w3.org/2000/01/rdf-schema#Class"
-        },
-        {
-            "@id": "https://github.com/priyajitbera/carkg/ontology/Car",
             "@type": "http://www.w3.org/2000/01/rdf-schema#Class"
         },
         {
@@ -35,6 +53,24 @@
             "http://www.w3.org/2000/01/rdf-schema#range": {
                 "@id": "https://github.com/priyajitbera/carkg/ontology/Brand"
             },
+            "http://www.w3.org/2000/01/rdf-schema#domain": {
+                "@id": "https://github.com/priyajitbera/carkg/ontology/Car"
+            },
+            "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+        },
+        {
+            "@id": "https://github.com/priyajitbera/carkg/ontology/hasVariants",
+            "http://www.w3.org/2000/01/rdf-schema#comment": "List of variants available for this car model",
+            "http://www.w3.org/2000/01/rdf-schema#label": "Car Variants",
+            "http://www.w3.org/2000/01/rdf-schema#domain": {
+                "@id": "https://github.com/priyajitbera/carkg/ontology/Car"
+            },
+            "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+        },
+        {
+            "@id": "https://github.com/priyajitbera/carkg/ontology/hasColorOptions",
+            "http://www.w3.org/2000/01/rdf-schema#comment": "Colors in which this car is offered",
+            "http://www.w3.org/2000/01/rdf-schema#label": "Available Color Options",
             "http://www.w3.org/2000/01/rdf-schema#domain": {
                 "@id": "https://github.com/priyajitbera/carkg/ontology/Car"
             },

@@ -10,6 +10,11 @@
     <rdfs:label>Car Name</rdfs:label>
     <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
   </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasTransmissionTypes">
+    <rdfs:comment>Transmission types associated with this car model</rdfs:comment>
+    <rdfs:label>Available Transmission Types</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
   <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/brandCountryOfOrigin">
     <rdfs:comment>A car brand's country of origin is the country where the brand was founded and historically developed. For example, Toyota is a Japanese brand, Volkswagen is German, and Ford is American, according to various sources on car brands and manufacturers. While manufacturing may occur in other countries, the "country of origin" refers to the brand's original national roots.</rdfs:comment>
     <rdfs:label>Brand Country of Origin</rdfs:label>
@@ -18,6 +23,11 @@
   <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/carId">
     <rdfs:comment>Identifier of the Car</rdfs:comment>
     <rdfs:label>Car Identifier</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasColorOptions">
+    <rdfs:comment>Colors in which this car is offered</rdfs:comment>
+    <rdfs:label>Available Color Options</rdfs:label>
     <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
   </rdf:Property>
   <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/brandId">
@@ -29,6 +39,16 @@
     <rdfs:comment>A "Brand Name" of a car brand is the specific name a company uses to market and sell its cars, such as Maruti Suzuki, Hyundai, Tata Motors, Toyota, Honda, Ford, or Volkswagen. These names identify the manufacturer and often have origins in the founders' names (like Toyota) or historical figures (like Cadillac).</rdfs:comment>
     <rdfs:label>Brand Name</rdfs:label>
     <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Brand"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasVariants">
+    <rdfs:comment>List of variants available for this car model</rdfs:comment>
+    <rdfs:label>Car Variants</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasEngines">
+    <rdfs:comment>Engines associated with this car model</rdfs:comment>
+    <rdfs:label>Available Engines</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
   </rdf:Property>
   <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasBrand">
     <rdfs:comment>A Car Brand, also known as the make, is the manufacturer or company that designs and builds vehicles, such as Toyota, Ford, or Mercedes-Benz. It identifies the company, while the car model (like the Ford Mustang or Toyota Corolla) is the specific type of vehicle a brand offers.</rdfs:comment>
