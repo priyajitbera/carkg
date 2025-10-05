@@ -1,16 +1,16 @@
 package com.github.priyajitbera.carkg.service.data.jpa.entity;
 
+import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -26,6 +26,28 @@ public class FuelType {
 
     @RdfPredicate(value = "fuelTypeName", label = "Fuel Type Name", comment = "Free-text fuel type, e.g., Petrol, Diesel, CNG, Electric, Hybrid")
     private String name;
+
+    public String deriveId() {
+        assert name != null;
+        return (new IdGen()).generate(name);
+    }
+
+    public void deriveAndSetId() {
+        this.id = deriveId();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        FuelType that = (FuelType) object;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
 
 

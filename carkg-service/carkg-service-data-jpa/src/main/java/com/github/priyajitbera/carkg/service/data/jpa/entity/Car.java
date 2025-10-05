@@ -62,6 +62,9 @@ public class Car implements Identifiable {
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TransmissionType> transmissionTypes;
 
+    @RdfPredicate(value = "hasCombination", label = "Available Combination of Variant, Engine, TransmissionType and ColorOption", comment = "Available Combination of Variant, Engine, TransmissionType and ColorOption")
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Combination> combinations;
 
     public String deriveId() {
         assert brand != null;

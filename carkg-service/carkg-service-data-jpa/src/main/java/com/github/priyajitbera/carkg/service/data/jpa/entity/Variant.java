@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,26 +26,6 @@ public class Variant {
 
     @RdfPredicate(value = "variantName", label = "Variant Name", comment = "Name of the variant, e.g., LX, Sport, Top Model")
     private String name;
-
-    @RdfPredicate(value = "hasEngines", label = "Engines", comment = "Engines associated with this variant")
-    @ManyToMany
-    @JoinTable(
-            name = "variant_engines",
-            joinColumns = @JoinColumn(name = "variant_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)),
-            inverseJoinColumns = @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    )
-    private List<Engine> engines;
-
-    @RdfPredicate(value = "hasTransmissionTypes", label = "Transmission Types", comment = "Transmission types associated with this variant")
-    @ManyToMany
-    @JoinTable(
-            name = "variant_transmission_types",
-            joinColumns = @JoinColumn(name = "variant_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)),
-            inverseJoinColumns = @JoinColumn(name = "transmission_type_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    )
-    private List<TransmissionType> transmissionTypes;
-
-    // Fuel type now comes via Engine.fuelType
 
     @JsonIgnore
     @ManyToOne
