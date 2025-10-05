@@ -21,4 +21,5 @@ public class CarModel extends EmbeddableModel {
     private List<VariantModel> variants;
     private List<EngineModel> engines;
     private List<TransmissionTypeModel> transmissionTypes;
+    private List<CombinationModel> combinations;
 }
