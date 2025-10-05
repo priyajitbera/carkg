@@ -1,19 +1,18 @@
 package com.github.priyajitbera.carkg.service.api.model.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
-@SuperBuilder
+
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CarModel extends EmbeddableModel {
+public class CarModel {
     private String id;
     private String name;
     private BrandModel brand;
