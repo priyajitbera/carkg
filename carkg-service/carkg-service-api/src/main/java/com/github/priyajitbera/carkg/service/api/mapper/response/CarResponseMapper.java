@@ -13,7 +13,6 @@ import org.mapstruct.Mappings;
 public abstract class CarResponseMapper {
 
     @Mappings({
-            @Mapping(target = "brand", source = "brand"),
             @Mapping(target = "embedding", source = "embedding", qualifiedByName = "embeddingToFloatArray")
     })
     public abstract CarModel map(Car car);

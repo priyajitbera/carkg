@@ -30,10 +30,8 @@ public abstract class ColorOptionRequestMapper {
     }
 
     @AfterMapping
-    protected void afterMapping(@MappingTarget ColorOption colorOption) {
-        if (colorOption != null) {
-            colorOption.deriveAndSetId();
-        }
+    protected void afterMapping(@MappingTarget ColorOption target) {
+        target.deriveAndSetId();
     }
 
     public static GenericListItemMapper<ColorOptionCreate, ColorOption, CarRequestMappingContext> genericListItemMapper(

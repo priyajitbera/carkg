@@ -2,6 +2,7 @@ package com.github.priyajitbera.carkg.service.api.mapper.request;
 
 import com.github.priyajitbera.carkg.service.api.mapper.CommonMapperConfig;
 import com.github.priyajitbera.carkg.service.api.mapper.request.context.CarRequestMappingContext;
+import com.github.priyajitbera.carkg.service.api.mapper.request.context.VariantRequestMappingContext;
 import com.github.priyajitbera.carkg.service.api.model.request.VariantCreate;
 import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
 import com.github.priyajitbera.carkg.service.data.jpa.entity.Car;
@@ -16,8 +17,10 @@ import java.util.Objects;
 @Mapper(config = CommonMapperConfig.class)
 public abstract class VariantRequestMapper {
 
-    @Mapping(target = "car", source = ".", qualifiedBy = MapCar.class)
-    public abstract void map(@MappingTarget Variant variant, VariantCreate src, @Context CarRequestMappingContext context);
+    @Mappings({
+            @Mapping(target = "car", source = ".", qualifiedBy = MapCar.class)
+    })
+    public abstract void map(@MappingTarget Variant variant, VariantCreate src, @Context VariantRequestMappingContext context);
 
     @Qualifier
     @Retention(RetentionPolicy.CLASS)
@@ -25,23 +28,51 @@ public abstract class VariantRequestMapper {
     }
 
     @MapCar
-    protected Car mapCar(VariantCreate src, @Context CarRequestMappingContext context) {
-        return context.car();
+    protected Car mapCar(VariantCreate src, @Context VariantRequestMappingContext context) {
+        return context.carRequestMappingContext().car();
     }
 
     @AfterMapping
-    protected void afterMapping(@MappingTarget Variant variant) {
-        variant.deriveAndSetId();
+    protected void afterMapping(@MappingTarget Variant target) {
+        target.deriveAndSetId();
     }
 
-    public static GenericListItemMapper<VariantCreate, Variant, CarRequestMappingContext> genericListItemMapper(
+    public static GenericListItemMapper<VariantCreate, Variant, VariantRequestMappingContext> genericListItemMapper(
             VariantRequestMapper mapper
     ) {
         GenericListItemMapper<VariantCreate,
-                Variant, CarRequestMappingContext> listItemMapper = new GenericListItemMapper<>() {
+                Variant, VariantRequestMappingContext> listItemMapper = new GenericListItemMapper<>() {
             @Override
-            TriConsumer<Variant, VariantCreate, CarRequestMappingContext> getMapper() {
+            TriConsumer<Variant, VariantCreate, VariantRequestMappingContext> getMapper() {
                 return mapper::map;
+            }
+
+            @Override
+            boolean match(Variant target, VariantCreate src) {
+                return Objects.equals(target.getId(), (new IdGen()).generate(target.getCar().deriveId(), src.getName()));
+            }
+
+            @Override
+            Variant newTargetInstance() {
+                return new Variant();
+            }
+        };
+        return listItemMapper;
+    }
+
+    public static GenericListItemMapper2<VariantCreate, Variant, CarRequestMappingContext, VariantRequestMappingContext> genericListItemMapper2(
+            VariantRequestMapper mapper
+    ) {
+        GenericListItemMapper2<VariantCreate,
+                Variant, CarRequestMappingContext, VariantRequestMappingContext> listItemMapper = new GenericListItemMapper2<>() {
+            @Override
+            TriConsumer<Variant, VariantCreate, VariantRequestMappingContext> getMapper() {
+                return (target, source, context) -> mapper.map(target, source, context);
+            }
+
+            @Override
+            VariantRequestMappingContext getContext(CarRequestMappingContext parentContext, Variant target) {
+                return new VariantRequestMappingContext(parentContext, target);
             }
 
             @Override

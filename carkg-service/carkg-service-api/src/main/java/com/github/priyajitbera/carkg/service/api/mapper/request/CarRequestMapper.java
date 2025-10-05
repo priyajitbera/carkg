@@ -23,13 +23,16 @@ public abstract class CarRequestMapper {
     private EngineRequestMapper engineRequestMapper;
     @Autowired
     private TransmissiongTypeRequestMapper transmissiongTypeRequestMapper;
+    @Autowired
+    private CombinationRequestMapper combinationRequestMapper;
 
     @Mappings({
             @Mapping(target = "brand", source = ".", qualifiedBy = MapBrand.class),
             @Mapping(target = "colorOptions", qualifiedBy = MapColorOptions.class, dependsOn = {"brand", "name"}),
-            @Mapping(target = "variants", qualifiedBy = MapVariants.class, dependsOn = {"brand", "name"}),
             @Mapping(target = "engines", qualifiedBy = MapEngines.class, dependsOn = {"brand", "name"}),
-            @Mapping(target = "transmissionTypes", qualifiedBy = MapTransmissionTypes.class, dependsOn = {"brand", "name"})
+            @Mapping(target = "transmissionTypes", qualifiedBy = MapTransmissionTypes.class, dependsOn = {"brand", "name"}),
+            @Mapping(target = "variants", qualifiedBy = MapVariants.class, dependsOn = {"brand", "name"}),
+            @Mapping(target = "combinations", qualifiedBy = MapCombinations.class, dependsOn = {"brand", "name", "variants", "engines", "transmissionTypes", "colorOptions"})
     })
     public abstract void map(@MappingTarget Car car, CarCreate create, @Context CarRequestMappingContext context);
 
@@ -60,8 +63,18 @@ public abstract class CarRequestMapper {
     }
 
     @MapVariants
-    protected List<Variant> mapVariants(List<VariantCreate> childItemsCreate, @Context CarRequestMappingContext context) {
-        return VariantRequestMapper.genericListItemMapper(variantRequestMapper).map(context.car().getVariants(), childItemsCreate, context);
+    protected List<Variant> mapVariants(List<VariantCreate> sourceItems, @Context CarRequestMappingContext context) {
+        return VariantRequestMapper.genericListItemMapper2(variantRequestMapper).map(context.car().getVariants(), sourceItems, context);
+    }
+
+    @Qualifier
+    @Retention(RetentionPolicy.CLASS)
+    @interface MapCombinations {
+    }
+
+    @MapCombinations
+    protected List<Combination> mapCombinations(List<CombinationCreate> sourceItems, @Context CarRequestMappingContext context) {
+        return CombinationRequestMapper.genericListItemMapper(combinationRequestMapper).map(context.car().getCombinations(), sourceItems, context);
     }
 
     @Qualifier
@@ -85,8 +98,8 @@ public abstract class CarRequestMapper {
     }
 
     @AfterMapping
-    protected void afterMapping(@MappingTarget Car car) {
-        car.deriveAndSetId();
+    protected void afterMapping(@MappingTarget Car target) {
+        target.deriveAndSetId();
     }
 }
 

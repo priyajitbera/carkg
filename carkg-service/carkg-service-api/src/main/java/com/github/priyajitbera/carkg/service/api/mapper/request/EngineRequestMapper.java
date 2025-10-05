@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
+import java.util.Optional;
 
 @Mapper(config = CommonMapperConfig.class)
 public abstract class EngineRequestMapper {
@@ -44,11 +45,19 @@ public abstract class EngineRequestMapper {
 
     @MapFuelType
     protected FuelType mapFuelType(FuelTypeCreate src, @Context CarRequestMappingContext context) {
-        FuelType fuelType = fuelTypeRepository.findByName(src.getName()).orElse(new FuelType() {{
-            setId(new IdGen().generate(src.getName()));
-            setName(src.getName());
-        }});
-        return fuelType;
+        Optional<FuelType> newlyCreatedOpt = context.createdFuelTypes().stream().filter(createdFuelType -> Objects.equals(createdFuelType.getName(), src.getName()))
+                .findFirst();
+        return newlyCreatedOpt.orElseGet(() -> {
+            Optional<FuelType> previouslyCreated = fuelTypeRepository.findByName(src.getName());
+            return previouslyCreated.orElseGet(() -> {
+                FuelType newFuelType = new FuelType() {{
+                    setId(new IdGen().generate(src.getName()));
+                    setName(src.getName());
+                }};
+                context.createdFuelTypes().add(newFuelType);
+                return newFuelType;
+            });
+        });
     }
 
     @AfterMapping

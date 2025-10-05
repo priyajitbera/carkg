@@ -13,10 +13,8 @@ public abstract class BrandRequestMapper {
     public abstract void map(@MappingTarget Brand brand, BrandCreate create);
 
     @AfterMapping
-    protected void afterMapping(@MappingTarget Brand brand) {
-        if (brand != null) {
-            brand.derviceAndSetId();
-        }
+    protected void afterMapping(@MappingTarget Brand target) {
+        target.derviceAndSetId();
     }
 }
 
