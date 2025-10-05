@@ -5,14 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VariantCreate {
-    private String name;
+public class CombinationCreate {
+    private String variant;
+    private String transmissionType;
+    private String engine;
+    private String colorOption;
 }
 
 

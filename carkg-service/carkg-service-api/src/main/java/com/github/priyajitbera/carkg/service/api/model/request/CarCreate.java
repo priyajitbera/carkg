@@ -20,4 +20,5 @@ public class CarCreate {
     private List<VariantCreate> variants;
     private List<ColorOptionCreate> colorOptions;
     private List<TransmissionTypeCreate> transmissionTypes;
+    private List<CombinationCreate> combinations;
 }
