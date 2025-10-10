@@ -1,7 +1,7 @@
-# 🚗 Car Knowledge Graph (MySQL → Semantic KG)
+## 🚗 Car Knowledge Graph (MySQL → Semantic KG)
 A Java Spring Boot application that transforms relational data from MySQL into a Semantic Knowledge Graph (RDF) using Apache Jena, enriched with vector embeddings for intelligent natural language semantic search.
 
-# ✨ Overview
+### ✨ Overview
 
 This project bridges the gap between structured relational databases and semantic web technologies.
 It converts MySQL-based automotive data (brands, models, variants, specifications) into a knowledge graph, enabling:
@@ -10,7 +10,7 @@ It converts MySQL-based automotive data (brands, models, variants, specification
  - Vector-based semantic similarity search for natural language queries.
  - Integration of symbolic (RDF) and neural (embeddings) representations.
 
-# 🧠 Key Features
+### 🧠 Key Features
 
 - 🔄 Automated Mapping: Translates relational schemas into RDF triples.
 - 🧩 Ontology-Driven: Uses custom or standard ontologies to describe domain semantics.
