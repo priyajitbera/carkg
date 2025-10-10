@@ -1,14 +1,15 @@
 package com.github.priyajitbera.carkg.service.api.model.response;
 
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@EqualsAndHashCode(callSuper = true)
-@SuperBuilder
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BrandModel extends EmbeddableModel {
+public class BrandModel {
     private String id;
     private String name;
     private String countryOfOrigin;

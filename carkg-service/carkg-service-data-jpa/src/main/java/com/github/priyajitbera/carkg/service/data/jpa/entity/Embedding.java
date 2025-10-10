@@ -1,7 +1,10 @@
 package com.github.priyajitbera.carkg.service.data.jpa.entity;
 
+import com.github.priyajitbera.carkg.service.data.jpa.converter.FloatArrayToJson;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -15,6 +18,9 @@ public class Embedding {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    @Convert(converter = FloatArrayToJson.class)
     @Column(columnDefinition = "text", length = 16383)
-    private String embedding;
+    private float[] vector;
+
+    private LocalDateTime embeddingRefreshTillUtc;
 }

@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BrandRepository extends JpaRepository<Brand, String> {
@@ -18,4 +19,6 @@ public interface BrandRepository extends JpaRepository<Brand, String> {
             FROM brand b join embedding e on b.embedding_id = e.id
             ORDER BY score DESC""", nativeQuery = true)
     List<BrandSemanticSearchProjection> cosineSimilarity(@Param("queryEmbedding") String queryEmbedding);
+
+    Optional<Brand> findByName(String name);
 }

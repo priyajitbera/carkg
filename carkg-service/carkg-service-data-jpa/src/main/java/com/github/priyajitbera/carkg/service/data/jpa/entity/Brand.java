@@ -38,4 +38,13 @@ public class Brand implements Identifiable {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_brand_semantic_object"))
     private SemanticObject semanticObject;
+
+    public String deriveId() {
+        assert name != null;
+        return name.replace(" ", "_").toLowerCase();
+    }
+
+    public void derviceAndSetId() {
+        this.id = deriveId();
+    }
 }
