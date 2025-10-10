@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CarModel {
+public class  CarModel {
     private String id;
     private String name;
     private BrandModel brand;

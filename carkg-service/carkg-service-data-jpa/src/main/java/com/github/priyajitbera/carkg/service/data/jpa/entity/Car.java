@@ -10,7 +10,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -24,6 +27,12 @@ public class Car implements Identifiable {
     @RdfPredicate(value = "carId", label = "Car Identifier", comment = "Identifier of the Car")
     @Id
     private String id;
+
+    @CreationTimestamp
+    private LocalDateTime createdAtUtc;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAtUtc;
 
     @RdfPredicate(value = "carName", label = "Car Name", comment = """
             A "Car Name" refers to either the specific model of a vehicle, such as a Toyota Corolla or Ford F-Series, or the make or brand of the car, like Toyota or Ford. To find the name of a specific car, you typically look for the model name, often found on the back of the vehicle.""")

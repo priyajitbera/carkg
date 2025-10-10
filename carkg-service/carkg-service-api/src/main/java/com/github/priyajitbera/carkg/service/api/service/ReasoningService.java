@@ -50,17 +50,17 @@ public class ReasoningService {
         this.projectionsContainer = projectionsContainer;
         this.ontologySchemas = ontologySchemas;
         try {
-            this.SPARQL_GENERATION_PROMPT_TEMPLATE = Files.readString(Path.of("carkg-service-api/src/main/resources/prompts/sparql_generation.txt"));
+            this.SPARQL_GENERATION_PROMPT_TEMPLATE = Files.readString(Path.of("carkg-service/carkg-service-api/src/main/resources/prompts/sparql_generation.txt"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         try {
-            this.SPARQL_GENERATION_FIX_SCHEMA_PROMPT_TEMPLATE = Files.readString(Path.of("carkg-service-api/src/main/resources/prompts/sparql_generation_fixed_schema.txt"));
+            this.SPARQL_GENERATION_FIX_SCHEMA_PROMPT_TEMPLATE = Files.readString(Path.of("carkg-service/carkg-service-api/src/main/resources/prompts/sparql_generation_fixed_schema.txt"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         try {
-            this.SPARQL_RESPONSE_NL_RESPONSE_TEMPLATE = Files.readString(Path.of("carkg-service-api/src/main/resources/prompts/sparql_response_to_nl_response.txt"));
+            this.SPARQL_RESPONSE_NL_RESPONSE_TEMPLATE = Files.readString(Path.of("carkg-service/carkg-service-api/src/main/resources/prompts/sparql_response_to_nl_response.txt"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
