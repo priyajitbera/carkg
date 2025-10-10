@@ -16,8 +16,8 @@ public interface CarRepository extends JpaRepository<Car, String> {
 
     @Query(value = """
             SELECT c.id, c.name, b.name brand_name, b.country_of_origin brand_country_of_origin,
-            cosine_similarity(embedding, :queryEmbedding) AS score
-            FROM car c JOIN brand b ON c.brand_id = b.id 
+            cosine_similarity(e.vector, :queryEmbedding) AS score
+            FROM car c JOIN brand b ON c.brand_id = b.id
             JOIN embedding e on c.embedding_id = e.id
             ORDER BY score DESC""", nativeQuery = true)
     List<CarSemanticSearchProjection> cosineSimilarity(@Param("queryEmbedding") String queryEmbedding);
