@@ -39,6 +39,10 @@
 <https://github.com/priyajitbera/carkg/ontology/carId> <http://www.w3.org/2000/01/rdf-schema#label> "Car Identifier" .
 <https://github.com/priyajitbera/carkg/ontology/carId> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
 <https://github.com/priyajitbera/carkg/ontology/carId> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#comment> "Available Combination of Variant, Engine, TransmissionType and ColorOption" .
+<https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#label> "Available Combination of Variant, Engine, TransmissionType and ColorOption" .
+<https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
+<https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
 <https://github.com/priyajitbera/carkg/ontology/brandId> <http://www.w3.org/2000/01/rdf-schema#comment> "Identifier of the brand" .
 <https://github.com/priyajitbera/carkg/ontology/brandId> <http://www.w3.org/2000/01/rdf-schema#label> "Brand Identifier" .
 <https://github.com/priyajitbera/carkg/ontology/brandId> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Brand> .

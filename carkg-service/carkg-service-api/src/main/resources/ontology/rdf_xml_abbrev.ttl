@@ -25,6 +25,11 @@
     <rdfs:label>Car Identifier</rdfs:label>
     <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
   </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasCombination">
+    <rdfs:comment>Available Combination of Variant, Engine, TransmissionType and ColorOption</rdfs:comment>
+    <rdfs:label>Available Combination of Variant, Engine, TransmissionType and ColorOption</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
   <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasColorOptions">
     <rdfs:comment>Colors in which this car is offered</rdfs:comment>
     <rdfs:label>Available Color Options</rdfs:label>

@@ -95,6 +95,15 @@
             "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
         },
         {
+            "@id": "https://github.com/priyajitbera/carkg/ontology/hasCombination",
+            "http://www.w3.org/2000/01/rdf-schema#comment": "Available Combination of Variant, Engine, TransmissionType and ColorOption",
+            "http://www.w3.org/2000/01/rdf-schema#label": "Available Combination of Variant, Engine, TransmissionType and ColorOption",
+            "http://www.w3.org/2000/01/rdf-schema#domain": {
+                "@id": "https://github.com/priyajitbera/carkg/ontology/Car"
+            },
+            "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+        },
+        {
             "@id": "https://github.com/priyajitbera/carkg/ontology/brandId",
             "http://www.w3.org/2000/01/rdf-schema#comment": "Identifier of the brand",
             "http://www.w3.org/2000/01/rdf-schema#label": "Brand Identifier",
