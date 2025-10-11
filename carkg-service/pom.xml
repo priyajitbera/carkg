@@ -6,6 +6,7 @@
         <spring-ai.version>1.0.2</spring-ai.version>
         <jena.version>5.1.0</jena.version>
         <lombok.version>1.18.34</lombok.version>
+        <com.fasterxml.jackson.version>2.19.2</com.fasterxml.jackson.version>
     </properties>
     <groupId>com.github.priyajitbera</groupId>
     <artifactId>carkg-service-parent</artifactId>
@@ -70,6 +71,16 @@
                 <groupId>com.github.priyajitbera</groupId>
                 <artifactId>carkg-service-lib-jena-fuseki</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

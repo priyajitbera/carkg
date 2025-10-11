@@ -1,7 +1,8 @@
 package com.github.priyajitbera.carkg.service.api.controller;
 
 import com.github.priyajitbera.carkg.service.api.model.request.BrandCreate;
-import com.github.priyajitbera.carkg.service.api.model.request.CarCreate;
+import com.github.priyajitbera.carkg.service.api.model.request.BrandEmbeddingRequest;
+import com.github.priyajitbera.carkg.service.api.model.response.BrandEmbeddingModel;
 import com.github.priyajitbera.carkg.service.api.model.response.BrandModel;
 import com.github.priyajitbera.carkg.service.api.model.response.semanticsearch.BrandSemanticSearchModel;
 import com.github.priyajitbera.carkg.service.api.service.BrandService;
@@ -20,22 +21,6 @@ public class BrandController {
         this.brandService = brandService;
     }
 
-
-    @GetMapping("/id")
-    public BrandModel helloWord(@Param("id") String id) {
-        return brandService.findById(id);
-    }
-
-    @GetMapping("/semantic-search")
-    public List<BrandSemanticSearchModel> semanticSearch(@Param("query") String query) {
-        return brandService.semanticSearch(query);
-    }
-
-    @GetMapping
-    public CarCreate get() {
-        return CarCreate.builder().name("Kylaq").name("Skoda").build();
-    }
-
     @PostMapping
     public BrandModel save(@RequestBody BrandCreate create) {
         return brandService.save(create);
@@ -44,5 +29,20 @@ public class BrandController {
     @PostMapping("/batch")
     public List<BrandModel> saveBatch(@RequestBody List<BrandCreate> creates) {
         return brandService.saveBatch(creates);
+    }
+
+    @GetMapping("/{id}")
+    public BrandModel get(@PathVariable("id") String id) {
+        return brandService.get(id);
+    }
+
+    @PostMapping("/embed")
+    public BrandEmbeddingModel embed(@RequestBody BrandEmbeddingRequest request) {
+        return brandService.embed(request);
+    }
+
+    @GetMapping("/semantic-search")
+    public List<BrandSemanticSearchModel> semanticSearch(@Param("query") String query) {
+        return brandService.semanticSearch(query);
     }
 }

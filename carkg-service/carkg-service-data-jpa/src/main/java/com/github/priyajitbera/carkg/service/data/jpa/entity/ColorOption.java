@@ -1,7 +1,9 @@
 package com.github.priyajitbera.carkg.service.data.jpa.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
+import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.BrandView;
+import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,10 +26,10 @@ public class ColorOption {
     @Id
     private String id;
 
+    @JsonView({CarView.class, BrandView.class})
     @RdfPredicate(value = "colorName", label = "Color Name", comment = "Human-readable color name, e.g., Midnight Black, Pearl White")
     private String name;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_color_option_car"))
     private Car car;

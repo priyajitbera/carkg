@@ -32,8 +32,8 @@ public class CarController {
     }
 
     @GetMapping("/{id}")
-    public CarModel get(@PathVariable("id") String id) {
-        return carService.get(id);
+    public CarModel findById(@PathVariable("id") String id) {
+        return carService.findById(id);
     }
 
     @PostMapping("/embed")
