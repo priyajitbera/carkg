@@ -6,7 +6,6 @@ public class EmbeddingOperations {
 
     public static <T> float[] generate(T candidate, Function<T, String> formatter, Function<String, float[]> embedder) {
         final String embeddableFormat = formatter.apply(candidate);
-        System.out.println("embeddableFormat:\n" + embeddableFormat);
         return embedder.apply(embeddableFormat);
     }
 }

@@ -72,7 +72,6 @@ public abstract class ProjectionRegistrar implements BeanFactoryPostProcessor {
                         // Note: Class.forName() can throw ClassNotFoundException
                         Class<?> projectionSchemaType = Class.forName(className);
                         config.registerSparqlSelectProjection(projectionSchemaType, projectionExtractor.extractProjection(projectionSchemaType));
-                        System.out.println("Registered projection: " + className);
                     }
                 }
             }
