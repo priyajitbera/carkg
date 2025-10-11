@@ -69,7 +69,7 @@ public abstract class CombinationRequestMapper {
     protected TransmissionType mapTransmissionType(String transmissionTypeName, @Context CarRequestMappingContext context) {
         return context.car().getTransmissionTypes().stream().filter(transmissionType -> Objects.equals(transmissionType.getName(), transmissionTypeName)).findFirst()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("TransmissionType: %s not found for car: %s of brand: %s",
-                        context, context.car().getName(), context.brand().getName())));
+                        transmissionTypeName, context.car().getName(), context.brand().getName())));
     }
 
     @Qualifier
@@ -80,8 +80,8 @@ public abstract class CombinationRequestMapper {
     @MapColorOption
     protected ColorOption mapColorOption(String colorOptionName, @Context CarRequestMappingContext context) {
         return context.car().getColorOptions().stream().filter(colorOption -> Objects.equals(colorOption.getName(), colorOptionName)).findFirst()
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("TransmissionType: %s not found for car: %s of brand: %s",
-                        context, context.car().getName(), context.brand().getName())));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("ColorOption: %s not found for car: %s of brand: %s",
+                        colorOptionName, context.car().getName(), context.brand().getName())));
     }
 
     @AfterMapping
