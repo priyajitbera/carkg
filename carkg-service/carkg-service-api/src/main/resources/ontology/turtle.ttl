@@ -106,3 +106,12 @@
                 <https://github.com/priyajitbera/carkg/ontology/Brand>;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "Brand Identifier" .
+
+<https://github.com/priyajitbera/carkg/ontology/cars>
+        a       <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+        <http://www.w3.org/2000/01/rdf-schema#comment>
+                "List of the cars offered by this brand";
+        <http://www.w3.org/2000/01/rdf-schema#domain>
+                <https://github.com/priyajitbera/carkg/ontology/Brand>;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Offered Cars" .

@@ -1,7 +1,9 @@
 package com.github.priyajitbera.carkg.service.data.jpa.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
+import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.BrandView;
+import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,14 +22,15 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Variant {
 
+    @JsonView(BrandView.class)
     @RdfPredicate(value = "variantId", label = "Variant Identifier", comment = "Identifier of the car variant")
     @Id
     private String id;
 
+    @JsonView({CarView.class, BrandView.class})
     @RdfPredicate(value = "variantName", label = "Variant Name", comment = "Name of the variant, e.g., LX, Sport, Top Model")
     private String name;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Car car;

@@ -55,6 +55,11 @@
     <rdfs:label>Available Engines</rdfs:label>
     <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
   </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/cars">
+    <rdfs:comment>List of the cars offered by this brand</rdfs:comment>
+    <rdfs:label>Offered Cars</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Brand"/>
+  </rdf:Property>
   <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasBrand">
     <rdfs:comment>A Car Brand, also known as the make, is the manufacturer or company that designs and builds vehicles, such as Toyota, Ford, or Mercedes-Benz. It identifies the company, while the car model (like the Ford Mustang or Toyota Corolla) is the specific type of vehicle a brand offers.</rdfs:comment>
     <rdfs:label>Car Brand</rdfs:label>

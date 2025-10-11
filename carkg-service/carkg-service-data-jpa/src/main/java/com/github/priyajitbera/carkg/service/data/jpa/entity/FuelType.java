@@ -1,6 +1,9 @@
 package com.github.priyajitbera.carkg.service.data.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
+import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.BrandView;
+import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -24,6 +27,7 @@ public class FuelType {
     @Id
     private String id;
 
+    @JsonView({CarView.class, BrandView.class})
     @RdfPredicate(value = "fuelTypeName", label = "Fuel Type Name", comment = "Free-text fuel type, e.g., Petrol, Diesel, CNG, Electric, Hybrid")
     private String name;
 

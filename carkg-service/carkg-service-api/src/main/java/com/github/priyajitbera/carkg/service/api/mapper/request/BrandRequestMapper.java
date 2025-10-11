@@ -14,7 +14,7 @@ public abstract class BrandRequestMapper {
 
     @AfterMapping
     protected void afterMapping(@MappingTarget Brand target) {
-        target.derviceAndSetId();
+        target.deriveAndSetId();
     }
 }
 

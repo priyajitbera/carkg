@@ -1,7 +1,7 @@
 package com.github.priyajitbera.carkg.service.api.service;
 
 import com.github.priyajitbera.carkg.service.api.client.JenaFusekiClient;
-import com.github.priyajitbera.carkg.service.api.embedding.EmbeddableFormatterCar;
+import com.github.priyajitbera.carkg.service.api.embedding.CarEmbeddableFormatter;
 import com.github.priyajitbera.carkg.service.api.embedding.EmbeddingOperations;
 import com.github.priyajitbera.carkg.service.api.mapper.request.CarRequestMapper;
 import com.github.priyajitbera.carkg.service.api.mapper.request.context.CarRequestMappingContext;
@@ -30,12 +30,14 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class CarService {
+public class CarService implements
+        CreateReadOps<Car, String, CarCreate, CarModel>,
+        SemanticOps<CarEmbeddingRequest, CarEmbeddingModel, CarSemanticSearchModel> {
 
     private final CarRequestMapper carRequestMapper;
     private final CarResponseMapper carResponseMapper;
     private final EmbeddingService embeddingService;
-    private final EmbeddableFormatterCar embeddableFormatterCar;
+    private final CarEmbeddableFormatter carEmbeddableFormatter;
     private final CarRepository carRepository;
     private final BrandRepository brandRepository;
     private final EntityToRDF entityToRDF;
@@ -46,7 +48,7 @@ public class CarService {
             CarRequestMapper carRequestMapper,
             CarResponseMapper carResponseMapper,
             EmbeddingService embeddingService,
-            EmbeddableFormatterCar embeddableFormatterCar, CarRepository carRepository,
+            CarEmbeddableFormatter carEmbeddableFormatter, CarRepository carRepository,
             BrandRepository brandRepository,
 
             EntityToRDF entityToRDF,
@@ -56,7 +58,7 @@ public class CarService {
         this.carRequestMapper = carRequestMapper;
         this.carResponseMapper = carResponseMapper;
         this.embeddingService = embeddingService;
-        this.embeddableFormatterCar = embeddableFormatterCar;
+        this.carEmbeddableFormatter = carEmbeddableFormatter;
         this.carRepository = carRepository;
         this.brandRepository = brandRepository;
 
@@ -76,7 +78,6 @@ public class CarService {
                 .createdFuelTypes(new LinkedHashSet<>())
                 .build();
         carRequestMapper.map(carEntity, carCreate, context);
-        carEntity.deriveAndSetId();
         carRepository.saveAndFlush(carEntity);
 
         return carResponseMapper.map(carEntity);
@@ -94,7 +95,7 @@ public class CarService {
         return creates.stream().map(this::save).toList();
     }
 
-    public CarModel get(String id) {
+    public CarModel findById(String id) {
         Car car = carRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, String.format("Car not found for id: %s", id)));
@@ -115,14 +116,14 @@ public class CarService {
 
             float[] vector = EmbeddingOperations.generate(
                     carEntity,
-                    embeddableFormatterCar::format,
+                    carEmbeddableFormatter::format,
                     text -> embeddingService.embedding(text).getOutput()
             );
             carEntity.getEmbedding().setVector(vector);
             carEntity.getEmbedding().setEmbeddingRefreshTillUtc(carEntity.getUpdatedAtUtc());
             carRepository.saveAndFlush(carEntity);
         } else {
-            log.info("Skipping embedding for car id: {} as it is already embedded at: {}",
+            log.info("Skipping embedding for Car with id: {} as it is already embedded at: {}",
                     carEntity.getId(), carEntity.getEmbedding().getEmbeddingRefreshTillUtc());
         }
 
