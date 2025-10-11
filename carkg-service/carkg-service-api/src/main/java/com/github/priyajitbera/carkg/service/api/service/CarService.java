@@ -3,6 +3,7 @@ package com.github.priyajitbera.carkg.service.api.service;
 import com.github.priyajitbera.carkg.service.api.client.JenaFusekiClient;
 import com.github.priyajitbera.carkg.service.api.embedding.CarEmbeddableFormatter;
 import com.github.priyajitbera.carkg.service.api.embedding.EmbeddingOperations;
+import com.github.priyajitbera.carkg.service.api.exception.ResourceNotFoundException;
 import com.github.priyajitbera.carkg.service.api.mapper.request.CarRequestMapper;
 import com.github.priyajitbera.carkg.service.api.mapper.request.context.CarRequestMappingContext;
 import com.github.priyajitbera.carkg.service.api.mapper.response.CarResponseMapper;
@@ -20,10 +21,8 @@ import com.github.priyajitbera.carkg.service.data.rdf.RdfMaterializer;
 import com.github.priyajitbera.carkg.service.data.rdf.jpa.support.EntityToRDF;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.embedding.Embedding;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -97,15 +96,13 @@ public class CarService implements
 
     public CarModel findById(String id) {
         Car car = carRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, String.format("Car not found for id: %s", id)));
+                .orElseThrow(ResourceNotFoundException.carById(id));
         return carResponseMapper.map(car);
     }
 
     public CarEmbeddingModel embed(CarEmbeddingRequest embeddingRequest) {
         Car carEntity = carRepository.findById(embeddingRequest.getId())
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, String.format("Car not found for id: %s", embeddingRequest.getId())));
+                .orElseThrow(ResourceNotFoundException.carById(embeddingRequest.getId()));
         if (carEntity.getEmbedding() == null) {
             carEntity.setEmbedding(new com.github.priyajitbera.carkg.service.data.jpa.entity.Embedding());
         }
