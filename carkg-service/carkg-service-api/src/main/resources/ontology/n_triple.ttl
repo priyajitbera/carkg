@@ -47,3 +47,7 @@
 <https://github.com/priyajitbera/carkg/ontology/brandId> <http://www.w3.org/2000/01/rdf-schema#label> "Brand Identifier" .
 <https://github.com/priyajitbera/carkg/ontology/brandId> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Brand> .
 <https://github.com/priyajitbera/carkg/ontology/brandId> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/cars> <http://www.w3.org/2000/01/rdf-schema#comment> "List of the cars offered by this brand" .
+<https://github.com/priyajitbera/carkg/ontology/cars> <http://www.w3.org/2000/01/rdf-schema#label> "Offered Cars" .
+<https://github.com/priyajitbera/carkg/ontology/cars> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Brand> .
+<https://github.com/priyajitbera/carkg/ontology/cars> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
