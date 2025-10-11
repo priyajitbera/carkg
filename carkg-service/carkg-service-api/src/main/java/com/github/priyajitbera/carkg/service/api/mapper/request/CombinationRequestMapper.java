@@ -1,5 +1,6 @@
 package com.github.priyajitbera.carkg.service.api.mapper.request;
 
+import com.github.priyajitbera.carkg.service.api.exception.ResourceNotFoundException;
 import com.github.priyajitbera.carkg.service.api.mapper.CommonMapperConfig;
 import com.github.priyajitbera.carkg.service.api.mapper.request.context.CarRequestMappingContext;
 import com.github.priyajitbera.carkg.service.api.model.request.CombinationCreate;
@@ -7,8 +8,6 @@ import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
 import com.github.priyajitbera.carkg.service.data.jpa.entity.*;
 import org.apache.commons.lang3.function.TriConsumer;
 import org.mapstruct.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -44,8 +43,7 @@ public abstract class CombinationRequestMapper {
     @MapVariant
     protected Variant mapVariant(String variantName, @Context CarRequestMappingContext context) {
         return context.car().getVariants().stream().filter(variant -> Objects.equals(variant.getName(), variantName)).findFirst()
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Variant: %s not found for car: %s of brand: %s",
-                        variantName, context.car().getName(), context.brand().getName())));
+                .orElseThrow(ResourceNotFoundException.variantByNameCarId(variantName, context.car().deriveId()));
     }
 
     @Qualifier
@@ -56,8 +54,7 @@ public abstract class CombinationRequestMapper {
     @MapEngine
     protected Engine mapEngine(String engineName, @Context CarRequestMappingContext context) {
         return context.car().getEngines().stream().filter(engine -> Objects.equals(engine.getName(), engineName)).findFirst()
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Engine: %s not found for car: %s of brand: %s",
-                        engineName, context.car().getName(), context.brand().getName())));
+                .orElseThrow(ResourceNotFoundException.engineByNameCarId(engineName, context.car().deriveId()));
     }
 
     @Qualifier
@@ -68,8 +65,7 @@ public abstract class CombinationRequestMapper {
     @MapTransmissionType
     protected TransmissionType mapTransmissionType(String transmissionTypeName, @Context CarRequestMappingContext context) {
         return context.car().getTransmissionTypes().stream().filter(transmissionType -> Objects.equals(transmissionType.getName(), transmissionTypeName)).findFirst()
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("TransmissionType: %s not found for car: %s of brand: %s",
-                        transmissionTypeName, context.car().getName(), context.brand().getName())));
+                .orElseThrow(ResourceNotFoundException.transmissionTypeByNameCarId(transmissionTypeName, context.car().deriveId()));
     }
 
     @Qualifier
@@ -80,8 +76,7 @@ public abstract class CombinationRequestMapper {
     @MapColorOption
     protected ColorOption mapColorOption(String colorOptionName, @Context CarRequestMappingContext context) {
         return context.car().getColorOptions().stream().filter(colorOption -> Objects.equals(colorOption.getName(), colorOptionName)).findFirst()
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("ColorOption: %s not found for car: %s of brand: %s",
-                        colorOptionName, context.car().getName(), context.brand().getName())));
+                .orElseThrow(ResourceNotFoundException.colorOptionByNameCarId(colorOptionName, context.car().deriveId()));
     }
 
     @AfterMapping
