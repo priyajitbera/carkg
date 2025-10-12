@@ -125,4 +125,8 @@ public class CarService implements
 
         return carResponseMapper.mapEmbeddingModel(carEntity);
     }
+
+    public List<CarEmbeddingModel> embedBatch(List<CarEmbeddingRequest> embeddingRequests) {
+        return embeddingRequests.stream().map(this::embed).toList();
+    }
 }
