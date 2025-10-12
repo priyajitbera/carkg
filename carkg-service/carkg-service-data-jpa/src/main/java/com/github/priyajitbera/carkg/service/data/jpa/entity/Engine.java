@@ -1,7 +1,9 @@
 package com.github.priyajitbera.carkg.service.data.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
+import com.github.priyajitbera.carkg.service.data.jpa.serializer.EngineSemanticSerializer;
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.BrandView;
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
@@ -14,6 +16,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.Objects;
 
+@JsonSerialize(using = EngineSemanticSerializer.class)
 @Entity
 @Getter
 @Setter
