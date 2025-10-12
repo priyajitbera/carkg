@@ -15,9 +15,6 @@ import lombok.experimental.SuperBuilder;
 import java.util.Objects;
 
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(name = "uk_engine_name_capacity_fuel", columnNames = {"name", "capacityCc", "fuelType_id"})
-})
 @Getter
 @Setter
 @SuperBuilder
@@ -39,7 +36,7 @@ public class Engine {
 
     @JsonView({CarView.class, BrandView.class})
     @RdfPredicate(value = "fuelType", label = "Fuel Type", comment = "Fuel type for this engine, free text via reference entity")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_engine_fuel_type"))
     private FuelType fuelType;
 
