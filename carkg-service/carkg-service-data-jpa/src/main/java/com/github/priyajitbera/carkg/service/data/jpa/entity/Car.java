@@ -68,7 +68,7 @@ public class Car implements Identifiable {
     @JsonView({CarView.class, BrandView.class})
     @RdfPredicate(value = "hasEngines", label = "Available Engines", comment = "Engines associated with this car model")
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Engine> engines;
+    private List<EngineOption> engineOptions;
 
     @JsonView({CarView.class, BrandView.class})
     @RdfPredicate(value = "hasColorOptions", label = "Available Color Options", comment = "Colors in which this car is offered")

@@ -43,7 +43,7 @@ public class Combination {
     @RdfPredicate(value = "hasEngine", label = "Engine", comment = "Engines associated with this combination")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_engine"))
-    private Engine engine;
+    private EngineOption engineOption;
 
     @JsonView({CarView.class, BrandView.class})
     @RdfPredicate(value = "hasTransmissionType", label = "Transmission Type", comment = "Transmission Type associated with this combination")
@@ -61,10 +61,10 @@ public class Combination {
     public String deriveId() {
         assert car != null;
         assert variant != null;
-        assert engine != null;
+        assert engineOption != null;
         assert transmissionType != null;
         assert colorOption != null;
-        return (new IdGen()).generate(car.deriveId(), variant.getName(), engine.getName(), transmissionType.getName(), colorOption.getName());
+        return (new IdGen()).generate(car.deriveId(), variant.getName(), engineOption.getName(), transmissionType.getName(), colorOption.getName());
     }
 
     public void deriveAndSetId() {

@@ -10,7 +10,7 @@ public class CombinationSemanticSerializer extends SemanticSerializer<Combinatio
     @Override
     public void serialize(Combination value, JsonGenerator gen, SerializerProvider serializers)
             throws IOException {
-        String display = value.getVariant().getName() + " with " + value.getEngine().getName() + " and " + value.getTransmissionType().getName() + " in " + value.getColorOption().getName();
+        String display = value.getVariant().getName() + " with " + value.getEngineOption().getName() + " and " + value.getTransmissionType().getName() + " in " + value.getColorOption().getName();
         gen.writeString(display);
     }
 }

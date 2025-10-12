@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class CombinationCreate {
     private String variant;
     private String transmissionType;
-    private String engine;
+    private String engineOption;
     private String colorOption;
 }
 

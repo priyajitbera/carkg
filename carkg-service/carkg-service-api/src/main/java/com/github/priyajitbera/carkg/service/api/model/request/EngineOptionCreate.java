@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EngineCreate {
+public class EngineOptionCreate {
     private String name;
     private Integer capacityCc;
     private FuelTypeCreate fuelType;

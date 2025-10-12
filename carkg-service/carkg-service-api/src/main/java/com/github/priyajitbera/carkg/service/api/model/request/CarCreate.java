@@ -15,7 +15,7 @@ public class CarCreate {
 
     private String name;
     private String brandId;
-    private List<EngineCreate> engines;
+    private List<EngineOptionCreate> engineOptions;
     private List<String> transmissionTypeIds;
     private List<VariantCreate> variants;
     private List<ColorOptionCreate> colorOptions;

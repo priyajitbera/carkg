@@ -23,7 +23,7 @@ import java.util.Objects;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Engine {
+public class EngineOption {
 
     @RdfPredicate(value = "engineId", label = "Engine Identifier", comment = "Identifier of the engine")
     @Id
@@ -61,7 +61,7 @@ public class Engine {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        Engine that = (Engine) object;
+        EngineOption that = (EngineOption) object;
         return Objects.equals(id, that.id);
     }
 
