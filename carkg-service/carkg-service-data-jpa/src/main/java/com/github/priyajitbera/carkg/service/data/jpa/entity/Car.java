@@ -66,22 +66,22 @@ public class Car implements Identifiable {
     private List<Variant> variants;
 
     @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasEngines", label = "Available Engines", comment = "Engines associated with this car model")
+    @RdfPredicate(value = "hasEngineOptions", label = "Available Engine Options", comment = "All Engine Options that are available with this car model")
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EngineOption> engineOptions;
 
     @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasColorOptions", label = "Available Color Options", comment = "Colors in which this car is offered")
+    @RdfPredicate(value = "hasColorOptions", label = "Available Color Options", comment = "All Color Options that are available with this car model")
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<ColorOption> colorOptions;
 
     @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasTransmissionTypes", label = "Available Transmission Types", comment = "Transmission types associated with this car model")
+    @RdfPredicate(value = "hasTransmissionTypes", label = "Available Transmission Types", comment = "All Transmission Types that are available with this car model")
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TransmissionType> transmissionTypes;
 
     @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasCombination", label = "Available Combination of Variant, Engine, TransmissionType and ColorOption", comment = "Available Combination of Variant, Engine, TransmissionType and ColorOption")
+    @RdfPredicate(value = "hasCombination", label = "Available Combinations of Variant, Engine, TransmissionType and ColorOption", comment = "All available combinations of Variant, Engine, Transmission Type and Color Option")
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Combination> combinations;
 

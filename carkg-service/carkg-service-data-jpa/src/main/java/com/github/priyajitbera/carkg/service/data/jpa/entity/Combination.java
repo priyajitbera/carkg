@@ -40,19 +40,19 @@ public class Combination {
     private Variant variant;
 
     @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasEngine", label = "Engine", comment = "Engines associated with this combination")
+    @RdfPredicate(value = "hasEngineOption", label = "Engine Option", comment = "The Engine Option associated with this combination")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_engine"))
     private EngineOption engineOption;
 
     @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasTransmissionType", label = "Transmission Type", comment = "Transmission Type associated with this combination")
+    @RdfPredicate(value = "hasTransmissionType", label = "Transmission Type", comment = "The Transmission Type associated with this combination")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_transmission_type"))
     private TransmissionType transmissionType;
 
     @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasTransmissionType", label = "Color Option", comment = "Transmission Type associated with this combination")
+    @RdfPredicate(value = "hasTransmissionType", label = "Color Option", comment = "The Color Option associated with this combination")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_color_option"))
     private ColorOption colorOption;
