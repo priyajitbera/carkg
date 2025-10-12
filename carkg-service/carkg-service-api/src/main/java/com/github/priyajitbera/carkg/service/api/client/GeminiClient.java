@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Component
-public class GeminiClient {
+@Component("geminiClient")
+public class GeminiClient implements GenerativeClient, EmbeddingClient {
 
     private final String GEMINI_BASE_URL;
 

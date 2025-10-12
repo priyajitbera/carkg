@@ -1,6 +1,6 @@
 package com.github.priyajitbera.carkg.service.api.service;
 
-import com.github.priyajitbera.carkg.service.api.client.GeminiClient;
+import com.github.priyajitbera.carkg.service.api.client.GenerativeClient;
 import com.github.priyajitbera.carkg.service.api.client.JenaFusekiClient;
 import com.github.priyajitbera.carkg.service.api.model.request.AskFixedSchema;
 import com.github.priyajitbera.carkg.service.api.model.response.RegisteredSparqlProjectionSchema;
@@ -24,7 +24,7 @@ import java.util.Optional;
 public class ReasoningService {
 
     private final String FORMAT = "RDF/XML";
-    private final GeminiClient geminiClient;
+    private final GenerativeClient geminiClient;
     private final JenaFusekiClient jenaFusekiClient;
     private final SparqlJsonMapper sparqlJsonMapper;
     private final ProjectionRegistrar.ProjectionsContainer projectionsContainer;
@@ -36,7 +36,8 @@ public class ReasoningService {
     private final String SPARQL_RESPONSE_NL_RESPONSE_TEMPLATE;
 
     public ReasoningService(
-            GeminiClient geminiClient,
+            @Qualifier("geminiClient")
+            GenerativeClient geminiClient,
             JenaFusekiClient jenaFusekiClient,
             SparqlJsonMapper sparqlJsonMapper,
             @Qualifier("registeredSparqlProjections")

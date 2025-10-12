@@ -14,7 +14,6 @@ import com.github.priyajitbera.carkg.service.data.jpa.converter.FloatArrayToJson
 import com.github.priyajitbera.carkg.service.data.jpa.entity.Brand;
 import com.github.priyajitbera.carkg.service.data.jpa.repository.BrandRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.embedding.Embedding;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,8 +50,8 @@ public class BrandService implements
     }
 
     public List<BrandSemanticSearchModel> semanticSearch(String query) {
-        Embedding embedding = embeddingService.embedding(query);
-        final String ser = new FloatArrayToJson().convertToDatabaseColumn(embedding.getOutput());
+        float[] embedding = embeddingService.embed(query);
+        final String ser = new FloatArrayToJson().convertToDatabaseColumn(embedding);
         return brandRepository.cosineSimilarity(ser)
                 .stream().map(brandResponseMapper::map).toList();
     }
@@ -88,7 +87,7 @@ public class BrandService implements
             float[] vector = EmbeddingOperations.generate(
                     brandEntity,
                     brandEmbeddableFormatter::format,
-                    text -> embeddingService.embedding(text).getOutput()
+                    embeddingService::embed
             );
             brandEntity.getEmbedding().setVector(vector);
             brandEntity.getEmbedding().setEmbeddingRefreshTillUtc(brandEntity.getUpdatedAtUtc());
