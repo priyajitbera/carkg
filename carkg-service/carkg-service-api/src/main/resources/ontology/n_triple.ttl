@@ -1,53 +1,99 @@
 ### Ontology in N-TRIPLE format (TBox)
 
-<https://github.com/priyajitbera/carkg/ontology/hasTransmissionTypes> <http://www.w3.org/2000/01/rdf-schema#comment> "Transmission types associated with this car model" .
+<https://github.com/priyajitbera/carkg/ontology/Variant> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<https://github.com/priyajitbera/carkg/ontology/ColorOption> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<https://github.com/priyajitbera/carkg/ontology/colorName> <http://www.w3.org/2000/01/rdf-schema#comment> "Human-readable color name, e.g., Midnight Black, Pearl White" .
+<https://github.com/priyajitbera/carkg/ontology/colorName> <http://www.w3.org/2000/01/rdf-schema#label> "Color Name" .
+<https://github.com/priyajitbera/carkg/ontology/colorName> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/ColorOption> .
+<https://github.com/priyajitbera/carkg/ontology/colorName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/transmissionTypeName> <http://www.w3.org/2000/01/rdf-schema#comment> "Free-text transmission type, e.g., MT, AMT, CVT, DCT, iMT, AT" .
+<https://github.com/priyajitbera/carkg/ontology/transmissionTypeName> <http://www.w3.org/2000/01/rdf-schema#label> "Transmission Type Name" .
+<https://github.com/priyajitbera/carkg/ontology/transmissionTypeName> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/TransmissionType> .
+<https://github.com/priyajitbera/carkg/ontology/transmissionTypeName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/hasTransmissionTypes> <http://www.w3.org/2000/01/rdf-schema#comment> "All Transmission Types that are available with this car model" .
 <https://github.com/priyajitbera/carkg/ontology/hasTransmissionTypes> <http://www.w3.org/2000/01/rdf-schema#label> "Available Transmission Types" .
+<https://github.com/priyajitbera/carkg/ontology/hasTransmissionTypes> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/TransmissionType> .
 <https://github.com/priyajitbera/carkg/ontology/hasTransmissionTypes> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
 <https://github.com/priyajitbera/carkg/ontology/hasTransmissionTypes> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
-<https://github.com/priyajitbera/carkg/ontology/hasEngines> <http://www.w3.org/2000/01/rdf-schema#comment> "Engines associated with this car model" .
-<https://github.com/priyajitbera/carkg/ontology/hasEngines> <http://www.w3.org/2000/01/rdf-schema#label> "Available Engines" .
-<https://github.com/priyajitbera/carkg/ontology/hasEngines> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
-<https://github.com/priyajitbera/carkg/ontology/hasEngines> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/hasVariants> <http://www.w3.org/2000/01/rdf-schema#comment> "List of variants available for this car model" .
+<https://github.com/priyajitbera/carkg/ontology/hasVariants> <http://www.w3.org/2000/01/rdf-schema#label> "Car Variants" .
+<https://github.com/priyajitbera/carkg/ontology/hasVariants> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/Variant> .
+<https://github.com/priyajitbera/carkg/ontology/hasVariants> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
+<https://github.com/priyajitbera/carkg/ontology/hasVariants> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/variantName> <http://www.w3.org/2000/01/rdf-schema#comment> "Name of the variant, e.g., LX, Sport, Top Model" .
+<https://github.com/priyajitbera/carkg/ontology/variantName> <http://www.w3.org/2000/01/rdf-schema#label> "Variant Name" .
+<https://github.com/priyajitbera/carkg/ontology/variantName> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Variant> .
+<https://github.com/priyajitbera/carkg/ontology/variantName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/TransmissionType> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#comment> "The Color Option associated with this combination" .
+<https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#label> "Color Option" .
+<https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/ColorOption> .
+<https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#comment> "The Transmission Type associated with this combination" .
+<https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#label> "Transmission Type" .
+<https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/TransmissionType> .
+<https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Combination> .
+<https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/Car> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<https://github.com/priyajitbera/carkg/ontology/fuelType> <http://www.w3.org/2000/01/rdf-schema#comment> "Fuel type for this engine, free text via reference entity" .
+<https://github.com/priyajitbera/carkg/ontology/fuelType> <http://www.w3.org/2000/01/rdf-schema#label> "Fuel Type" .
+<https://github.com/priyajitbera/carkg/ontology/fuelType> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/FuelType> .
+<https://github.com/priyajitbera/carkg/ontology/fuelType> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/EngineOption> .
+<https://github.com/priyajitbera/carkg/ontology/fuelType> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/EngineOption> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<https://github.com/priyajitbera/carkg/ontology/engineCapacityCc> <http://www.w3.org/2000/01/rdf-schema#comment> "Engine displacement in cubic centimeters" .
+<https://github.com/priyajitbera/carkg/ontology/engineCapacityCc> <http://www.w3.org/2000/01/rdf-schema#label> "Engine Capacity (cc)" .
+<https://github.com/priyajitbera/carkg/ontology/engineCapacityCc> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/EngineOption> .
+<https://github.com/priyajitbera/carkg/ontology/engineCapacityCc> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
 <https://github.com/priyajitbera/carkg/ontology/brandName> <http://www.w3.org/2000/01/rdf-schema#comment> "A \"Brand Name\" of a car brand is the specific name a company uses to market and sell its cars, such as Maruti Suzuki, Hyundai, Tata Motors, Toyota, Honda, Ford, or Volkswagen. These names identify the manufacturer and often have origins in the founders' names (like Toyota) or historical figures (like Cadillac)." .
 <https://github.com/priyajitbera/carkg/ontology/brandName> <http://www.w3.org/2000/01/rdf-schema#label> "Brand Name" .
 <https://github.com/priyajitbera/carkg/ontology/brandName> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Brand> .
 <https://github.com/priyajitbera/carkg/ontology/brandName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
-<https://github.com/priyajitbera/carkg/ontology/Car> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
-<https://github.com/priyajitbera/carkg/ontology/brandCountryOfOrigin> <http://www.w3.org/2000/01/rdf-schema#comment> "A car brand's country of origin is the country where the brand was founded and historically developed. For example, Toyota is a Japanese brand, Volkswagen is German, and Ford is American, according to various sources on car brands and manufacturers. While manufacturing may occur in other countries, the \"country of origin\" refers to the brand's original national roots." .
-<https://github.com/priyajitbera/carkg/ontology/brandCountryOfOrigin> <http://www.w3.org/2000/01/rdf-schema#label> "Brand Country of Origin" .
-<https://github.com/priyajitbera/carkg/ontology/brandCountryOfOrigin> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Brand> .
-<https://github.com/priyajitbera/carkg/ontology/brandCountryOfOrigin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/hasEngineOption> <http://www.w3.org/2000/01/rdf-schema#comment> "The Engine Option associated with this combination" .
+<https://github.com/priyajitbera/carkg/ontology/hasEngineOption> <http://www.w3.org/2000/01/rdf-schema#label> "Engine Option" .
+<https://github.com/priyajitbera/carkg/ontology/hasEngineOption> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/EngineOption> .
+<https://github.com/priyajitbera/carkg/ontology/hasEngineOption> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Combination> .
+<https://github.com/priyajitbera/carkg/ontology/hasEngineOption> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
 <https://github.com/priyajitbera/carkg/ontology/Brand> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<https://github.com/priyajitbera/carkg/ontology/fuelTypeName> <http://www.w3.org/2000/01/rdf-schema#comment> "Free-text fuel type, e.g., Petrol, Diesel, CNG, Electric, Hybrid" .
+<https://github.com/priyajitbera/carkg/ontology/fuelTypeName> <http://www.w3.org/2000/01/rdf-schema#label> "Fuel Type Name" .
+<https://github.com/priyajitbera/carkg/ontology/fuelTypeName> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/FuelType> .
+<https://github.com/priyajitbera/carkg/ontology/fuelTypeName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
 <https://github.com/priyajitbera/carkg/ontology/hasBrand> <http://www.w3.org/2000/01/rdf-schema#comment> "A Car Brand, also known as the make, is the manufacturer or company that designs and builds vehicles, such as Toyota, Ford, or Mercedes-Benz. It identifies the company, while the car model (like the Ford Mustang or Toyota Corolla) is the specific type of vehicle a brand offers." .
 <https://github.com/priyajitbera/carkg/ontology/hasBrand> <http://www.w3.org/2000/01/rdf-schema#label> "Car Brand" .
 <https://github.com/priyajitbera/carkg/ontology/hasBrand> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/Brand> .
 <https://github.com/priyajitbera/carkg/ontology/hasBrand> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
 <https://github.com/priyajitbera/carkg/ontology/hasBrand> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
-<https://github.com/priyajitbera/carkg/ontology/hasVariants> <http://www.w3.org/2000/01/rdf-schema#comment> "List of variants available for this car model" .
-<https://github.com/priyajitbera/carkg/ontology/hasVariants> <http://www.w3.org/2000/01/rdf-schema#label> "Car Variants" .
-<https://github.com/priyajitbera/carkg/ontology/hasVariants> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
-<https://github.com/priyajitbera/carkg/ontology/hasVariants> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
-<https://github.com/priyajitbera/carkg/ontology/hasColorOptions> <http://www.w3.org/2000/01/rdf-schema#comment> "Colors in which this car is offered" .
+<https://github.com/priyajitbera/carkg/ontology/hasEngineOptions> <http://www.w3.org/2000/01/rdf-schema#comment> "All Engine Options that are available with this car model" .
+<https://github.com/priyajitbera/carkg/ontology/hasEngineOptions> <http://www.w3.org/2000/01/rdf-schema#label> "Available Engine Options" .
+<https://github.com/priyajitbera/carkg/ontology/hasEngineOptions> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/EngineOption> .
+<https://github.com/priyajitbera/carkg/ontology/hasEngineOptions> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
+<https://github.com/priyajitbera/carkg/ontology/hasEngineOptions> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/Combination> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<https://github.com/priyajitbera/carkg/ontology/hasColorOptions> <http://www.w3.org/2000/01/rdf-schema#comment> "All Color Options that are available with this car model" .
 <https://github.com/priyajitbera/carkg/ontology/hasColorOptions> <http://www.w3.org/2000/01/rdf-schema#label> "Available Color Options" .
+<https://github.com/priyajitbera/carkg/ontology/hasColorOptions> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/ColorOption> .
 <https://github.com/priyajitbera/carkg/ontology/hasColorOptions> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
 <https://github.com/priyajitbera/carkg/ontology/hasColorOptions> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
-<https://github.com/priyajitbera/carkg/ontology/carName> <http://www.w3.org/2000/01/rdf-schema#comment> "A \"Car Name\" refers to either the specific model of a vehicle, such as a Toyota Corolla or Ford F-Series, or the make or brand of the car, like Toyota or Ford. To find the name of a specific car, you typically look for the model name, often found on the back of the vehicle." .
-<https://github.com/priyajitbera/carkg/ontology/carName> <http://www.w3.org/2000/01/rdf-schema#label> "Car Name" .
-<https://github.com/priyajitbera/carkg/ontology/carName> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
-<https://github.com/priyajitbera/carkg/ontology/carName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/FuelType> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
 <https://github.com/priyajitbera/carkg/ontology/carId> <http://www.w3.org/2000/01/rdf-schema#comment> "Identifier of the Car" .
 <https://github.com/priyajitbera/carkg/ontology/carId> <http://www.w3.org/2000/01/rdf-schema#label> "Car Identifier" .
 <https://github.com/priyajitbera/carkg/ontology/carId> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
 <https://github.com/priyajitbera/carkg/ontology/carId> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
-<https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#comment> "Available Combination of Variant, Engine, TransmissionType and ColorOption" .
-<https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#label> "Available Combination of Variant, Engine, TransmissionType and ColorOption" .
+<https://github.com/priyajitbera/carkg/ontology/carName> <http://www.w3.org/2000/01/rdf-schema#comment> "A \"Car Name\" refers to either the specific model of a vehicle, such as a Toyota Corolla or Ford F-Series, or the make or brand of the car, like Toyota or Ford. To find the name of a specific car, you typically look for the model name, often found on the back of the vehicle." .
+<https://github.com/priyajitbera/carkg/ontology/carName> <http://www.w3.org/2000/01/rdf-schema#label> "Car Name" .
+<https://github.com/priyajitbera/carkg/ontology/carName> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
+<https://github.com/priyajitbera/carkg/ontology/carName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/hasVariant> <http://www.w3.org/2000/01/rdf-schema#comment> "Variant associated with this combination" .
+<https://github.com/priyajitbera/carkg/ontology/hasVariant> <http://www.w3.org/2000/01/rdf-schema#label> "Variant" .
+<https://github.com/priyajitbera/carkg/ontology/hasVariant> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/Variant> .
+<https://github.com/priyajitbera/carkg/ontology/hasVariant> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Combination> .
+<https://github.com/priyajitbera/carkg/ontology/hasVariant> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/engineName> <http://www.w3.org/2000/01/rdf-schema#comment> "Human readable engine name, e.g., K12N, 1.5 TSI" .
+<https://github.com/priyajitbera/carkg/ontology/engineName> <http://www.w3.org/2000/01/rdf-schema#label> "Engine Name" .
+<https://github.com/priyajitbera/carkg/ontology/engineName> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/EngineOption> .
+<https://github.com/priyajitbera/carkg/ontology/engineName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#comment> "All available combinations of Variant, Engine, Transmission Type and Color Option" .
+<https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#label> "Available Combinations of Variant, Engine, TransmissionType and ColorOption" .
+<https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/Combination> .
 <https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Car> .
 <https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
-<https://github.com/priyajitbera/carkg/ontology/brandId> <http://www.w3.org/2000/01/rdf-schema#comment> "Identifier of the brand" .
-<https://github.com/priyajitbera/carkg/ontology/brandId> <http://www.w3.org/2000/01/rdf-schema#label> "Brand Identifier" .
-<https://github.com/priyajitbera/carkg/ontology/brandId> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Brand> .
-<https://github.com/priyajitbera/carkg/ontology/brandId> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
-<https://github.com/priyajitbera/carkg/ontology/cars> <http://www.w3.org/2000/01/rdf-schema#comment> "List of the cars offered by this brand" .
-<https://github.com/priyajitbera/carkg/ontology/cars> <http://www.w3.org/2000/01/rdf-schema#label> "Offered Cars" .
-<https://github.com/priyajitbera/carkg/ontology/cars> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Brand> .
-<https://github.com/priyajitbera/carkg/ontology/cars> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
