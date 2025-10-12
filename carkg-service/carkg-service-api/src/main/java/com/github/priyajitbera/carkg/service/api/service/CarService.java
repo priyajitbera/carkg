@@ -20,7 +20,6 @@ import com.github.priyajitbera.carkg.service.data.jpa.repository.CarRepository;
 import com.github.priyajitbera.carkg.service.data.rdf.RdfMaterializer;
 import com.github.priyajitbera.carkg.service.data.rdf.jpa.support.EntityToRDF;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.embedding.Embedding;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,8 +82,8 @@ public class CarService implements
     }
 
     public List<CarSemanticSearchModel> semanticSearch(String query) {
-        Embedding embedding = embeddingService.embedding(query);
-        final String ser = new FloatArrayToJson().convertToDatabaseColumn(embedding.getOutput());
+        float[] embedding = embeddingService.embed(query);
+        final String ser = new FloatArrayToJson().convertToDatabaseColumn(embedding);
         return carRepository.cosineSimilarity(ser)
                 .stream().map(carResponseMapper::map).toList();
     }
@@ -114,7 +113,7 @@ public class CarService implements
             float[] vector = EmbeddingOperations.generate(
                     carEntity,
                     carEmbeddableFormatter::format,
-                    text -> embeddingService.embedding(text).getOutput()
+                    embeddingService::embed
             );
             carEntity.getEmbedding().setVector(vector);
             carEntity.getEmbedding().setEmbeddingRefreshTillUtc(carEntity.getUpdatedAtUtc());
