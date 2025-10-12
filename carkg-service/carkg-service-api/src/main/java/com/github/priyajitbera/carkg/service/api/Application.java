@@ -1,6 +1,7 @@
 package com.github.priyajitbera.carkg.service.api;
 
 import com.github.priyajitbera.carkg.service.data.jpa.entity.Car;
+import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
 import com.github.priyajitbera.carkg.service.data.rdf.OntologySchemaExtractor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,6 +27,6 @@ public class Application implements CommandLineRunner {
         extractor.extract(
                 "https://github.com/priyajitbera/carkg/ontology/",
                 "https://github.com/priyajitbera/carkg/data/",
-                "carkg-service/carkg-service-api/src/main/resources/ontology", Car.class);
+                "carkg-service/carkg-service-api/src/main/resources/ontology", Car.class, CarView.class);
     }
 }
