@@ -18,10 +18,11 @@ It converts MySQL-based automotive data (brands, models, variants, specification
 - ⚙️ Spring Boot Integration: RESTful endpoints for knowledge graph and vector search operations.
 - 💾 Hybrid Storage: MySQL for structured data, Jena TDB for semantic triples, and embedding store for vector retrieval.
 
-![Architecture](https://github.com/priyajitbera/carkg/blob/feature/enhance-entities/carkg-service/diagrams/render/carkg_archictecture_v1.jpg)
+![Architecture](carkg-service/diagrams/render/carkg_archictecture_v1.jpg)
 
-## Glimpses
-### NL to SparQL
+### Glimpses
+#### NL to SparQL
+✨ gemini-2.0-flash-lite
 ![nl_2_sparql.png](glimpses/nl_2_sparql.png)
 ```
 curl --location 'http://localhost:8080/reason/generate-sparql' \
@@ -30,6 +31,7 @@ curl --location 'http://localhost:8080/reason/generate-sparql' \
 ```
 
 ### Semantic Search
+✨ gemini-embedding-001
 ![semantic_search.png](glimpses/semantic_search.png)
 ```
 curl --location 'http://localhost:8080/car/semantic-search?query=cars%20from%20brands%20from%20Japan'
