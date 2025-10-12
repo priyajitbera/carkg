@@ -1,12 +1,15 @@
 package com.github.priyajitbera.carkg.service.api.embedding;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import java.io.IOException;
 
 
 public abstract class DefaultEmbeddableFormatter<T> implements EmbeddableFormatter<T> {
@@ -16,6 +19,9 @@ public abstract class DefaultEmbeddableFormatter<T> implements EmbeddableFormatt
     public DefaultEmbeddableFormatter() {
         YAMLFactory yamlFactory = new YAMLFactory();
         yamlFactory.enable(YAMLGenerator.Feature.MINIMIZE_QUOTES);
+        yamlFactory.disable(YAMLGenerator.Feature.ALWAYS_QUOTE_NUMBERS_AS_STRINGS);
+        yamlFactory.disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER);
+        yamlFactory.disable(YAMLGenerator.Feature.SPLIT_LINES);
 
         ObjectMapper mapper = new ObjectMapper(yamlFactory);
         mapper.registerModule(new JavaTimeModule());

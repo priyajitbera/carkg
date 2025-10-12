@@ -29,10 +29,10 @@ public abstract class CarRequestMapper {
     @Mappings({
             @Mapping(target = "brand", source = ".", qualifiedBy = MapBrand.class),
             @Mapping(target = "colorOptions", qualifiedBy = MapColorOptions.class, dependsOn = {"brand", "name"}),
-            @Mapping(target = "engines", qualifiedBy = MapEngines.class, dependsOn = {"brand", "name"}),
+            @Mapping(target = "engineOptions", qualifiedBy = MapEngines.class, dependsOn = {"brand", "name"}),
             @Mapping(target = "transmissionTypes", qualifiedBy = MapTransmissionTypes.class, dependsOn = {"brand", "name"}),
             @Mapping(target = "variants", qualifiedBy = MapVariants.class, dependsOn = {"brand", "name"}),
-            @Mapping(target = "combinations", qualifiedBy = MapCombinations.class, dependsOn = {"brand", "name", "variants", "engines", "transmissionTypes", "colorOptions"})
+            @Mapping(target = "combinations", qualifiedBy = MapCombinations.class, dependsOn = {"brand", "name", "variants", "engineOptions", "transmissionTypes", "colorOptions"})
     })
     public abstract void map(@MappingTarget Car car, CarCreate create, @Context CarRequestMappingContext context);
 
@@ -83,8 +83,8 @@ public abstract class CarRequestMapper {
     }
 
     @MapEngines
-    protected List<Engine> mapEngines(List<EngineCreate> childItemsCreate, @Context CarRequestMappingContext context) {
-        return EngineRequestMapper.genericListItemMapper(engineRequestMapper).map(context.car().getEngines(), childItemsCreate, context);
+    protected List<EngineOption> mapEngines(List<EngineOptionCreate> childItemsCreate, @Context CarRequestMappingContext context) {
+        return EngineRequestMapper.genericListItemMapper(engineRequestMapper).map(context.car().getEngineOptions(), childItemsCreate, context);
     }
 
     @Qualifier

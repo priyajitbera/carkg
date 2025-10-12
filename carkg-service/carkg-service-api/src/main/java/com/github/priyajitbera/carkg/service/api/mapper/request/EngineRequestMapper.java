@@ -2,11 +2,11 @@ package com.github.priyajitbera.carkg.service.api.mapper.request;
 
 import com.github.priyajitbera.carkg.service.api.mapper.CommonMapperConfig;
 import com.github.priyajitbera.carkg.service.api.mapper.request.context.CarRequestMappingContext;
-import com.github.priyajitbera.carkg.service.api.model.request.EngineCreate;
+import com.github.priyajitbera.carkg.service.api.model.request.EngineOptionCreate;
 import com.github.priyajitbera.carkg.service.api.model.request.FuelTypeCreate;
 import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
 import com.github.priyajitbera.carkg.service.data.jpa.entity.Car;
-import com.github.priyajitbera.carkg.service.data.jpa.entity.Engine;
+import com.github.priyajitbera.carkg.service.data.jpa.entity.EngineOption;
 import com.github.priyajitbera.carkg.service.data.jpa.entity.FuelType;
 import com.github.priyajitbera.carkg.service.data.jpa.repository.FuelTypeRepository;
 import org.apache.commons.lang3.function.TriConsumer;
@@ -26,7 +26,7 @@ public abstract class EngineRequestMapper {
 
     @Mapping(target = "car", source = ".", qualifiedBy = MapCar.class)
     @Mapping(target = "fuelType", qualifiedBy = MapFuelType.class)
-    public abstract void map(@MappingTarget Engine target, EngineCreate src, @Context CarRequestMappingContext context);
+    public abstract void map(@MappingTarget EngineOption target, EngineOptionCreate src, @Context CarRequestMappingContext context);
 
     @Qualifier
     @Retention(RetentionPolicy.CLASS)
@@ -34,7 +34,7 @@ public abstract class EngineRequestMapper {
     }
 
     @MapCar
-    protected Car mapCar(EngineCreate src, @Context CarRequestMappingContext context) {
+    protected Car mapCar(EngineOptionCreate src, @Context CarRequestMappingContext context) {
         return context.car();
     }
 
@@ -61,28 +61,28 @@ public abstract class EngineRequestMapper {
     }
 
     @AfterMapping
-    protected void afterMapping(@MappingTarget Engine target) {
+    protected void afterMapping(@MappingTarget EngineOption target) {
         target.deriveAndSetId();
     }
 
-    public static GenericListItemMapper<EngineCreate, Engine, CarRequestMappingContext> genericListItemMapper(
+    public static GenericListItemMapper<EngineOptionCreate, EngineOption, CarRequestMappingContext> genericListItemMapper(
             EngineRequestMapper mapper
     ) {
-        GenericListItemMapper<EngineCreate,
-                Engine, CarRequestMappingContext> listItemMapper = new GenericListItemMapper<>() {
+        GenericListItemMapper<EngineOptionCreate,
+                EngineOption, CarRequestMappingContext> listItemMapper = new GenericListItemMapper<>() {
             @Override
-            TriConsumer<Engine, EngineCreate, CarRequestMappingContext> getMapper() {
+            TriConsumer<EngineOption, EngineOptionCreate, CarRequestMappingContext> getMapper() {
                 return mapper::map;
             }
 
             @Override
-            boolean match(Engine target, EngineCreate src) {
+            boolean match(EngineOption target, EngineOptionCreate src) {
                 return Objects.equals(target.getId(), (new IdGen()).generate(target.getCar().deriveId(), src.getName()));
             }
 
             @Override
-            Engine newTargetInstance() {
-                return new Engine();
+            EngineOption newTargetInstance() {
+                return new EngineOption();
             }
         };
         return listItemMapper;

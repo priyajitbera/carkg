@@ -1,7 +1,9 @@
 package com.github.priyajitbera.carkg.service.data.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
+import com.github.priyajitbera.carkg.service.data.jpa.serializer.EngineSemanticSerializer;
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.BrandView;
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
@@ -14,13 +16,14 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.Objects;
 
+@JsonSerialize(using = EngineSemanticSerializer.class)
 @Entity
 @Getter
 @Setter
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Engine {
+public class EngineOption {
 
     @RdfPredicate(value = "engineId", label = "Engine Identifier", comment = "Identifier of the engine")
     @Id
@@ -58,7 +61,7 @@ public class Engine {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        Engine that = (Engine) object;
+        EngineOption that = (EngineOption) object;
         return Objects.equals(id, that.id);
     }
 

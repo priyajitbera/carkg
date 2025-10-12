@@ -19,3 +19,18 @@ It converts MySQL-based automotive data (brands, models, variants, specification
 - 💾 Hybrid Storage: MySQL for structured data, Jena TDB for semantic triples, and embedding store for vector retrieval.
 
 ![Architecture](https://github.com/priyajitbera/carkg/blob/feature/enhance-entities/carkg-service/diagrams/render/carkg_archictecture_v1.jpg)
+
+## Glimpses
+### NL to SparQL
+![nl_2_sparql.png](glimpses/nl_2_sparql.png)
+```
+curl --location 'http://localhost:8080/reason/generate-sparql' \
+--header 'Content-Type: application/json' \
+--data 'List all cars variants blue color and petrol fuel type'
+```
+
+### Semantic Search
+![semantic_search.png](glimpses/semantic_search.png)
+```
+curl --location 'http://localhost:8080/car/semantic-search?query=cars%20from%20brands%20from%20Japan'
+```

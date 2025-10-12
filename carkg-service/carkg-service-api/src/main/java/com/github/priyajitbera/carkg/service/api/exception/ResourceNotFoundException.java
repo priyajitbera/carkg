@@ -29,7 +29,7 @@ public class ResourceNotFoundException extends ResponseStatusException {
     }
 
     public static Supplier<ResourceNotFoundException> engineByNameCarId(String name, String carId) {
-        return () -> new ResourceNotFoundException(String.format("%s: %s not found for car with: %s", Engine.class.getSimpleName(), name, carId));
+        return () -> new ResourceNotFoundException(String.format("%s: %s not found for car with: %s", EngineOption.class.getSimpleName(), name, carId));
     }
 
     public static Supplier<ResourceNotFoundException> transmissionTypeByNameCarId(String name, String carId) {

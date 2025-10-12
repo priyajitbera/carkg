@@ -1,7 +1,9 @@
 package com.github.priyajitbera.carkg.service.data.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
+import com.github.priyajitbera.carkg.service.data.jpa.serializer.CombinationSemanticSerializer;
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.BrandView;
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
@@ -14,6 +16,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.Objects;
 
+@JsonSerialize(using = CombinationSemanticSerializer.class)
 @Entity
 @Getter
 @Setter
@@ -37,19 +40,19 @@ public class Combination {
     private Variant variant;
 
     @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasEngine", label = "Engine", comment = "Engines associated with this combination")
+    @RdfPredicate(value = "hasEngineOption", label = "Engine Option", comment = "The Engine Option associated with this combination")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_engine"))
-    private Engine engine;
+    private EngineOption engineOption;
 
     @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasTransmissionType", label = "Transmission Type", comment = "Transmission Type associated with this combination")
+    @RdfPredicate(value = "hasTransmissionType", label = "Transmission Type", comment = "The Transmission Type associated with this combination")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_transmission_type"))
     private TransmissionType transmissionType;
 
     @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasTransmissionType", label = "Color Option", comment = "Transmission Type associated with this combination")
+    @RdfPredicate(value = "hasTransmissionType", label = "Color Option", comment = "The Color Option associated with this combination")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_color_option"))
     private ColorOption colorOption;
@@ -58,10 +61,10 @@ public class Combination {
     public String deriveId() {
         assert car != null;
         assert variant != null;
-        assert engine != null;
+        assert engineOption != null;
         assert transmissionType != null;
         assert colorOption != null;
-        return (new IdGen()).generate(car.deriveId(), variant.getName(), engine.getName(), transmissionType.getName(), colorOption.getName());
+        return (new IdGen()).generate(car.deriveId(), variant.getName(), engineOption.getName(), transmissionType.getName(), colorOption.getName());
     }
 
     public void deriveAndSetId() {

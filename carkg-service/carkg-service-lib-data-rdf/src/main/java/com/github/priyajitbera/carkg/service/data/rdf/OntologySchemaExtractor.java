@@ -6,6 +6,7 @@ import org.apache.jena.rdf.model.Model;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
@@ -17,10 +18,11 @@ public class OntologySchemaExtractor {
             String namespaceOntology,
             String namespaceData,
             String directory,
-            Class<? extends Identifiable> rootType
+            Class<? extends Identifiable> rootType,
+            Class<?> jsonView
     ) {
         EntityToRDF entityToRDF = new EntityToRDF(namespaceOntology, namespaceData);
-        Model ontologyModel = entityToRDF.entityToOntologyModel(rootType);
+        Model ontologyModel = entityToRDF.entityToOntologyModel(rootType, jsonView);
 
         Arrays.stream(KNOWN_FORMATS).forEach(format -> {
             String fileName = rdfFormatToConventionalOntologySchemaFileName(format);

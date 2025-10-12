@@ -19,7 +19,7 @@ public abstract class CombinationRequestMapper {
     @Mappings({
             @Mapping(target = "car", source = ".", qualifiedBy = MapCar.class),
             @Mapping(target = "variant", qualifiedBy = MapVariant.class),
-            @Mapping(target = "engine", qualifiedBy = MapEngine.class),
+            @Mapping(target = "engineOption", qualifiedBy = MapEngine.class),
             @Mapping(target = "transmissionType", qualifiedBy = MapTransmissionType.class),
             @Mapping(target = "colorOption", qualifiedBy = MapColorOption.class)
     })
@@ -52,8 +52,8 @@ public abstract class CombinationRequestMapper {
     }
 
     @MapEngine
-    protected Engine mapEngine(String engineName, @Context CarRequestMappingContext context) {
-        return context.car().getEngines().stream().filter(engine -> Objects.equals(engine.getName(), engineName)).findFirst()
+    protected EngineOption mapEngine(String engineName, @Context CarRequestMappingContext context) {
+        return context.car().getEngineOptions().stream().filter(engine -> Objects.equals(engine.getName(), engineName)).findFirst()
                 .orElseThrow(ResourceNotFoundException.engineByNameCarId(engineName, context.car().deriveId()));
     }
 
@@ -96,7 +96,7 @@ public abstract class CombinationRequestMapper {
 
             @Override
             boolean match(Combination target, CombinationCreate src) {
-                return Objects.equals(target.getId(), (new IdGen()).generate(target.getCar().deriveId(), src.getVariant(), src.getEngine(), src.getTransmissionType(), src.getColorOption()));
+                return Objects.equals(target.getId(), (new IdGen()).generate(target.getCar().deriveId(), src.getVariant(), src.getEngineOption(), src.getTransmissionType(), src.getColorOption()));
             }
 
             @Override

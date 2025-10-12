@@ -1,6 +1,7 @@
 package com.github.priyajitbera.carkg.service.data.rdf.jpa.support;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
 import com.github.priyajitbera.carkg.service.data.rdf.interfaces.Identifiable;
 import jakarta.persistence.Entity;
@@ -14,6 +15,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,13 +40,13 @@ public class EntityToRDF {
         this.NAMESPACE_DATA = namespaceData;
     }
 
-    public <T extends Identifiable> Model entityToOntologyModel(Class<T> entityClass) {
+    public <T extends Identifiable> Model entityToOntologyModel(Class<T> entityClass, Class<?> jsonView) {
         Model model = ModelFactory.createDefaultModel();
-        entityToOntologyResource(model, entityClass);
+        entityToOntologyResource(model, entityClass, jsonView);
         return model;
     }
 
-    private Map.Entry<Resource, Property> entityToOntologyResource(Model model, Class<?> entityClass) {
+    private Map.Entry<Resource, Property> entityToOntologyResource(Model model, Class<?> entityClass, Class<?> viewAnnotation) {
         String uri = NAMESPACE_ONTOLOGY + entityClass.getSimpleName();
         Resource resource = model.createResource(uri);
 
@@ -53,14 +58,32 @@ public class EntityToRDF {
         for (Field field : entityClass.getDeclaredFields()) {
             if (!field.isAnnotationPresent(RdfPredicate.class)) continue;
             Property property = model.createProperty(NAMESPACE_ONTOLOGY, field.getAnnotation(RdfPredicate.class).value());
+
+            if (!field.isAnnotationPresent(JsonView.class) || Arrays.stream(field.getAnnotation(JsonView.class).value()).sequential().noneMatch(jsonView -> jsonView == viewAnnotation)) {
+                continue;
+            }
             if (field.getType().isAnnotationPresent(Entity.class)) {
                 // example :hasBrand a rdf:Property ;
                 model.add(property, RDF.type, RDF.Property);
                 property.addProperty(RDFS.domain, resourceType); // example: The subject of hasBrand must be a Car
-                Map.Entry<Resource, Property> propertyResource = entityToOntologyResource(model, field.getType());
+                Map.Entry<Resource, Property> propertyResource = entityToOntologyResource(model, field.getType(), viewAnnotation);
                 property.addProperty(RDFS.range, propertyResource.getValue()); // example: The object of hasBrand must be a Brand
                 property.addProperty(RDFS.label, field.getAnnotation(RdfPredicate.class).label());
                 property.addProperty(RDFS.comment, field.getAnnotation(RdfPredicate.class).comment());
+            } else if (Collection.class.isAssignableFrom(field.getType())) {
+                Type genericType = field.getGenericType();
+                if (genericType instanceof ParameterizedType) {
+                    Class<?> genericTypeClazz = (Class<?>) ((ParameterizedType) genericType).getActualTypeArguments()[0];
+                    if (genericTypeClazz.isAnnotationPresent(Entity.class)) {
+                        // example :hasBrand a rdf:Property ;
+                        model.add(property, RDF.type, RDF.Property);
+                        property.addProperty(RDFS.domain, resourceType); // example: The subject of hasBrand must be a Car
+                        Map.Entry<Resource, Property> propertyResource = entityToOntologyResource(model, genericTypeClazz, viewAnnotation);
+                        property.addProperty(RDFS.range, propertyResource.getValue()); // example: The object of hasBrand must be a Brand
+                        property.addProperty(RDFS.label, field.getAnnotation(RdfPredicate.class).label());
+                        property.addProperty(RDFS.comment, field.getAnnotation(RdfPredicate.class).comment());
+                    }
+                }
             } else {
                 // example :hasBrand a rdf:Property ;
                 model.add(property, RDF.type, RDF.Property);

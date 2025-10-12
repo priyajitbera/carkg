@@ -41,6 +41,11 @@ public class CarController {
         return carService.embed(embeddingRequest);
     }
 
+    @PostMapping("/embed/batch")
+    public List<CarEmbeddingModel> embed(@RequestBody List<CarEmbeddingRequest> embeddingRequests) {
+        return carService.embedBatch(embeddingRequests);
+    }
+
     @GetMapping("/semantic-search")
     public List<CarSemanticSearchModel> semanticSearch(@Param("query") String query) {
         return carService.semanticSearch(query);
