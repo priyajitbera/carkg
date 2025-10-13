@@ -21,7 +21,7 @@ It converts MySQL-based automotive data (brands, models, variants, specification
 ![Architecture](carkg-service/diagrams/render/carkg_archictecture_v1.jpg)
 
 ### Glimpses
-#### NL to SparQL
+#### ✍️ NL to SparQL
 ✨ gemini-2.0-flash-lite
 ![nl_2_sparql.png](glimpses/nl_2_sparql.png)
 ```
@@ -30,14 +30,14 @@ curl --location 'http://localhost:8080/reason/generate-sparql' \
 --data 'List all cars variants blue color and petrol fuel type'
 ```
 
-### Semantic Search
+### 🔍 Semantic Search
 ✨ gemini-embedding-001
 ![semantic_search.png](glimpses/semantic_search.png)
 ```
 curl --location 'http://localhost:8080/car/semantic-search?query=cars%20from%20brands%20from%20Japan'
 ```
 
-### Question Answer
+### 🙋 Question Answer
 ✨ gemini-2.5-flash-lite
 ![question_answer.png](glimpses/question_answer.png)
 ```
