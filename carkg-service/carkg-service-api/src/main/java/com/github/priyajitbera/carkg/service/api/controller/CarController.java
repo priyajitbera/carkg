@@ -2,6 +2,7 @@ package com.github.priyajitbera.carkg.service.api.controller;
 
 import com.github.priyajitbera.carkg.service.api.model.request.CarCreate;
 import com.github.priyajitbera.carkg.service.api.model.request.CarEmbeddingRequest;
+import com.github.priyajitbera.carkg.service.api.model.request.CarKgSyncRequest;
 import com.github.priyajitbera.carkg.service.api.model.response.CarEmbeddingModel;
 import com.github.priyajitbera.carkg.service.api.model.response.CarModel;
 import com.github.priyajitbera.carkg.service.api.model.response.semanticsearch.CarSemanticSearchModel;
@@ -49,5 +50,15 @@ public class CarController {
     @GetMapping("/semantic-search")
     public List<CarSemanticSearchModel> semanticSearch(@Param("query") String query) {
         return carService.semanticSearch(query);
+    }
+
+    @PostMapping("/sync/kg")
+    public void syncKG(@RequestBody CarKgSyncRequest request) {
+        carService.syncKG(request);
+    }
+
+    @PostMapping("/sync/kg/batch")
+    public void syncKG(@RequestBody List<CarKgSyncRequest> requests) {
+        carService.syncKGBatch(requests);
     }
 }
