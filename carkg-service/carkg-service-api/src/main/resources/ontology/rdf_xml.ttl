@@ -16,6 +16,12 @@
     <rdfs:label>Car Name</rdfs:label>
     <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
   </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasColorOption">
+    <rdfs:comment>The Color Option associated with this combination</rdfs:comment>
+    <rdfs:label>Color Option</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/ColorOption"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Combination"/>
+  </rdf:Property>
   <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasTransmissionTypes">
     <rdfs:comment>All Transmission Types that are available with this car model</rdfs:comment>
     <rdfs:label>Available Transmission Types</rdfs:label>
@@ -99,9 +105,6 @@
     <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
   </rdf:Property>
   <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasTransmissionType">
-    <rdfs:comment>The Color Option associated with this combination</rdfs:comment>
-    <rdfs:label>Color Option</rdfs:label>
-    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/ColorOption"/>
     <rdfs:comment>The Transmission Type associated with this combination</rdfs:comment>
     <rdfs:label>Transmission Type</rdfs:label>
     <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/TransmissionType"/>

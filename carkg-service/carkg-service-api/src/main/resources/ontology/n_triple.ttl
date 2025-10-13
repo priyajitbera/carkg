@@ -25,9 +25,6 @@
 <https://github.com/priyajitbera/carkg/ontology/variantName> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Variant> .
 <https://github.com/priyajitbera/carkg/ontology/variantName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
 <https://github.com/priyajitbera/carkg/ontology/TransmissionType> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
-<https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#comment> "The Color Option associated with this combination" .
-<https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#label> "Color Option" .
-<https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/ColorOption> .
 <https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#comment> "The Transmission Type associated with this combination" .
 <https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#label> "Transmission Type" .
 <https://github.com/priyajitbera/carkg/ontology/hasTransmissionType> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/TransmissionType> .
@@ -92,6 +89,11 @@
 <https://github.com/priyajitbera/carkg/ontology/engineName> <http://www.w3.org/2000/01/rdf-schema#label> "Engine Name" .
 <https://github.com/priyajitbera/carkg/ontology/engineName> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/EngineOption> .
 <https://github.com/priyajitbera/carkg/ontology/engineName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://github.com/priyajitbera/carkg/ontology/hasColorOption> <http://www.w3.org/2000/01/rdf-schema#comment> "The Color Option associated with this combination" .
+<https://github.com/priyajitbera/carkg/ontology/hasColorOption> <http://www.w3.org/2000/01/rdf-schema#label> "Color Option" .
+<https://github.com/priyajitbera/carkg/ontology/hasColorOption> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/ColorOption> .
+<https://github.com/priyajitbera/carkg/ontology/hasColorOption> <http://www.w3.org/2000/01/rdf-schema#domain> <https://github.com/priyajitbera/carkg/ontology/Combination> .
+<https://github.com/priyajitbera/carkg/ontology/hasColorOption> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
 <https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#comment> "All available combinations of Variant, Engine, Transmission Type and Color Option" .
 <https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#label> "Available Combinations of Variant, Engine, TransmissionType and ColorOption" .
 <https://github.com/priyajitbera/carkg/ontology/hasCombination> <http://www.w3.org/2000/01/rdf-schema#range> <https://github.com/priyajitbera/carkg/ontology/Combination> .
