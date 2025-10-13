@@ -1,9 +1,15 @@
 package com.github.priyajitbera.carkg.service.data.jpa.entity;
 
-import com.github.priyajitbera.carkg.service.data.jpa.converter.FloatArrayToJson;
 import com.github.priyajitbera.carkg.service.data.rdf.interfaces.Identifiable;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,10 +18,10 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Embedding implements Identifiable, CommonEntity<String, LocalDateTime> {
+public class KnowledgeGraphSyncInfo implements Identifiable, CommonEntity<String, LocalDateTime> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -27,9 +33,5 @@ public class Embedding implements Identifiable, CommonEntity<String, LocalDateTi
     @UpdateTimestamp
     private LocalDateTime updatedAtUtc;
 
-    @Convert(converter = FloatArrayToJson.class)
-    @Column(columnDefinition = "text", length = 16383)
-    private float[] vector;
-
-    private LocalDateTime embeddingRefreshTillUtc;
+    private LocalDateTime syncedAtUtc;
 }

@@ -5,6 +5,7 @@ import com.github.priyajitbera.carkg.service.data.jpa.IdGen;
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.BrandView;
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
+import com.github.priyajitbera.carkg.service.data.rdf.interfaces.Identifiable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -21,11 +25,17 @@ import java.util.Objects;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FuelType {
+public class FuelType implements Identifiable, CommonEntity<String, LocalDateTime> {
 
     @RdfPredicate(value = "fuelTypeId", label = "Fuel Type Identifier", comment = "Identifier of the fuel type")
     @Id
     private String id;
+
+    @CreationTimestamp
+    private LocalDateTime createdAtUtc;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAtUtc;
 
     @JsonView({CarView.class, BrandView.class})
     @RdfPredicate(value = "fuelTypeName", label = "Fuel Type Name", comment = "Free-text fuel type, e.g., Petrol, Diesel, CNG, Electric, Hybrid")
