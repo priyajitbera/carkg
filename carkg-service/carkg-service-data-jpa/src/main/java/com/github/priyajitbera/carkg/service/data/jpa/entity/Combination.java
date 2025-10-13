@@ -7,13 +7,17 @@ import com.github.priyajitbera.carkg.service.data.jpa.serializer.CombinationSema
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.BrandView;
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
+import com.github.priyajitbera.carkg.service.data.rdf.interfaces.Identifiable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @JsonSerialize(using = CombinationSemanticSerializer.class)
@@ -23,11 +27,17 @@ import java.util.Objects;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Combination {
+public class Combination implements Identifiable, CommonEntity<String, LocalDateTime> {
 
     @RdfPredicate(value = "combinationId", label = "Combination Identifier", comment = "Identifier of the car variant")
     @Id
     private String id;
+
+    @CreationTimestamp
+    private LocalDateTime createdAtUtc;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAtUtc;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
@@ -52,7 +62,7 @@ public class Combination {
     private TransmissionType transmissionType;
 
     @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasTransmissionType", label = "Color Option", comment = "The Color Option associated with this combination")
+    @RdfPredicate(value = "hasColorOption", label = "Color Option", comment = "The Color Option associated with this combination")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_color_option"))
     private ColorOption colorOption;

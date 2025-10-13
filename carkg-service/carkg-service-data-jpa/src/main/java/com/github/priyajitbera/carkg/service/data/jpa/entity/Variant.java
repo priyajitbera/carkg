@@ -7,13 +7,17 @@ import com.github.priyajitbera.carkg.service.data.jpa.serializer.VariantSemantic
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.BrandView;
 import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
+import com.github.priyajitbera.carkg.service.data.rdf.interfaces.Identifiable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @JsonSerialize(using = VariantSemanticSerializer.class)
@@ -23,12 +27,18 @@ import java.util.Objects;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Variant {
+public class Variant implements Identifiable, CommonEntity<String, LocalDateTime> {
 
     @JsonView(BrandView.class)
     @RdfPredicate(value = "variantId", label = "Variant Identifier", comment = "Identifier of the car variant")
     @Id
     private String id;
+
+    @CreationTimestamp
+    private LocalDateTime createdAtUtc;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAtUtc;
 
     @JsonView({CarView.class, BrandView.class})
     @RdfPredicate(value = "variantName", label = "Variant Name", comment = "Name of the variant, e.g., LX, Sport, Top Model")

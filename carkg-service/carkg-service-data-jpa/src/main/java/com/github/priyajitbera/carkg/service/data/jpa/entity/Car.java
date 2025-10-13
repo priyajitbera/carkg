@@ -25,7 +25,7 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Car implements Identifiable {
+public class Car implements Identifiable, CommonEntity<String, LocalDateTime> {
 
     @JsonView(CarView.class)
     @RdfPredicate(value = "carId", label = "Car Identifier", comment = "Identifier of the Car")
@@ -59,6 +59,10 @@ public class Car implements Identifiable {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_car_semantic_object"))
     private SemanticObject semanticObject;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_car_knowledge_graph_sync_info"))
+    private KnowledgeGraphSyncInfo knowledgeGraphSyncInfo;
 
     @JsonView({CarView.class, BrandView.class})
     @RdfPredicate(value = "hasVariants", label = "Car Variants", comment = "List of variants available for this car model")

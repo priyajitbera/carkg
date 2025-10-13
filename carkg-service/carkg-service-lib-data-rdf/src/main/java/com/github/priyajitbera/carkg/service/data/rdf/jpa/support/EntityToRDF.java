@@ -111,13 +111,13 @@ public class EntityToRDF {
         };
     }
 
-    public <T extends Identifiable> Model entityToDataModel(T entity) {
+    public <T extends Identifiable> Model entityToDataModel(T entity, Class<?> viewAnnotation) {
         Model model = ModelFactory.createDefaultModel();
-        entityToDataModel(model, entity);
+        entityToDataModel(model, entity, viewAnnotation);
         return model;
     }
 
-    private <T extends Identifiable> Map.Entry<Resource, Property> entityToDataModel(Model model, T entity) {
+    private <T extends Identifiable> Map.Entry<Resource, Property> entityToDataModel(Model model, T entity, Class<?> viewAnnotation) {
         String uri = NAMESPACE_DATA + entity.getId();
         Resource resource = model.createResource(uri);
 
@@ -127,6 +127,9 @@ public class EntityToRDF {
         resource.addProperty(RDF.type, resourceType);
 
         for (Field field : entity.getClass().getDeclaredFields()) {
+            if (!field.isAnnotationPresent(JsonView.class) || Arrays.stream(field.getAnnotation(JsonView.class).value()).sequential().noneMatch(jsonView -> jsonView == viewAnnotation)) {
+                continue;
+            }
             if (!field.isAnnotationPresent(RdfPredicate.class)) continue;
             field.setAccessible(true);
             Object fieldValue;
@@ -141,8 +144,20 @@ public class EntityToRDF {
                 if (field.getType().isPrimitive() || wrapperTypes.contains(field.getType())) {
                     model.add(resource, property, fieldValue.toString());
                 } else if (Identifiable.class.isAssignableFrom(field.getType())) {
-                    Map.Entry<Resource, Property> propertyResource = entityToDataModel(model, (Identifiable) fieldValue);
+                    Map.Entry<Resource, Property> propertyResource = entityToDataModel(model, (Identifiable) fieldValue, viewAnnotation);
                     resource.addProperty(property, propertyResource.getKey());
+                } else if (Collection.class.isAssignableFrom(field.getType())) {
+                    Type genericType = field.getGenericType();
+                    if (genericType instanceof ParameterizedType) {
+                        Class<?> genericTypeClazz = (Class<?>) ((ParameterizedType) genericType).getActualTypeArguments()[0];
+                        if (genericTypeClazz.isAnnotationPresent(Entity.class)) {
+                            Collection<?> collection = (Collection<?>) fieldValue;
+                            collection.forEach(item -> {
+                                Map.Entry<Resource, Property> propertyResource = entityToDataModel(model, (Identifiable) item, viewAnnotation);
+                                resource.addProperty(property, propertyResource.getKey());
+                            });
+                        }
+                    }
                 }
             }
         }

@@ -36,3 +36,12 @@ curl --location 'http://localhost:8080/reason/generate-sparql' \
 ```
 curl --location 'http://localhost:8080/car/semantic-search?query=cars%20from%20brands%20from%20Japan'
 ```
+
+### Question Answer
+✨ gemini-2.5-flash-lite
+![question_answer.png](glimpses/question_answer.png)
+```
+curl --location 'http://localhost:8080/reason/ask-humanize' \
+--header 'Content-Type: application/json' \
+--data 'List all combinations(variant, engine, color) of car named Nexon order by variant name'
+```

@@ -9,17 +9,21 @@ import com.github.priyajitbera.carkg.service.api.mapper.request.context.CarReque
 import com.github.priyajitbera.carkg.service.api.mapper.response.CarResponseMapper;
 import com.github.priyajitbera.carkg.service.api.model.request.CarCreate;
 import com.github.priyajitbera.carkg.service.api.model.request.CarEmbeddingRequest;
+import com.github.priyajitbera.carkg.service.api.model.request.CarKgSyncRequest;
 import com.github.priyajitbera.carkg.service.api.model.response.CarEmbeddingModel;
 import com.github.priyajitbera.carkg.service.api.model.response.CarModel;
 import com.github.priyajitbera.carkg.service.api.model.response.semanticsearch.CarSemanticSearchModel;
 import com.github.priyajitbera.carkg.service.data.jpa.converter.FloatArrayToJson;
 import com.github.priyajitbera.carkg.service.data.jpa.entity.Brand;
 import com.github.priyajitbera.carkg.service.data.jpa.entity.Car;
+import com.github.priyajitbera.carkg.service.data.jpa.entity.KnowledgeGraphSyncInfo;
 import com.github.priyajitbera.carkg.service.data.jpa.repository.BrandRepository;
 import com.github.priyajitbera.carkg.service.data.jpa.repository.CarRepository;
+import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
 import com.github.priyajitbera.carkg.service.data.rdf.RdfMaterializer;
 import com.github.priyajitbera.carkg.service.data.rdf.jpa.support.EntityToRDF;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.jena.rdf.model.Model;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -128,5 +132,38 @@ public class CarService implements
 
     public List<CarEmbeddingModel> embedBatch(List<CarEmbeddingRequest> embeddingRequests) {
         return embeddingRequests.stream().map(this::embed).toList();
+    }
+
+    @Transactional
+    public void syncKG(CarKgSyncRequest request) {
+        Car carEntity = carRepository.findById(request.getId())
+                .orElseThrow(ResourceNotFoundException.carById(request.getId()));
+        if (request.getForce() || carEntity.getKnowledgeGraphSyncInfo() == null || carEntity.getKnowledgeGraphSyncInfo().getSyncedAtUtc().isBefore(carEntity.getUpdatedAtUtc())) {
+
+            Model ontologyModel = entityToRDF.entityToOntologyModel(Car.class, CarView.class);
+            log.info("Ontology model of size {} created for Car", ontologyModel.size());
+
+            Model dataModel = entityToRDF.entityToDataModel(carEntity, CarView.class);
+            System.out.println(dataModel);
+
+            log.info("Data model of size {} created for Car with id: {}", dataModel.size(), carEntity.getId());
+            Model materializedModel = rdfMaterializer.materialize(dataModel, ontologyModel);
+            log.info("Materialized model of size {} created for Car with id: {}", materializedModel.size(), carEntity.getId());
+
+            jenaFusekiClient.saveToFuseki(materializedModel);
+            if (carEntity.getKnowledgeGraphSyncInfo() == null) {
+                carEntity.setKnowledgeGraphSyncInfo(new KnowledgeGraphSyncInfo());
+            }
+            carEntity.getKnowledgeGraphSyncInfo().setSyncedAtUtc(java.time.LocalDateTime.now());
+            carRepository.saveAndFlush(carEntity);
+        } else {
+            log.info("Skipping KG sync for Car with id: {} as it is already synced at: {}",
+                    carEntity.getId(), carEntity.getKnowledgeGraphSyncInfo().getSyncedAtUtc());
+        }
+    }
+
+    @Transactional
+    public void syncKGBatch(List<CarKgSyncRequest> requests) {
+        requests.forEach(this::syncKG);
     }
 }

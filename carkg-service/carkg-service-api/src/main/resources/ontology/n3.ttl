@@ -61,13 +61,13 @@
 <https://github.com/priyajitbera/carkg/ontology/hasTransmissionType>
         a       <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
         <http://www.w3.org/2000/01/rdf-schema#comment>
-                "The Color Option associated with this combination" , "The Transmission Type associated with this combination";
+                "The Transmission Type associated with this combination";
         <http://www.w3.org/2000/01/rdf-schema#domain>
                 <https://github.com/priyajitbera/carkg/ontology/Combination>;
         <http://www.w3.org/2000/01/rdf-schema#label>
-                "Color Option" , "Transmission Type";
+                "Transmission Type";
         <http://www.w3.org/2000/01/rdf-schema#range>
-                <https://github.com/priyajitbera/carkg/ontology/ColorOption> , <https://github.com/priyajitbera/carkg/ontology/TransmissionType> .
+                <https://github.com/priyajitbera/carkg/ontology/TransmissionType> .
 
 <https://github.com/priyajitbera/carkg/ontology/Car>
         a       <http://www.w3.org/2000/01/rdf-schema#Class> .
@@ -203,6 +203,17 @@
                 <https://github.com/priyajitbera/carkg/ontology/EngineOption>;
         <http://www.w3.org/2000/01/rdf-schema#label>
                 "Engine Name" .
+
+<https://github.com/priyajitbera/carkg/ontology/hasColorOption>
+        a       <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+        <http://www.w3.org/2000/01/rdf-schema#comment>
+                "The Color Option associated with this combination";
+        <http://www.w3.org/2000/01/rdf-schema#domain>
+                <https://github.com/priyajitbera/carkg/ontology/Combination>;
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Color Option";
+        <http://www.w3.org/2000/01/rdf-schema#range>
+                <https://github.com/priyajitbera/carkg/ontology/ColorOption> .
 
 <https://github.com/priyajitbera/carkg/ontology/hasCombination>
         a       <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;

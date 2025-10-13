@@ -71,22 +71,11 @@
         },
         {
             "@id": "https://github.com/priyajitbera/carkg/ontology/hasTransmissionType",
-            "http://www.w3.org/2000/01/rdf-schema#comment": [
-                "The Color Option associated with this combination",
-                "The Transmission Type associated with this combination"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                "Color Option",
-                "Transmission Type"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "https://github.com/priyajitbera/carkg/ontology/ColorOption"
-                },
-                {
-                    "@id": "https://github.com/priyajitbera/carkg/ontology/TransmissionType"
-                }
-            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": "The Transmission Type associated with this combination",
+            "http://www.w3.org/2000/01/rdf-schema#label": "Transmission Type",
+            "http://www.w3.org/2000/01/rdf-schema#range": {
+                "@id": "https://github.com/priyajitbera/carkg/ontology/TransmissionType"
+            },
             "http://www.w3.org/2000/01/rdf-schema#domain": {
                 "@id": "https://github.com/priyajitbera/carkg/ontology/Combination"
             },
@@ -231,6 +220,18 @@
             "http://www.w3.org/2000/01/rdf-schema#label": "Engine Name",
             "http://www.w3.org/2000/01/rdf-schema#domain": {
                 "@id": "https://github.com/priyajitbera/carkg/ontology/EngineOption"
+            },
+            "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+        },
+        {
+            "@id": "https://github.com/priyajitbera/carkg/ontology/hasColorOption",
+            "http://www.w3.org/2000/01/rdf-schema#comment": "The Color Option associated with this combination",
+            "http://www.w3.org/2000/01/rdf-schema#label": "Color Option",
+            "http://www.w3.org/2000/01/rdf-schema#range": {
+                "@id": "https://github.com/priyajitbera/carkg/ontology/ColorOption"
+            },
+            "http://www.w3.org/2000/01/rdf-schema#domain": {
+                "@id": "https://github.com/priyajitbera/carkg/ontology/Combination"
             },
             "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
         },
