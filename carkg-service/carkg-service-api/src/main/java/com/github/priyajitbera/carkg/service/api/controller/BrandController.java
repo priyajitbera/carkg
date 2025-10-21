@@ -1,19 +1,19 @@
 package com.github.priyajitbera.carkg.service.api.controller;
 
+import com.github.priyajitbera.carkg.service.api.BrandApi;
 import com.github.priyajitbera.carkg.service.api.model.request.BrandCreate;
 import com.github.priyajitbera.carkg.service.api.model.request.BrandEmbeddingRequest;
 import com.github.priyajitbera.carkg.service.api.model.response.BrandEmbeddingModel;
 import com.github.priyajitbera.carkg.service.api.model.response.BrandModel;
 import com.github.priyajitbera.carkg.service.api.model.response.semanticsearch.BrandSemanticSearchModel;
 import com.github.priyajitbera.carkg.service.api.service.BrandService;
-import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("brand")
-public class BrandController {
+public class BrandController implements BrandApi {
 
     private final BrandService brandService;
 
@@ -21,28 +21,28 @@ public class BrandController {
         this.brandService = brandService;
     }
 
-    @PostMapping
-    public BrandModel save(@RequestBody BrandCreate create) {
-        return brandService.save(create);
+    @Override
+    public ResponseEntity<BrandModel> save(BrandCreate create) {
+        return ResponseEntity.ok(brandService.save(create));
     }
 
-    @PostMapping("/batch")
-    public List<BrandModel> saveBatch(@RequestBody List<BrandCreate> creates) {
-        return brandService.saveBatch(creates);
+    @Override
+    public ResponseEntity<List<BrandModel>> saveBatch(List<BrandCreate> creates) {
+        return ResponseEntity.ok(brandService.saveBatch(creates));
     }
 
-    @GetMapping("/{id}")
-    public BrandModel get(@PathVariable("id") String id) {
-        return brandService.get(id);
+    @Override
+    public ResponseEntity<BrandModel> get(String id) {
+        return ResponseEntity.ok(brandService.get(id));
     }
 
-    @PostMapping("/embed")
-    public BrandEmbeddingModel embed(@RequestBody BrandEmbeddingRequest request) {
-        return brandService.embed(request);
+    @Override
+    public ResponseEntity<BrandEmbeddingModel> embed(BrandEmbeddingRequest request) {
+        return ResponseEntity.ok(brandService.embed(request));
     }
 
-    @GetMapping("/semantic-search")
-    public List<BrandSemanticSearchModel> semanticSearch(@Param("query") String query) {
-        return brandService.semanticSearch(query);
+    @Override
+    public ResponseEntity<List<BrandSemanticSearchModel>> semanticSearch(String query) {
+        return ResponseEntity.ok(brandService.semanticSearch(query));
     }
 }

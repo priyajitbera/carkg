@@ -7,6 +7,8 @@
         <jena.version>5.1.0</jena.version>
         <lombok.version>1.18.34</lombok.version>
         <com.fasterxml.jackson.version>2.19.2</com.fasterxml.jackson.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <lombok-mapstruct.version>0.2.0</lombok-mapstruct.version>
     </properties>
     <groupId>com.github.priyajitbera</groupId>
     <artifactId>carkg-service-parent</artifactId>
@@ -25,6 +27,8 @@
         <module>carkg-service-data-jpa</module>
         <module>carkg-service-lib-data-rdf</module>
         <module>carkg-service-lib-jena-fuseki</module>
+        <module>carkg-service-mcp-server</module>
+        <module>carkg-service-api-contract</module>
     </modules>
 
     <dependencyManagement>
@@ -55,8 +59,34 @@
                 <artifactId>jena-rdfconnection</artifactId>
                 <version>${jena.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <!-- MapStruct for code generation mappers -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-mapstruct-binding</artifactId>
+                <version>${lombok-mapstruct.version}</version>
+                <scope>provided</scope>
+            </dependency>
             <!-- Internal module versions -->
+            <dependency>
+                <groupId>com.github.priyajitbera</groupId>
+                <artifactId>carkg-service-api-contract</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.github.priyajitbera</groupId>
                 <artifactId>carkg-service-data-jpa</artifactId>
@@ -71,16 +101,6 @@
                 <groupId>com.github.priyajitbera</groupId>
                 <artifactId>carkg-service-lib-jena-fuseki</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${com.fasterxml.jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-yaml</artifactId>
-                <version>${com.fasterxml.jackson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
