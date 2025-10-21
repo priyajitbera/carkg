@@ -97,6 +97,8 @@ public class CarService implements
         return creates.stream().map(this::save).toList();
     }
 
+    @Transactional(readOnly = true)
+    @Override
     public CarModel findById(String id) {
         Car car = carRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException.carById(id));

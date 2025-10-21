@@ -1,5 +1,6 @@
 package com.github.priyajitbera.carkg.service.api.controller;
 
+import com.github.priyajitbera.carkg.service.api.CarApi;
 import com.github.priyajitbera.carkg.service.api.model.request.CarCreate;
 import com.github.priyajitbera.carkg.service.api.model.request.CarEmbeddingRequest;
 import com.github.priyajitbera.carkg.service.api.model.request.CarKgSyncRequest;
@@ -7,14 +8,14 @@ import com.github.priyajitbera.carkg.service.api.model.response.CarEmbeddingMode
 import com.github.priyajitbera.carkg.service.api.model.response.CarModel;
 import com.github.priyajitbera.carkg.service.api.model.response.semanticsearch.CarSemanticSearchModel;
 import com.github.priyajitbera.carkg.service.api.service.CarService;
-import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("car")
-public class CarController {
+public class CarController implements CarApi {
 
     private final CarService carService;
 
@@ -22,43 +23,45 @@ public class CarController {
         this.carService = carService;
     }
 
-    @PostMapping
-    public CarModel save(@RequestBody CarCreate carCreate) {
-        return carService.save(carCreate);
+    @Override
+    public ResponseEntity<CarModel> save(@RequestBody CarCreate carCreate) {
+        return ResponseEntity.ok(carService.save(carCreate));
     }
 
-    @PostMapping("/batch")
-    public List<CarModel> save(@RequestBody List<CarCreate> creates) {
-        return carService.saveBatch(creates);
+    @Override
+    public ResponseEntity<List<CarModel>> save(List<CarCreate> creates) {
+        return ResponseEntity.ok(carService.saveBatch(creates));
     }
 
-    @GetMapping("/{id}")
-    public CarModel findById(@PathVariable("id") String id) {
-        return carService.findById(id);
+    @Override
+    public ResponseEntity<CarModel> findById(String id) {
+        return ResponseEntity.ok(carService.findById(id));
     }
 
-    @PostMapping("/embed")
-    public CarEmbeddingModel embed(@RequestBody CarEmbeddingRequest embeddingRequest) {
-        return carService.embed(embeddingRequest);
+    @Override
+    public ResponseEntity<CarEmbeddingModel> embed(CarEmbeddingRequest embeddingRequest) {
+        return ResponseEntity.ok(carService.embed(embeddingRequest));
     }
 
-    @PostMapping("/embed/batch")
-    public List<CarEmbeddingModel> embed(@RequestBody List<CarEmbeddingRequest> embeddingRequests) {
-        return carService.embedBatch(embeddingRequests);
+    @Override
+    public ResponseEntity<List<CarEmbeddingModel>> embed(List<CarEmbeddingRequest> embeddingRequests) {
+        return ResponseEntity.ok(carService.embedBatch(embeddingRequests));
     }
 
-    @GetMapping("/semantic-search")
-    public List<CarSemanticSearchModel> semanticSearch(@Param("query") String query) {
-        return carService.semanticSearch(query);
+    @Override
+    public ResponseEntity<List<CarSemanticSearchModel>> semanticSearch(String query) {
+        return ResponseEntity.ok(carService.semanticSearch(query));
     }
 
-    @PostMapping("/sync/kg")
-    public void syncKG(@RequestBody CarKgSyncRequest request) {
+    @Override
+    public ResponseEntity<Void> syncKG(CarKgSyncRequest request) {
         carService.syncKG(request);
+        return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/sync/kg/batch")
-    public void syncKG(@RequestBody List<CarKgSyncRequest> requests) {
+    @Override
+    public ResponseEntity<Void> syncKG(List<CarKgSyncRequest> requests) {
         carService.syncKGBatch(requests);
+        return ResponseEntity.ok().build();
     }
 }
