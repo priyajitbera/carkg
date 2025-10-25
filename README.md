@@ -18,7 +18,7 @@ It converts MySQL-based automotive data (brands, models, variants, specification
 - ⚙️ Spring Boot Integration: RESTful endpoints for knowledge graph and vector search operations.
 - 💾 Hybrid Storage: MySQL for structured data, Jena TDB for semantic triples, and embedding store for vector retrieval.
 
-![Architecture](carkg-service/diagrams/render/carkg_archictecture_v1.jpg)
+![Architecture](carkg-service/diagrams/render/carkg_architecture_v2.png)
 
 ### Glimpses
 #### ✍️ NL to SparQL
