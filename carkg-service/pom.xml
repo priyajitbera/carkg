@@ -29,6 +29,7 @@
         <module>carkg-service-lib-jena-fuseki</module>
         <module>carkg-service-mcp-server</module>
         <module>carkg-service-api-contract</module>
+        <module>carkg-service-common</module>
     </modules>
 
     <dependencyManagement>
@@ -100,6 +101,11 @@
             <dependency>
                 <groupId>com.github.priyajitbera</groupId>
                 <artifactId>carkg-service-lib-jena-fuseki</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.priyajitbera</groupId>
+                <artifactId>carkg-service-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

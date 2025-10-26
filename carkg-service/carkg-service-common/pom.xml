@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <artifactId>carkg-service-api</artifactId>
+    <artifactId>carkg-service-common</artifactId>
     <modelVersion>4.0.0</modelVersion>
     <version>0.0.1-SNAPSHOT</version>
-    <name>carkg-service-api</name>
-    <description>APIs</description>
+    <name>carkg-service-common</name>
+    <description>Common utilities used in project carkg</description>
     <parent>
         <groupId>com.github.priyajitbera</groupId>
         <artifactId>carkg-service-parent</artifactId>
@@ -23,14 +23,6 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-model-ollama</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
@@ -39,41 +31,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- Apache Jena - versions managed by parent -->
-        <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>apache-jena-libs</artifactId>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>jena-tdb2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>jena-rdfconnection</artifactId>
-        </dependency>
         <!-- Local module dependencies - versions managed by parent -->
         <dependency>
             <groupId>com.github.priyajitbera</groupId>
             <artifactId>carkg-service-api-contract</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.priyajitbera</groupId>
-            <artifactId>carkg-service-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.priyajitbera</groupId>
-            <artifactId>carkg-service-lib-data-rdf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.priyajitbera</groupId>
-            <artifactId>carkg-service-common</artifactId>
         </dependency>
         <!-- MapStruct for code generation mappers -->
         <dependency>
@@ -118,10 +79,6 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

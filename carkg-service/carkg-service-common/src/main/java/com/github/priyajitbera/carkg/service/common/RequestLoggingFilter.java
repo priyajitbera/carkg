@@ -1,4 +1,4 @@
-package com.github.priyajitbera.carkg.service.api;
+package com.github.priyajitbera.carkg.service.common;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -15,8 +15,8 @@ import java.io.IOException;
 public class RequestLoggingFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        log.info(request.getRequestURL().toString());
+        log.info("{} {}", request.getMethod(), request.getRequestURL().toString());
         filterChain.doFilter(request, response);
-        log.info(request.getRequestURL().toString() + " " + response.getStatus());
+        log.info("{} {} {}", request.getMethod(), request.getRequestURL().toString(), response.getStatus());
     }
 }
