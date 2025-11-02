@@ -30,6 +30,7 @@
         <module>carkg-service-mcp-server</module>
         <module>carkg-service-api-contract</module>
         <module>carkg-service-common</module>
+        <module>carkg-service-agent</module>
     </modules>
 
     <dependencyManagement>
@@ -85,11 +86,6 @@
             <!-- Internal module versions -->
             <dependency>
                 <groupId>com.github.priyajitbera</groupId>
-                <artifactId>carkg-service-api-contract</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.priyajitbera</groupId>
                 <artifactId>carkg-service-data-jpa</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -106,6 +102,11 @@
             <dependency>
                 <groupId>com.github.priyajitbera</groupId>
                 <artifactId>carkg-service-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.priyajitbera</groupId>
+                <artifactId>carkg-service-api-contract</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
