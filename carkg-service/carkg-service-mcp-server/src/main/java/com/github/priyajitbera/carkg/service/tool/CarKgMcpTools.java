@@ -1,4 +1,4 @@
-package com.github.priyajitbera.carkg.service.mcp.tool;
+package com.github.priyajitbera.carkg.service.tool;
 
 import com.github.priyajitbera.carkg.service.api.model.request.BrandCreate;
 import com.github.priyajitbera.carkg.service.api.model.request.CarCreate;
@@ -6,8 +6,8 @@ import com.github.priyajitbera.carkg.service.api.model.response.BrandModel;
 import com.github.priyajitbera.carkg.service.api.model.response.CarModel;
 import com.github.priyajitbera.carkg.service.api.model.response.semanticsearch.BrandSemanticSearchModel;
 import com.github.priyajitbera.carkg.service.api.model.response.semanticsearch.CarSemanticSearchModel;
+import com.github.priyajitbera.carkg.service.client.CarKgServiceClient;
 import com.github.priyajitbera.carkg.service.common.Serializer;
-import com.github.priyajitbera.carkg.service.mcp.client.CarKgServiceClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;

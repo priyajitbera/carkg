@@ -1,4 +1,4 @@
-package com.github.priyajitbera.carkg.service.mcp;
+package com.github.priyajitbera.carkg.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

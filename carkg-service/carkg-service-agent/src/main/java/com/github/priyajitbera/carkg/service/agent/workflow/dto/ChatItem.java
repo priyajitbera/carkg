@@ -1,9 +1,7 @@
-package com.github.priyajitbera.carkg.service.mcp.agent.dto;
+package com.github.priyajitbera.carkg.service.agent.workflow.dto;
 
 import lombok.Builder;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 @Data
 @Builder

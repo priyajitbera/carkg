@@ -1,6 +1,6 @@
-package com.github.priyajitbera.carkg.service.mcp;
+package com.github.priyajitbera.carkg.service;
 
-import com.github.priyajitbera.carkg.service.mcp.tool.CarKgMcpTools;
+import com.github.priyajitbera.carkg.service.tool.CarKgMcpTools;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.context.annotation.Bean;

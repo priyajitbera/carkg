@@ -1,4 +1,4 @@
-package com.github.priyajitbera.carkg.service.mcp.agent;
+package com.github.priyajitbera.carkg.service.agent.workflow;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

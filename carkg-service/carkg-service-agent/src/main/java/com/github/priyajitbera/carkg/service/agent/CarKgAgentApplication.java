@@ -1,4 +1,4 @@
-package com.github.priyajitbera.carkg.service.mcp;
+package com.github.priyajitbera.carkg.service.agent;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;

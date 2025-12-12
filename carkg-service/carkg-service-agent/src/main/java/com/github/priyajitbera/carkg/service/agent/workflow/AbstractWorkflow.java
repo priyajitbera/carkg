@@ -1,11 +1,11 @@
-package com.github.priyajitbera.carkg.service.mcp.agent;
+package com.github.priyajitbera.carkg.service.agent.workflow;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.priyajitbera.carkg.service.agent.workflow.dto.*;
 import com.github.priyajitbera.carkg.service.common.Serializer;
-import com.github.priyajitbera.carkg.service.mcp.agent.dto.*;
 import com.github.priyajitbera.carkg.service.model.client.common.GenerativeClient;
 import com.github.priyajitbera.carkg.service.model.client.common.response.GenerationResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Slf4j
-public abstract class AbstractWorkflow implements WorkFlow {
+public abstract class AbstractWorkflow implements Workflow {
 
     protected final GenerativeClient generativeClient;
     protected final SyncMcpToolCallbackProvider toolCallbackProvider;
@@ -28,9 +28,11 @@ public abstract class AbstractWorkflow implements WorkFlow {
         this.toolCallbackProvider = toolCallbackProvider;
     }
 
-    abstract String getRole();
+    public abstract String getName();
 
-    abstract String getRoleDescription();
+    public abstract String getRole();
+
+    public abstract String getRoleDescription();
 
     List<Tool> getTools() {
         return Arrays.stream(toolCallbackProvider.getToolCallbacks())

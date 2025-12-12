@@ -1,4 +1,4 @@
-package com.github.priyajitbera.carkg.service.mcp.agent.dto;
+package com.github.priyajitbera.carkg.service.agent.workflow.dto;
 
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import lombok.Builder;
