@@ -15,7 +15,7 @@ public interface BrandRepository extends JpaRepository<Brand, String> {
 
     @Query(value = """
             SELECT b.id, b.name, b.country_of_origin,
-            cosine_similarity(embedding, :queryEmbedding) AS score
+            cosine_similarity(e.vector, :queryEmbedding) AS score
             FROM brand b join embedding e on b.embedding_id = e.id
             ORDER BY score DESC""", nativeQuery = true)
     List<BrandSemanticSearchProjection> cosineSimilarity(@Param("queryEmbedding") String queryEmbedding);

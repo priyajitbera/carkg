@@ -1,8 +1,9 @@
 package com.github.priyajitbera.carkg.service.api.service;
 
-import com.github.priyajitbera.carkg.service.api.client.EmbeddingClient;
-import com.github.priyajitbera.carkg.service.api.client.GeminiClient;
-import com.github.priyajitbera.carkg.service.api.client.OllamaClient;
+
+import com.github.priyajitbera.carkg.service.model.client.common.EmbeddingClient;
+import com.github.priyajitbera.carkg.service.model.client.gemini.GeminiClient;
+import com.github.priyajitbera.carkg.service.model.client.OllamaClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

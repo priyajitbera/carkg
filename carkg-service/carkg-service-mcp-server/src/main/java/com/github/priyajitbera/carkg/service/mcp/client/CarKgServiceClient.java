@@ -51,11 +51,15 @@ public class CarKgServiceClient {
     }
 
     public BrandModel saveBrand(BrandCreate create) {
-        return webClient.post().uri("/brand")
-                .bodyValue(create)
-                .retrieve()
-                .bodyToMono(BrandModel.class)
-                .block();
+        try {
+            return webClient.post().uri("/brand")
+                    .bodyValue(create)
+                    .retrieve()
+                    .bodyToMono(BrandModel.class)
+                    .block();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public BrandModel findBrandById(String id) {

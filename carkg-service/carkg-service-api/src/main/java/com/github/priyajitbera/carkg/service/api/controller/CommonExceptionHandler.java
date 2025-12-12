@@ -15,7 +15,7 @@ public class CommonExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<ErrorModel> handleResponseStatusException(ResponseStatusException ex) {
         log.info("Logging ResponseStatusException: {} {}", ex.getClass().getSimpleName(), ex.getMessage());
-        return ResponseEntity.badRequest().body(
+        return ResponseEntity.status(ex.getStatusCode()).body(
                 ErrorModel.builder()
                         .code(ex.getStatusCode().value())
                         .message(ex.getReason())

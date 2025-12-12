@@ -1,4 +1,4 @@
-package com.github.priyajitbera.carkg.service.api.client;
+package com.github.priyajitbera.carkg.service.model.client.common;
 
 public interface EmbeddingClient {
     float[] embed(String text);

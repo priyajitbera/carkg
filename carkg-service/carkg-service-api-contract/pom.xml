@@ -48,6 +48,11 @@
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
         </dependency>
+        <!-- Local module dependencies - versions managed by parent -->
+        <dependency>
+            <groupId>com.github.priyajitbera</groupId>
+            <artifactId>carkg-service-common</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

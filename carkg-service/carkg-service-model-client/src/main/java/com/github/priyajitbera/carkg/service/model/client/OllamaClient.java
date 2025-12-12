@@ -1,5 +1,9 @@
-package com.github.priyajitbera.carkg.service.api.client;
+package com.github.priyajitbera.carkg.service.model.client;
 
+import com.github.priyajitbera.carkg.service.model.client.common.EmbeddingClient;
+import com.github.priyajitbera.carkg.service.model.client.common.GenerativeClient;
+import com.github.priyajitbera.carkg.service.model.client.common.request.Tool;
+import com.github.priyajitbera.carkg.service.model.client.common.response.GenerationResponse;
 import org.springframework.ai.embedding.EmbeddingRequest;
 import org.springframework.ai.embedding.EmbeddingResponse;
 import org.springframework.ai.ollama.OllamaEmbeddingModel;
@@ -35,5 +39,10 @@ public class OllamaClient implements GenerativeClient, EmbeddingClient {
     @Override
     public String generate(String promp) {
         throw new UnsupportedOperationException("OllamaClient does not support text generation yet.");
+    }
+
+    @Override
+    public GenerationResponse generate(String prompt, List<Tool> tools) {
+        throw new RuntimeException("Not implemented yet");
     }
 }

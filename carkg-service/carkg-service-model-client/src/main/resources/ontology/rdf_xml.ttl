@@ -1,0 +1,125 @@
+### Ontology in RDF/XML format (TBox)
+
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdfs:Class rdf:about="https://github.com/priyajitbera/carkg/ontology/Brand"/>
+  <rdfs:Class rdf:about="https://github.com/priyajitbera/carkg/ontology/EngineOption"/>
+  <rdfs:Class rdf:about="https://github.com/priyajitbera/carkg/ontology/Combination"/>
+  <rdfs:Class rdf:about="https://github.com/priyajitbera/carkg/ontology/TransmissionType"/>
+  <rdfs:Class rdf:about="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  <rdfs:Class rdf:about="https://github.com/priyajitbera/carkg/ontology/FuelType"/>
+  <rdfs:Class rdf:about="https://github.com/priyajitbera/carkg/ontology/ColorOption"/>
+  <rdfs:Class rdf:about="https://github.com/priyajitbera/carkg/ontology/Variant"/>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/carName">
+    <rdfs:comment>A "Car Name" refers to either the specific model of a vehicle, such as a Toyota Corolla or Ford F-Series, or the make or brand of the car, like Toyota or Ford. To find the name of a specific car, you typically look for the model name, often found on the back of the vehicle.</rdfs:comment>
+    <rdfs:label>Car Name</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasColorOption">
+    <rdfs:comment>The Color Option associated with this combination</rdfs:comment>
+    <rdfs:label>Color Option</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/ColorOption"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Combination"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasTransmissionTypes">
+    <rdfs:comment>All Transmission Types that are available with this car model</rdfs:comment>
+    <rdfs:label>Available Transmission Types</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/TransmissionType"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/fuelTypeName">
+    <rdfs:comment>Free-text fuel type, e.g., Petrol, Diesel, CNG, Electric, Hybrid</rdfs:comment>
+    <rdfs:label>Fuel Type Name</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/FuelType"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasCombination">
+    <rdfs:comment>All available combinations of Variant, Engine, Transmission Type and Color Option</rdfs:comment>
+    <rdfs:label>Available Combinations of Variant, Engine, TransmissionType and ColorOption</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/Combination"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/engineName">
+    <rdfs:comment>Human readable engine name, e.g., K12N, 1.5 TSI</rdfs:comment>
+    <rdfs:label>Engine Name</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/EngineOption"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasColorOptions">
+    <rdfs:comment>All Color Options that are available with this car model</rdfs:comment>
+    <rdfs:label>Available Color Options</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/ColorOption"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/brandName">
+    <rdfs:comment>A "Brand Name" of a car brand is the specific name a company uses to market and sell its cars, such as Maruti Suzuki, Hyundai, Tata Motors, Toyota, Honda, Ford, or Volkswagen. These names identify the manufacturer and often have origins in the founders' names (like Toyota) or historical figures (like Cadillac).</rdfs:comment>
+    <rdfs:label>Brand Name</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Brand"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasVariants">
+    <rdfs:comment>List of variants available for this car model</rdfs:comment>
+    <rdfs:label>Car Variants</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/Variant"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/fuelType">
+    <rdfs:comment>Fuel type for this engine, free text via reference entity</rdfs:comment>
+    <rdfs:label>Fuel Type</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/FuelType"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/EngineOption"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/transmissionTypeName">
+    <rdfs:comment>Free-text transmission type, e.g., MT, AMT, CVT, DCT, iMT, AT</rdfs:comment>
+    <rdfs:label>Transmission Type Name</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/TransmissionType"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/colorName">
+    <rdfs:comment>Human-readable color name, e.g., Midnight Black, Pearl White</rdfs:comment>
+    <rdfs:label>Color Name</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/ColorOption"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasEngineOptions">
+    <rdfs:comment>All Engine Options that are available with this car model</rdfs:comment>
+    <rdfs:label>Available Engine Options</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/EngineOption"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasBrand">
+    <rdfs:comment>A Car Brand, also known as the make, is the manufacturer or company that designs and builds vehicles, such as Toyota, Ford, or Mercedes-Benz. It identifies the company, while the car model (like the Ford Mustang or Toyota Corolla) is the specific type of vehicle a brand offers.</rdfs:comment>
+    <rdfs:label>Car Brand</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/Brand"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/engineCapacityCc">
+    <rdfs:comment>Engine displacement in cubic centimeters</rdfs:comment>
+    <rdfs:label>Engine Capacity (cc)</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/EngineOption"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/variantName">
+    <rdfs:comment>Name of the variant, e.g., LX, Sport, Top Model</rdfs:comment>
+    <rdfs:label>Variant Name</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Variant"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/carId">
+    <rdfs:comment>Identifier of the Car</rdfs:comment>
+    <rdfs:label>Car Identifier</rdfs:label>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Car"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasTransmissionType">
+    <rdfs:comment>The Transmission Type associated with this combination</rdfs:comment>
+    <rdfs:label>Transmission Type</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/TransmissionType"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Combination"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasVariant">
+    <rdfs:comment>Variant associated with this combination</rdfs:comment>
+    <rdfs:label>Variant</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/Variant"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Combination"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://github.com/priyajitbera/carkg/ontology/hasEngineOption">
+    <rdfs:comment>The Engine Option associated with this combination</rdfs:comment>
+    <rdfs:label>Engine Option</rdfs:label>
+    <rdfs:range rdf:resource="https://github.com/priyajitbera/carkg/ontology/EngineOption"/>
+    <rdfs:domain rdf:resource="https://github.com/priyajitbera/carkg/ontology/Combination"/>
+  </rdf:Property>
+</rdf:RDF>

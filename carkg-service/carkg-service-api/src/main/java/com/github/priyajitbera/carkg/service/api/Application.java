@@ -27,6 +27,6 @@ public class Application implements CommandLineRunner {
         extractor.extract(
                 "https://github.com/priyajitbera/carkg/ontology/",
                 "https://github.com/priyajitbera/carkg/data/",
-                "carkg-service/carkg-service-api/src/main/resources/ontology", Car.class, CarView.class);
+                "carkg-service-api/src/main/resources/ontology", Car.class, CarView.class);
     }
 }

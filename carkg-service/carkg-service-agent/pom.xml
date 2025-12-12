@@ -36,6 +36,10 @@
             <groupId>com.github.priyajitbera</groupId>
             <artifactId>carkg-service-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.priyajitbera</groupId>
+            <artifactId>carkg-service-model-client</artifactId>
+        </dependency>
         <!-- MapStruct for code generation mappers -->
         <dependency>
             <groupId>org.mapstruct</groupId>
@@ -56,6 +60,22 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-mcp-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-client-chat</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.ai</groupId>-->
+<!--            <artifactId>spring-ai-starter-model-vertex-ai-gemini</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.ai</groupId>-->
+<!--            <artifactId>spring-ai-starter-model-openai</artifactId>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-model-ollama</artifactId>
         </dependency>
     </dependencies>
     <build>

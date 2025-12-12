@@ -1,11 +1,12 @@
 package com.github.priyajitbera.carkg.service.api.service;
 
-import com.github.priyajitbera.carkg.service.api.client.GenerativeClient;
+
 import com.github.priyajitbera.carkg.service.api.client.JenaFusekiClient;
 import com.github.priyajitbera.carkg.service.api.model.request.AskFixedSchema;
 import com.github.priyajitbera.carkg.service.api.model.response.RegisteredSparqlProjectionSchema;
 import com.github.priyajitbera.carkg.service.jena.config.ProjectionRegistrar;
 import com.github.priyajitbera.carkg.service.jena.mapper.SparqlJsonMapper;
+import com.github.priyajitbera.carkg.service.model.client.common.GenerativeClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -51,17 +52,17 @@ public class ReasoningService {
         this.projectionsContainer = projectionsContainer;
         this.ontologySchemas = ontologySchemas;
         try {
-            this.SPARQL_GENERATION_PROMPT_TEMPLATE = Files.readString(Path.of("carkg-service/carkg-service-api/src/main/resources/prompts/sparql_generation.txt"));
+            this.SPARQL_GENERATION_PROMPT_TEMPLATE = Files.readString(Path.of("carkg-service-api/src/main/resources/prompts/sparql_generation.txt"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         try {
-            this.SPARQL_GENERATION_FIX_SCHEMA_PROMPT_TEMPLATE = Files.readString(Path.of("carkg-service/carkg-service-api/src/main/resources/prompts/sparql_generation_fixed_schema.txt"));
+            this.SPARQL_GENERATION_FIX_SCHEMA_PROMPT_TEMPLATE = Files.readString(Path.of("carkg-service-api/src/main/resources/prompts/sparql_generation_fixed_schema.txt"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         try {
-            this.SPARQL_RESPONSE_NL_RESPONSE_TEMPLATE = Files.readString(Path.of("carkg-service/carkg-service-api/src/main/resources/prompts/sparql_response_to_nl_response.txt"));
+            this.SPARQL_RESPONSE_NL_RESPONSE_TEMPLATE = Files.readString(Path.of("carkg-service-api/src/main/resources/prompts/sparql_response_to_nl_response.txt"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

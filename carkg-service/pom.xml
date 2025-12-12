@@ -31,6 +31,7 @@
         <module>carkg-service-api-contract</module>
         <module>carkg-service-common</module>
         <module>carkg-service-agent</module>
+        <module>carkg-service-model-client</module>
     </modules>
 
     <dependencyManagement>
@@ -81,7 +82,6 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok-mapstruct-binding</artifactId>
                 <version>${lombok-mapstruct.version}</version>
-                <scope>provided</scope>
             </dependency>
             <!-- Internal module versions -->
             <dependency>
@@ -107,6 +107,11 @@
             <dependency>
                 <groupId>com.github.priyajitbera</groupId>
                 <artifactId>carkg-service-api-contract</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.priyajitbera</groupId>
+                <artifactId>carkg-service-model-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
@@ -137,6 +142,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.13.0</version>
                     <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
                         <release>${java.version}</release>
                         <parameters>true</parameters>
                     </configuration>
