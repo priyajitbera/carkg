@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CarEmbeddableFormatter extends DefaultEmbeddableFormatter<Car> {
 
-    @Override
-    public Class<?> getView() {
-        return CarView.class;
-    }
+  @Override
+  public Class<?> getView() {
+    return CarView.class;
+  }
 }

@@ -10,25 +10,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class CarCreateWorkflow extends AbstractWorkflow {
 
-    public CarCreateWorkflow(
-            @Qualifier("geminiClient") GenerationClient generationClient,
-            SyncMcpToolCallbackProvider toolCallbackProvider) {
-        super(generationClient, toolCallbackProvider);
-    }
+  public CarCreateWorkflow(
+      @Qualifier("geminiClient") GenerationClient generationClient,
+      SyncMcpToolCallbackProvider toolCallbackProvider) {
+    super(generationClient, toolCallbackProvider);
+  }
 
-    @Override
-    public String getName() {
-        return "CarCreateWorkflow";
-    }
+  @Override
+  public String getName() {
+    return "CarCreateWorkflow";
+  }
 
-    @Override
-    public String getRole() {
-        return "Automotive Research Agent";
-    }
+  @Override
+  public String getRole() {
+    return "Automotive Research Agent";
+  }
 
-    @Override
-    public String getRoleDescription() {
-        return """
+  @Override
+  public String getRoleDescription() {
+    return """
                 Gather information about the given car from the official brand website or reliable sources.
                 Make use of tools to ingest the data into the system.
 
@@ -41,5 +41,5 @@ public class CarCreateWorkflow extends AbstractWorkflow {
                 To verify whether redundant data exists in the system you have to use the provided MCP tools (e.g., `semanticSearchCars`, `findCarById`).
 
                 This conversation is not being supervised by a human, so you can't ask any clarifying questions. At any point if you feel you can't continue, you have to end the task.""";
-    }
+  }
 }

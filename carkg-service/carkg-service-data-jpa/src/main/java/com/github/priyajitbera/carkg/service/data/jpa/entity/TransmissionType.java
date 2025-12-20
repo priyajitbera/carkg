@@ -9,6 +9,8 @@ import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
 import com.github.priyajitbera.carkg.service.data.rdf.interfaces.Identifiable;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,9 +18,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 @JsonSerialize(using = TransmissionTypeSemanticSerializer.class)
 @Entity
@@ -29,46 +28,48 @@ import java.util.Objects;
 @NoArgsConstructor
 public class TransmissionType implements Identifiable, CommonEntity<String, LocalDateTime> {
 
-    @RdfPredicate(value = "transmissionTypeId", label = "Transmission Type Identifier", comment = "Identifier of the transmission type")
-    @Id
-    private String id;
+  @RdfPredicate(
+      value = "transmissionTypeId",
+      label = "Transmission Type Identifier",
+      comment = "Identifier of the transmission type")
+  @Id
+  private String id;
 
-    @CreationTimestamp
-    private LocalDateTime createdAtUtc;
+  @CreationTimestamp private LocalDateTime createdAtUtc;
 
-    @UpdateTimestamp
-    private LocalDateTime updatedAtUtc;
+  @UpdateTimestamp private LocalDateTime updatedAtUtc;
 
-    @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "transmissionTypeName", label = "Transmission Type Name", comment = "Free-text transmission type, e.g., MT, AMT, CVT, DCT, iMT, AT")
-    private String name;
+  @JsonView({CarView.class, BrandView.class})
+  @RdfPredicate(
+      value = "transmissionTypeName",
+      label = "Transmission Type Name",
+      comment = "Free-text transmission type, e.g., MT, AMT, CVT, DCT, iMT, AT")
+  private String name;
 
-    @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_transmission_type_car"))
-    private Car car;
+  @ManyToOne
+  @JoinColumn(foreignKey = @ForeignKey(name = "fk_transmission_type_car"))
+  private Car car;
 
-    public String deriveId() {
-        assert car != null;
-        assert name != null;
-        return (new IdGen()).generate(car.deriveId(), name);
-    }
+  public String deriveId() {
+    assert car != null;
+    assert name != null;
+    return (new IdGen()).generate(car.deriveId(), name);
+  }
 
-    public void deriveAndSetId() {
-        this.id = deriveId();
-    }
+  public void deriveAndSetId() {
+    this.id = deriveId();
+  }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        TransmissionType that = (TransmissionType) object;
-        return Objects.equals(id, that.id);
-    }
+  @Override
+  public boolean equals(Object object) {
+    if (this == object) return true;
+    if (object == null || getClass() != object.getClass()) return false;
+    TransmissionType that = (TransmissionType) object;
+    return Objects.equals(id, that.id);
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
+  }
 }
-
-

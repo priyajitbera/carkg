@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class BrandEmbeddableFormatter extends DefaultEmbeddableFormatter<Brand> {
 
-    @Override
-    public Class<?> getView() {
-        return BrandView.class;
-    }
+  @Override
+  public Class<?> getView() {
+    return BrandView.class;
+  }
 }

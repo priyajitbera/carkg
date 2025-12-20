@@ -7,11 +7,9 @@ import lombok.Data;
 @Data
 @Builder
 public class Tool {
-    private String name;
+  private String name;
 
-    @JsonRawValue
-    private String inputSchema;
+  @JsonRawValue private String inputSchema;
 
-    @JsonRawValue
-    private String description;
+  @JsonRawValue private String description;
 }

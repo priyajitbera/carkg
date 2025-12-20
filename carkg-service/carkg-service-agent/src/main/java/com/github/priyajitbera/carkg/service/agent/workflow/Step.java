@@ -8,5 +8,5 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder
 public class Step {
-    private String prompt;
+  private String prompt;
 }

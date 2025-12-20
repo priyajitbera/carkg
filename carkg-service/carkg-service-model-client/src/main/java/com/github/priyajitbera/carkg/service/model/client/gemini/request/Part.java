@@ -8,5 +8,5 @@ import lombok.Getter;
 @Builder
 @Getter
 public class Part {
-    private String text;
+  private String text;
 }

@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ColorOptionCreate {
-    private String name;
-    private String simpleName;
+  private String name;
+  private String simpleName;
 }
-
-
-

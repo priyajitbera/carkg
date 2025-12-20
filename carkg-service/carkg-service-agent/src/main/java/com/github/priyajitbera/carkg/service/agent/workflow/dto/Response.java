@@ -8,12 +8,12 @@ import lombok.*;
 @Getter
 @Setter
 public class Response {
-    public enum InstructionType {
-        MESSAGE,
-        END_TASK
-    }
+  public enum InstructionType {
+    MESSAGE,
+    END_TASK
+  }
 
-    private InstructionType instructionType;
-    private ToolCallDetails toolCallDetails;
-    private MessageDetails messageDetails;
+  private InstructionType instructionType;
+  private ToolCallDetails toolCallDetails;
+  private MessageDetails messageDetails;
 }

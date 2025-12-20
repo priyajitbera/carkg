@@ -6,12 +6,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class BrandEmbeddingModel extends EmbeddableModel {
-    private String id;
+  private String id;
 }

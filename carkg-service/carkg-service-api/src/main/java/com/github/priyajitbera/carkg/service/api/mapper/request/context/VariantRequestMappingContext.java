@@ -4,5 +4,5 @@ import com.github.priyajitbera.carkg.service.data.jpa.entity.Variant;
 import lombok.Builder;
 
 @Builder
-public record VariantRequestMappingContext(CarRequestMappingContext carRequestMappingContext, Variant variant) {
-}
+public record VariantRequestMappingContext(
+    CarRequestMappingContext carRequestMappingContext, Variant variant) {}

@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class RegisteredSparqlProjectionSchema {
-    private String name;
-    private String columns;
+  private String name;
+  private String columns;
 }

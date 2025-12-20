@@ -8,5 +8,5 @@ import lombok.Getter;
 @Builder
 @Getter
 public class EmbeddingResponse {
-    private Embedding embedding;
+  private Embedding embedding;
 }

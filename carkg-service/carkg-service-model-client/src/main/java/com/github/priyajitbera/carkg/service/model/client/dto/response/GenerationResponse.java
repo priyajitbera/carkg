@@ -8,6 +8,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class GenerationResponse {
-    private String content;
-    private ToolCallDetails toolCallDetails;
+  private String content;
+  private ToolCallDetails toolCallDetails;
 }

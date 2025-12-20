@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Workflow {
-    private String name;
-    private String role;
-    private String description;
+  private String name;
+  private String role;
+  private String description;
 }

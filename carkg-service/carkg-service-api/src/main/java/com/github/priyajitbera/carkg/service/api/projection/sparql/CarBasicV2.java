@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class CarBasicV2 {
-    private String carId;
-    private String brandId;
-    private String carName;
-    private String brandName;
-    private String brandCountryOfOrigin;
+  private String carId;
+  private String brandId;
+  private String carName;
+  private String brandName;
+  private String brandCountryOfOrigin;
 }

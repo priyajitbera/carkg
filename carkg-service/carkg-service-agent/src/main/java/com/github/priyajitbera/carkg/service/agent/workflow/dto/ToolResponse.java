@@ -8,5 +8,5 @@ import lombok.*;
 @Getter
 @Setter
 public class ToolResponse {
-    private String text;
+  private String text;
 }

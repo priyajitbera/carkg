@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EngineOptionCreate {
-    private String name;
-    private Integer capacityCc;
-    private FuelTypeCreate fuelType;
+  private String name;
+  private Integer capacityCc;
+  private FuelTypeCreate fuelType;
 }
-
-
-

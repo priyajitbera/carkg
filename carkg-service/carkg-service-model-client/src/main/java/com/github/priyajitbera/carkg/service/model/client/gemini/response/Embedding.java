@@ -8,5 +8,5 @@ import lombok.Getter;
 @Builder
 @Getter
 public class Embedding {
-    private float[] values;
+  private float[] values;
 }

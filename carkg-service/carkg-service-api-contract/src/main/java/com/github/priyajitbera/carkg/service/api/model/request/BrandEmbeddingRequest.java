@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BrandEmbeddingRequest {
-    private String id;
-    private Boolean force;
+  private String id;
+  private Boolean force;
 }

@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class Part {
-    private String text;
-    private FunctionCall functionCall;
+  private String text;
+  private FunctionCall functionCall;
 }

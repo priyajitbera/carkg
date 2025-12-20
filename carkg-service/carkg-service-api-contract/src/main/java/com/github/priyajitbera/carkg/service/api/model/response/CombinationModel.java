@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CombinationModel {
-    private String id;
-    private VariantModel variant;
-    private EngineModel engine;
-    private TransmissionTypeModel transmissionType;
-    private ColorOptionModel colorOption;
+  private String id;
+  private VariantModel variant;
+  private EngineModel engine;
+  private TransmissionTypeModel transmissionType;
+  private ColorOptionModel colorOption;
 }

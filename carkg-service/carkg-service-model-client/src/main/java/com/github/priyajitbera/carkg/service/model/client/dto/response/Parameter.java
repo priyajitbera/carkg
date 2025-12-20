@@ -8,6 +8,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class Parameter {
-    private String name;
-    private Object value;
+  private String name;
+  private Object value;
 }

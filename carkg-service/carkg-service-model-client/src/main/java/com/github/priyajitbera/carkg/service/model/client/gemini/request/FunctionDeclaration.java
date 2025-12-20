@@ -9,7 +9,7 @@ import lombok.Getter;
 @Builder
 @Getter
 public class FunctionDeclaration {
-    private String name;
-    private String description;
-    private JsonNode parameters;
+  private String name;
+  private String description;
+  private JsonNode parameters;
 }

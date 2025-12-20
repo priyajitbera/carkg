@@ -13,12 +13,10 @@ import org.mapstruct.Mappings;
 @Mapper(config = CommonMapperConfig.class)
 public abstract class BrandResponseMapper {
 
-    public abstract BrandModel map(Brand brand);
+  public abstract BrandModel map(Brand brand);
 
-    public abstract BrandSemanticSearchModel map(BrandSemanticSearchProjection brand);
+  public abstract BrandSemanticSearchModel map(BrandSemanticSearchProjection brand);
 
-    @Mappings(
-            @Mapping(target = "embedding", source = "src.embedding.vector")
-    )
-    public abstract BrandEmbeddingModel mapEmbeddingModel(Brand src);
+  @Mappings(@Mapping(target = "embedding", source = "src.embedding.vector"))
+  public abstract BrandEmbeddingModel mapEmbeddingModel(Brand src);
 }

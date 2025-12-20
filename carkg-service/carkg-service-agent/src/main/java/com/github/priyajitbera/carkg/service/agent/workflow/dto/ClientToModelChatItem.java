@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class ClientToModelChatItem {
-    private String prompt;
+  private String prompt;
 }

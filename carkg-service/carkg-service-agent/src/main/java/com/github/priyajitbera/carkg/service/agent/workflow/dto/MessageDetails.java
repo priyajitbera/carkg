@@ -8,5 +8,5 @@ import lombok.*;
 @Getter
 @Setter
 public class MessageDetails {
-    private String message;
+  private String message;
 }

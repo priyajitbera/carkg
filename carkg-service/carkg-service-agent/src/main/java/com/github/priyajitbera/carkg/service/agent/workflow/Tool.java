@@ -8,7 +8,7 @@ import lombok.Getter;
 @Builder
 @Getter
 public class Tool {
-    private String name;
-    private String description;
-    private String inputSchema;
+  private String name;
+  private String description;
+  private String inputSchema;
 }

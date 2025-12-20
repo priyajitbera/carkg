@@ -10,15 +10,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(config = CommonMapperConfig.class, uses = {BrandResponseMapper.class})
+@Mapper(
+    config = CommonMapperConfig.class,
+    uses = {BrandResponseMapper.class})
 public abstract class CarResponseMapper {
 
-    public abstract CarModel map(Car car);
+  public abstract CarModel map(Car car);
 
-    public abstract CarSemanticSearchModel map(CarSemanticSearchProjection car);
+  public abstract CarSemanticSearchModel map(CarSemanticSearchProjection car);
 
-    @Mappings(
-            @Mapping(target = "embedding", source = "src.embedding.vector")
-    )
-    public abstract CarEmbeddingModel mapEmbeddingModel(Car src);
+  @Mappings(@Mapping(target = "embedding", source = "src.embedding.vector"))
+  public abstract CarEmbeddingModel mapEmbeddingModel(Car src);
 }

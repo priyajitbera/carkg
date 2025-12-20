@@ -8,8 +8,8 @@ import lombok.Getter;
 @Builder
 @Getter
 public class AgentPrompt {
-    private String role;
-    private String roleDescription;
-    private String chatGuidelines;
-    private String taskDetail;
+  private String role;
+  private String roleDescription;
+  private String chatGuidelines;
+  private String taskDetail;
 }

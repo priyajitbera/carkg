@@ -10,22 +10,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class RdfMaterializer {
 
-    public Model materialize(Model dataModel, Model ontologyModel) {
-        // Create an RDFS reasoner
-        Reasoner reasoner = ReasonerRegistry.getRDFSReasoner();
+  public Model materialize(Model dataModel, Model ontologyModel) {
+    // Create an RDFS reasoner
+    Reasoner reasoner = ReasonerRegistry.getRDFSReasoner();
 
-        // Bind the reasoner to the ontology model
-        reasoner = reasoner.bindSchema(ontologyModel);
+    // Bind the reasoner to the ontology model
+    reasoner = reasoner.bindSchema(ontologyModel);
 
-        // Create an inference model
-        InfModel infModel = ModelFactory.createInfModel(reasoner, dataModel);
+    // Create an inference model
+    InfModel infModel = ModelFactory.createInfModel(reasoner, dataModel);
 
-        // The infModel contains both explicit and inferred triples.
-        // To get a simple, materialized model, you can copy the contents.
-        Model materializedModel = ModelFactory.createDefaultModel();
-        materializedModel.add(infModel);
+    // The infModel contains both explicit and inferred triples.
+    // To get a simple, materialized model, you can copy the contents.
+    Model materializedModel = ModelFactory.createDefaultModel();
+    materializedModel.add(infModel);
 
-        return materializedModel;
-    }
-
+    return materializedModel;
+  }
 }

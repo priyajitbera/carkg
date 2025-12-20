@@ -9,6 +9,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class ToolCallDetails {
-    private String name;
-    private JsonNode parameters;
+  private String name;
+  private JsonNode parameters;
 }

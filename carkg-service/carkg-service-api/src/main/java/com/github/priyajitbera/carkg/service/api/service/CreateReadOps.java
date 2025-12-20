@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface CreateReadOps<ENTITY, ID, CREATE, RESP_MODEL> {
 
-    RESP_MODEL save(CREATE create);
+  RESP_MODEL save(CREATE create);
 
-    List<RESP_MODEL> saveBatch(List<CREATE> creates);
+  List<RESP_MODEL> saveBatch(List<CREATE> creates);
 
-    RESP_MODEL findById(ID id);
+  RESP_MODEL findById(ID id);
 }

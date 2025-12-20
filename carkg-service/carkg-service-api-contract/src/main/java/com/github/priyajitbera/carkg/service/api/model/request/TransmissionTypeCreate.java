@@ -10,7 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TransmissionTypeCreate {
-    private String name;
+  private String name;
 }
-
-

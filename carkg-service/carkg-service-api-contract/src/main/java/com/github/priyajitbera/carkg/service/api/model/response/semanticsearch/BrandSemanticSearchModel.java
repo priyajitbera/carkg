@@ -5,14 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class BrandSemanticSearchModel {
-    private String id;
-    private String name;
-    private String countryOfOrigin;
-    private Double score;
+  private String id;
+  private String name;
+  private String countryOfOrigin;
+  private Double score;
 }

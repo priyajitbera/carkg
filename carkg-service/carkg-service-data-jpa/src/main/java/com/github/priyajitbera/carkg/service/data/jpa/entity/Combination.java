@@ -9,6 +9,8 @@ import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView
 import com.github.priyajitbera.carkg.service.data.rdf.annotation.RdfPredicate;
 import com.github.priyajitbera.carkg.service.data.rdf.interfaces.Identifiable;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,9 +18,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 @JsonSerialize(using = CombinationSemanticSerializer.class)
 @Entity
@@ -29,70 +28,86 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Combination implements Identifiable, CommonEntity<String, LocalDateTime> {
 
-    @RdfPredicate(value = "combinationId", label = "Combination Identifier", comment = "Identifier of the car variant")
-    @Id
-    private String id;
+  @RdfPredicate(
+      value = "combinationId",
+      label = "Combination Identifier",
+      comment = "Identifier of the car variant")
+  @Id
+  private String id;
 
-    @CreationTimestamp
-    private LocalDateTime createdAtUtc;
+  @CreationTimestamp private LocalDateTime createdAtUtc;
 
-    @UpdateTimestamp
-    private LocalDateTime updatedAtUtc;
+  @UpdateTimestamp private LocalDateTime updatedAtUtc;
 
-    @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Car car;
+  @ManyToOne
+  @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private Car car;
 
-    @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasVariant", label = "Variant", comment = "Variant associated with this combination")
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_variant"))
-    private Variant variant;
+  @JsonView({CarView.class, BrandView.class})
+  @RdfPredicate(
+      value = "hasVariant",
+      label = "Variant",
+      comment = "Variant associated with this combination")
+  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_variant"))
+  private Variant variant;
 
-    @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasEngineOption", label = "Engine Option", comment = "The Engine Option associated with this combination")
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_engine"))
-    private EngineOption engineOption;
+  @JsonView({CarView.class, BrandView.class})
+  @RdfPredicate(
+      value = "hasEngineOption",
+      label = "Engine Option",
+      comment = "The Engine Option associated with this combination")
+  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_engine"))
+  private EngineOption engineOption;
 
-    @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasTransmissionType", label = "Transmission Type", comment = "The Transmission Type associated with this combination")
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_transmission_type"))
-    private TransmissionType transmissionType;
+  @JsonView({CarView.class, BrandView.class})
+  @RdfPredicate(
+      value = "hasTransmissionType",
+      label = "Transmission Type",
+      comment = "The Transmission Type associated with this combination")
+  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_transmission_type"))
+  private TransmissionType transmissionType;
 
-    @JsonView({CarView.class, BrandView.class})
-    @RdfPredicate(value = "hasColorOption", label = "Color Option", comment = "The Color Option associated with this combination")
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_color_option"))
-    private ColorOption colorOption;
+  @JsonView({CarView.class, BrandView.class})
+  @RdfPredicate(
+      value = "hasColorOption",
+      label = "Color Option",
+      comment = "The Color Option associated with this combination")
+  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(foreignKey = @ForeignKey(name = "fk_combination_color_option"))
+  private ColorOption colorOption;
 
+  public String deriveId() {
+    assert car != null;
+    assert variant != null;
+    assert engineOption != null;
+    assert transmissionType != null;
+    assert colorOption != null;
+    return (new IdGen())
+        .generate(
+            car.deriveId(),
+            variant.getName(),
+            engineOption.getName(),
+            transmissionType.getName(),
+            colorOption.getName());
+  }
 
-    public String deriveId() {
-        assert car != null;
-        assert variant != null;
-        assert engineOption != null;
-        assert transmissionType != null;
-        assert colorOption != null;
-        return (new IdGen()).generate(car.deriveId(), variant.getName(), engineOption.getName(), transmissionType.getName(), colorOption.getName());
-    }
+  public void deriveAndSetId() {
+    this.id = deriveId();
+  }
 
-    public void deriveAndSetId() {
-        this.id = deriveId();
-    }
+  @Override
+  public boolean equals(Object object) {
+    if (this == object) return true;
+    if (object == null || getClass() != object.getClass()) return false;
+    Combination that = (Combination) object;
+    return Objects.equals(id, that.id);
+  }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Combination that = (Combination) object;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
+  }
 }
-
-

@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class ModelToClientChatItem {
-    private String response;
+  private String response;
 }

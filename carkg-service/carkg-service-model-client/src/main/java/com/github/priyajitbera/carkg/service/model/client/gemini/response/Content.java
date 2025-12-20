@@ -1,17 +1,16 @@
 package com.github.priyajitbera.carkg.service.model.client.gemini.response;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
 public class Content {
-    private List<Part> parts;
-    private String role;
+  private List<Part> parts;
+  private String role;
 }

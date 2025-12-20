@@ -6,17 +6,17 @@ import lombok.Data;
 @Data
 @Builder
 public class ChatItem {
-    public enum ChatItemType {
-        CLIENT_TO_MODEL,
-        TOOL_CALL_RESULT,
-        MODEL_TO_CLIENT
-    }
+  public enum ChatItemType {
+    CLIENT_TO_MODEL,
+    TOOL_CALL_RESULT,
+    MODEL_TO_CLIENT
+  }
 
-    private Integer index;
-    private String timeStampUtc;
-    private ChatItemType type;
+  private Integer index;
+  private String timeStampUtc;
+  private ChatItemType type;
 
-    private ClientToModelChatItem clientToModel;
-    private ToolCallChatItem toolCall;
-    private ModelToClientChatItem modelToClient;
+  private ClientToModelChatItem clientToModel;
+  private ToolCallChatItem toolCall;
+  private ModelToClientChatItem modelToClient;
 }

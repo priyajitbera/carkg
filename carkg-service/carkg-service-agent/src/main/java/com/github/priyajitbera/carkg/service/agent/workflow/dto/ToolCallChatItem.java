@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class ToolCallChatItem<IP, OP> {
-    private String name;
-    private IP input;
-    private OP output;
+  private String name;
+  private IP input;
+  private OP output;
 }

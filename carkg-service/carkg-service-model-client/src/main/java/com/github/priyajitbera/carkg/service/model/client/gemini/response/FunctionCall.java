@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class FunctionCall {
-    private String name;
-    private JsonNode args;
+  private String name;
+  private JsonNode args;
 }

@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class Candidate {
-    private Integer index;
-    private Content content;
-    private String finishReason;
-    private String finishMessage;
+  private Integer index;
+  private Content content;
+  private String finishReason;
+  private String finishMessage;
 }
