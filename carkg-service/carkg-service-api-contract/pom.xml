@@ -4,7 +4,7 @@
     <artifactId>carkg-service-api-contract</artifactId>
     <modelVersion>4.0.0</modelVersion>
     <version>0.0.1-SNAPSHOT</version>
-    <name>carkg-service-model</name>
+    <name>carkg-service-api-contract</name>
     <description>API Models</description>
     <parent>
         <groupId>com.github.priyajitbera</groupId>
@@ -79,10 +79,6 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
