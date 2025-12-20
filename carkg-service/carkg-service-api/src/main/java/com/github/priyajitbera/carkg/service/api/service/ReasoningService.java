@@ -35,7 +35,7 @@ public class ReasoningService {
   private final String SPARQL_RESPONSE_NL_RESPONSE_TEMPLATE;
 
   public ReasoningService(
-      @Qualifier("geminiClient") GenerationClient geminiClient,
+      @Qualifier("GeminiGenerationClient") GenerationClient geminiClient,
       JenaFusekiClient jenaFusekiClient,
       SparqlJsonMapper sparqlJsonMapper,
       @Qualifier("registeredSparqlProjections")

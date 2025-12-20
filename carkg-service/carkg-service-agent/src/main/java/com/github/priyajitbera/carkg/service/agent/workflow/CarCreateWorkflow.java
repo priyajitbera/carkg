@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class CarCreateWorkflow extends AbstractWorkflow {
 
   public CarCreateWorkflow(
-      @Qualifier("geminiClient") GenerationClient generationClient,
+      @Qualifier("GeminiGenerationClient") GenerationClient generationClient,
       SyncMcpToolCallbackProvider toolCallbackProvider) {
     super(generationClient, toolCallbackProvider);
   }
