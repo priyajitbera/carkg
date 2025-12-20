@@ -5,10 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.github.priyajitbera.carkg.service.model.client.common.EmbeddingClient;
-import com.github.priyajitbera.carkg.service.model.client.common.GenerativeClient;
+import com.github.priyajitbera.carkg.service.model.client.GenerationClient;
 import com.github.priyajitbera.carkg.service.model.client.gemini.request.*;
-import com.github.priyajitbera.carkg.service.model.client.gemini.response.EmbeddingResponse;
 import com.github.priyajitbera.carkg.service.model.client.gemini.response.FunctionCall;
 import com.github.priyajitbera.carkg.service.model.client.gemini.response.GenerationResponse;
 import io.netty.handler.codec.http.HttpHeaderValues;
@@ -23,12 +21,11 @@ import org.springframework.web.server.ResponseStatusException;
 import reactor.netty.http.client.HttpClient;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-@Component("geminiClient")
-public class GeminiClient implements GenerativeClient, EmbeddingClient {
+@Component("GeminiGenerationClient")
+public class GeminiGenerationClient implements GenerationClient {
 
     public final static String HEADER_X_GOOG_API_KEY = "X-goog-api-key";
 
@@ -37,24 +34,20 @@ public class GeminiClient implements GenerativeClient, EmbeddingClient {
     private final String GEMINI_API_KEY;
 
     private final String GEMINI_GENERATIVE_MODEL_URI;
-    private final String GEMINI_EMBEDDING_MODEL_URI;
 
     private final WebClient webClient;
 
-    public GeminiClient(
+    public GeminiGenerationClient(
             @Value("${gemini.baseUrl}")
             String geminiBaseUrl,
             @Value("${gemini.apiKey}")
             String geminiApiKey,
             @Value("${gemini.generative.modelUri}")
-            String geminiGenerativeModelUri,
-            @Value("${gemini.embedding.modelUri}")
-            String geminiEmbeddingModelUri
+            String geminiGenerativeModelUri
     ) {
         this.GEMINI_BASE_URL = geminiBaseUrl;
         this.GEMINI_API_KEY = geminiApiKey;
         this.GEMINI_GENERATIVE_MODEL_URI = geminiGenerativeModelUri;
-        this.GEMINI_EMBEDDING_MODEL_URI = geminiEmbeddingModelUri;
         this.webClient = WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(HttpClient.create()
                         .wiretap("reactor.netty.http.client.HttpClient",
@@ -79,7 +72,7 @@ public class GeminiClient implements GenerativeClient, EmbeddingClient {
     }
 
     @Override
-    public com.github.priyajitbera.carkg.service.model.client.common.response.GenerationResponse generate(String prompt, List<com.github.priyajitbera.carkg.service.model.client.common.request.Tool> tools) {
+    public com.github.priyajitbera.carkg.service.model.client.dto.response.GenerationResponse generate(String prompt, List<com.github.priyajitbera.carkg.service.model.client.dto.request.Tool> tools) {
         GenerationRequest generationRequest = GenerationRequest.builder()
                 .contents(List.of(Content.builder().parts(List.of(Part.builder().text(prompt).build())).build()))
                 .tools(List.of(Tool.builder().functionDeclarations(tools.stream().map(this::map).toList()).build()))
@@ -97,10 +90,10 @@ public class GeminiClient implements GenerativeClient, EmbeddingClient {
         Optional<FunctionCall> functionCallOpt = generationResponse.getCandidates().get(0).getContent().getParts().stream()
                 .filter(part -> part.getFunctionCall() != null).findFirst().map(com.github.priyajitbera.carkg.service.model.client.gemini.response.Part::getFunctionCall);
 
-        return com.github.priyajitbera.carkg.service.model.client.common.response.GenerationResponse.builder()
+        return com.github.priyajitbera.carkg.service.model.client.dto.response.GenerationResponse.builder()
                 .content(content)
                 .toolCallDetails(
-                        functionCallOpt.map(functionCall -> com.github.priyajitbera.carkg.service.model.client.common.response.ToolCallDetails.builder()
+                        functionCallOpt.map(functionCall -> com.github.priyajitbera.carkg.service.model.client.dto.response.ToolCallDetails.builder()
                                 .name(functionCall.getName())
                                 .parameters(functionCall.getArgs())
                                 .build()).orElse(null)
@@ -108,7 +101,7 @@ public class GeminiClient implements GenerativeClient, EmbeddingClient {
                 .build();
     }
 
-    private FunctionDeclaration map(com.github.priyajitbera.carkg.service.model.client.common.request.Tool tool) {
+    private FunctionDeclaration map(com.github.priyajitbera.carkg.service.model.client.dto.request.Tool tool) {
         return FunctionDeclaration.builder()
                 .name(tool.getName())
                 .description(tool.getDescription())
@@ -178,31 +171,5 @@ public class GeminiClient implements GenerativeClient, EmbeddingClient {
                 generationResponse.getUsageMetadata().getCandidatesTokenCount(),
                 generationResponse.getUsageMetadata().getTotalTokenCount());
         return generationResponse;
-    }
-
-    @Override
-    public float[] embed(String text) {
-        final EmbeddingResponse embeddingResponse;
-        try {
-            embeddingResponse = webClient.post()
-                    .uri(GEMINI_EMBEDDING_MODEL_URI)
-                    .header(HttpHeaders.CONTENT_TYPE, HttpHeaderValues.APPLICATION_JSON.toString())
-                    .header(HEADER_X_GOOG_API_KEY, GEMINI_API_KEY)
-                    .bodyValue(
-                            Map.of(
-                                    "content", Map.of("parts", List.of(Map.of("text", text)))
-                            )
-                    )
-                    .retrieve()
-                    .bodyToMono(EmbeddingResponse.class)
-                    .block();
-        } catch (WebClientResponseException e) {
-            throw new ResponseStatusException(e.getStatusCode(), e.getMessage());
-        }
-        if (embeddingResponse != null) {
-            return embeddingResponse.getEmbedding().getValues();
-        } else {
-            throw new RuntimeException("Unexpected or incomplete Gemini response received");
-        }
     }
 }

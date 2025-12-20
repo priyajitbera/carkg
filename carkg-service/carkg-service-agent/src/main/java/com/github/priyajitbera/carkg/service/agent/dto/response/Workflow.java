@@ -1,4 +1,4 @@
-package com.github.priyajitbera.carkg.service.agent.dto;
+package com.github.priyajitbera.carkg.service.agent.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class WorkflowCreate {
+public class Workflow {
     private String name;
     private String role;
     private String description;

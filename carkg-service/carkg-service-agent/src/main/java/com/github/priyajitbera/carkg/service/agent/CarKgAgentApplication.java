@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 @Slf4j
 @ComponentScan(basePackages = {"com.github.priyajitbera.carkg.service.mcp",
-        "com.github.priyajitbera.carkg.service.model.client"})
+        "com.github.priyajitbera.carkg.service.model.client.gemini"})
 @SpringBootApplication
 public class CarKgAgentApplication implements CommandLineRunner {
 

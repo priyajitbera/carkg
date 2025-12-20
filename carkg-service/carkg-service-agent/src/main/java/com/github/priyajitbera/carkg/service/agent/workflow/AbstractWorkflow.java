@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.priyajitbera.carkg.service.agent.workflow.dto.*;
 import com.github.priyajitbera.carkg.service.common.Serializer;
-import com.github.priyajitbera.carkg.service.model.client.common.GenerativeClient;
-import com.github.priyajitbera.carkg.service.model.client.common.response.GenerationResponse;
+import com.github.priyajitbera.carkg.service.model.client.GenerationClient;
+import com.github.priyajitbera.carkg.service.model.client.dto.response.GenerationResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.ai.tool.execution.ToolExecutionException;
@@ -20,11 +20,11 @@ import java.util.*;
 @Slf4j
 public abstract class AbstractWorkflow implements Workflow {
 
-    protected final GenerativeClient generativeClient;
+    protected final GenerationClient generationClient;
     protected final SyncMcpToolCallbackProvider toolCallbackProvider;
 
-    public AbstractWorkflow(GenerativeClient generativeClient, SyncMcpToolCallbackProvider toolCallbackProvider) {
-        this.generativeClient = generativeClient;
+    public AbstractWorkflow(GenerationClient generationClient, SyncMcpToolCallbackProvider toolCallbackProvider) {
+        this.generationClient = generationClient;
         this.toolCallbackProvider = toolCallbackProvider;
     }
 
@@ -88,8 +88,8 @@ public abstract class AbstractWorkflow implements Workflow {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            List<com.github.priyajitbera.carkg.service.model.client.common.request.Tool> tools = mapTools(getTools());
-            GenerationResponse generationResponse = generativeClient.generate(chatToon, tools);
+            List<com.github.priyajitbera.carkg.service.model.client.dto.request.Tool> tools = mapTools(getTools());
+            GenerationResponse generationResponse = generationClient.generate(chatToon, tools);
             log.info("generationResponse:\n{}", Serializer.toTokenOriented(generationResponse));
 
             chat.getChatItems().add(ChatItem.builder()
@@ -125,15 +125,15 @@ public abstract class AbstractWorkflow implements Workflow {
         return ZonedDateTime.now(ZoneId.of("UTC")).toLocalDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
-    List<com.github.priyajitbera.carkg.service.model.client.common.request.Tool> mapTools(List<Tool> tools) {
-        return tools.stream().map(tool -> com.github.priyajitbera.carkg.service.model.client.common.request.Tool.builder()
+    List<com.github.priyajitbera.carkg.service.model.client.dto.request.Tool> mapTools(List<Tool> tools) {
+        return tools.stream().map(tool -> com.github.priyajitbera.carkg.service.model.client.dto.request.Tool.builder()
                 .name(tool.getName())
                 .description(tool.getDescription())
                 .inputSchema(tool.getInputSchema())
                 .build()).toList();
     }
 
-    ToolCallDetails mapToolCallDetails(com.github.priyajitbera.carkg.service.model.client.common.response.ToolCallDetails toolCallDetails) {
+    ToolCallDetails mapToolCallDetails(com.github.priyajitbera.carkg.service.model.client.dto.response.ToolCallDetails toolCallDetails) {
         return ToolCallDetails.builder()
                 .name(toolCallDetails.getName())
                 .parameters(toolCallDetails.getParameters())

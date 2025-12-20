@@ -1,9 +1,7 @@
 package com.github.priyajitbera.carkg.service.api.service;
 
 
-import com.github.priyajitbera.carkg.service.model.client.common.EmbeddingClient;
-import com.github.priyajitbera.carkg.service.model.client.gemini.GeminiClient;
-import com.github.priyajitbera.carkg.service.model.client.OllamaClient;
+import com.github.priyajitbera.carkg.service.model.client.EmbeddingClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,14 +22,14 @@ public class EmbeddingService {
     public EmbeddingService(
             @Value("${embedding.strategy}")
             String embeddingStrategy,
-            @Qualifier("ollamaClient")
-            OllamaClient ollamaClient,
-            @Qualifier("geminiClient")
-            GeminiClient geminiClient) {
+            @Qualifier("OllamaEmbeddingClient")
+            EmbeddingClient ollamaEmbeddingClient,
+            @Qualifier("GeminiEmbeddingClient")
+            EmbeddingClient geminiEmbeddingClient) {
         this.EMBEDDING_STRATEGY = embeddingStrategy;
         embeddingClientMap = Map.of(
-                OLLAMA, ollamaClient,
-                GEMINI, geminiClient
+                OLLAMA, ollamaEmbeddingClient,
+                GEMINI, geminiEmbeddingClient
         );
     }
 

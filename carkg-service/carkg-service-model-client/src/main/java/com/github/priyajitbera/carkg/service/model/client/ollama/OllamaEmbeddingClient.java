@@ -1,9 +1,6 @@
-package com.github.priyajitbera.carkg.service.model.client;
+package com.github.priyajitbera.carkg.service.model.client.ollama;
 
-import com.github.priyajitbera.carkg.service.model.client.common.EmbeddingClient;
-import com.github.priyajitbera.carkg.service.model.client.common.GenerativeClient;
-import com.github.priyajitbera.carkg.service.model.client.common.request.Tool;
-import com.github.priyajitbera.carkg.service.model.client.common.response.GenerationResponse;
+import com.github.priyajitbera.carkg.service.model.client.EmbeddingClient;
 import org.springframework.ai.embedding.EmbeddingRequest;
 import org.springframework.ai.embedding.EmbeddingResponse;
 import org.springframework.ai.ollama.OllamaEmbeddingModel;
@@ -13,14 +10,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component("ollamaClient")
-public class OllamaClient implements GenerativeClient, EmbeddingClient {
+@Component("OllamaEmbeddingClient")
+public class OllamaEmbeddingClient implements EmbeddingClient {
 
     private final String OLLAMA_EMBEDDING_MODEL;
 
     private final OllamaEmbeddingModel embeddingModel;
 
-    public OllamaClient(
+    public OllamaEmbeddingClient(
             @Value("${ollama.embedding.model}")
             String ollamaEmbeddingModel,
             OllamaEmbeddingModel embeddingModel) {
@@ -34,15 +31,5 @@ public class OllamaClient implements GenerativeClient, EmbeddingClient {
                         List.of(text),
                         OllamaOptions.builder().model(OLLAMA_EMBEDDING_MODEL).truncate(false).build()));
         return embeddingResponse.getResults().get(0).getOutput();
-    }
-
-    @Override
-    public String generate(String promp) {
-        throw new UnsupportedOperationException("OllamaClient does not support text generation yet.");
-    }
-
-    @Override
-    public GenerationResponse generate(String prompt, List<Tool> tools) {
-        throw new RuntimeException("Not implemented yet");
     }
 }

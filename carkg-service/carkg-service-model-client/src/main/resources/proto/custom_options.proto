@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+// Define the Java package for the generated Protobuf descriptor classes
+option java_package = "com.github.priyajitbera.carkg.registered.projection.option";
+option java_outer_classname = "CustomOptionsProto";
+
+// Extend the MessageOptions object to add your custom option
+extend google.protobuf.MessageOptions {
+    // 1000 is an arbitrary, unused field number in the reserved range
+    optional string java_annotation = 1000;
+}

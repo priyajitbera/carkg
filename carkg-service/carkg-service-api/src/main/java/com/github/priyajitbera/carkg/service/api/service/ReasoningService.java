@@ -6,7 +6,7 @@ import com.github.priyajitbera.carkg.service.api.model.request.AskFixedSchema;
 import com.github.priyajitbera.carkg.service.api.model.response.RegisteredSparqlProjectionSchema;
 import com.github.priyajitbera.carkg.service.jena.config.ProjectionRegistrar;
 import com.github.priyajitbera.carkg.service.jena.mapper.SparqlJsonMapper;
-import com.github.priyajitbera.carkg.service.model.client.common.GenerativeClient;
+import com.github.priyajitbera.carkg.service.model.client.GenerationClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ import java.util.Optional;
 public class ReasoningService {
 
     private final String FORMAT = "RDF/XML";
-    private final GenerativeClient geminiClient;
+    private final GenerationClient geminiClient;
     private final JenaFusekiClient jenaFusekiClient;
     private final SparqlJsonMapper sparqlJsonMapper;
     private final ProjectionRegistrar.ProjectionsContainer projectionsContainer;
@@ -38,7 +38,7 @@ public class ReasoningService {
 
     public ReasoningService(
             @Qualifier("geminiClient")
-            GenerativeClient geminiClient,
+            GenerationClient geminiClient,
             JenaFusekiClient jenaFusekiClient,
             SparqlJsonMapper sparqlJsonMapper,
             @Qualifier("registeredSparqlProjections")

@@ -1,6 +1,6 @@
 package com.github.priyajitbera.carkg.service.agent.workflow;
 
-import com.github.priyajitbera.carkg.service.model.client.common.GenerativeClient;
+import com.github.priyajitbera.carkg.service.model.client.GenerationClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 public class BrandCreateWorkflow extends AbstractWorkflow {
 
     public BrandCreateWorkflow(
-            @Qualifier("geminiClient") GenerativeClient generativeClient,
+            @Qualifier("geminiClient") GenerationClient generationClient,
             SyncMcpToolCallbackProvider toolCallbackProvider) {
-        super(generativeClient, toolCallbackProvider);
+        super(generationClient, toolCallbackProvider);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.github.priyajitbera.carkg.service.model.client.common.request;
+package com.github.priyajitbera.carkg.service.model.client.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

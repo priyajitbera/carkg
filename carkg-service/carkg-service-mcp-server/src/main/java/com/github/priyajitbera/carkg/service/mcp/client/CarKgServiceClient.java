@@ -1,4 +1,4 @@
-package com.github.priyajitbera.carkg.service.client;
+package com.github.priyajitbera.carkg.service.mcp.client;
 
 import com.github.priyajitbera.carkg.service.api.model.request.BrandCreate;
 import com.github.priyajitbera.carkg.service.api.model.request.CarCreate;

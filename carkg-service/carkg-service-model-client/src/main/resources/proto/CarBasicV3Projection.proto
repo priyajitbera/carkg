@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+// Import the file containing your custom option definition
+import "custom_options.proto";
+// Import to ensure you can map to the generated Java annotation class
+option java_package = "com.github.priyajitbera.carkg.registered.projection";
+option java_outer_classname = "CarBasicV3ProjectionProtos";
+
+
+message CarBasicV3Projection {
+  // Apply the custom option here.
+  // The value is the fully qualified name of the annotation you want applied.
+  option (java_annotation) = "com.github.priyajitbera.carkg.service.jena.annoations.SparqlProjection";
+
+  string carName = 1;
+  string brandCountryOfOrigin = 2;
+}
