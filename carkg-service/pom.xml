@@ -25,7 +25,7 @@
         <version>3.5.5</version>
     </parent>
     <modules>
-        <module>carkg-service-api</module>
+        <module>carkg-service-core</module>
         <module>carkg-service-data-jpa</module>
         <module>carkg-service-lib-data-rdf</module>
         <module>carkg-service-lib-jena-fuseki</module>
