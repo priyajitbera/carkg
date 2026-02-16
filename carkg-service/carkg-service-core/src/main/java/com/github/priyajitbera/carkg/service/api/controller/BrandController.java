@@ -36,8 +36,13 @@ public class BrandController implements BrandApi {
   }
 
   @Override
-  public ResponseEntity<BrandEmbeddingModel> embed(BrandEmbeddingRequest request) {
+  public ResponseEntity<BrandEmbeddingModel> embedBatch(BrandEmbeddingRequest request) {
     return ResponseEntity.ok(brandService.embed(request));
+  }
+
+  @Override
+  public ResponseEntity<List<BrandEmbeddingModel>> embedAll() {
+    return ResponseEntity.ok(brandService.embedAll());
   }
 
   @Override

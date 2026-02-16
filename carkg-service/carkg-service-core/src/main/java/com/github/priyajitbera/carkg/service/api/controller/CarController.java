@@ -49,6 +49,11 @@ public class CarController implements CarApi {
   }
 
   @Override
+  public ResponseEntity<List<CarEmbeddingModel>> embed() {
+    return ResponseEntity.ok(carService.embedAll());
+  }
+
+  @Override
   public ResponseEntity<List<CarSemanticSearchModel>> semanticSearch(String query) {
     return ResponseEntity.ok(carService.semanticSearch(query));
   }
@@ -60,8 +65,14 @@ public class CarController implements CarApi {
   }
 
   @Override
-  public ResponseEntity<Void> syncKG(List<CarKgSyncRequest> requests) {
+  public ResponseEntity<Void> syncKGBatch(List<CarKgSyncRequest> requests) {
     carService.syncKGBatch(requests);
+    return ResponseEntity.ok().build();
+  }
+
+  @Override
+  public ResponseEntity<Void> syncKGAll() {
+    carService.syncKGAll();
     return ResponseEntity.ok().build();
   }
 }

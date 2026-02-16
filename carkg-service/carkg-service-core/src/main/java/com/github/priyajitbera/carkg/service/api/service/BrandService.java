@@ -111,4 +111,11 @@ public class BrandService
 
     return brandResponseMapper.mapEmbeddingModel(brandEntity);
   }
+
+  public List<BrandEmbeddingModel> embedAll() {
+    return brandRepository.findAll().stream()
+        .map(brand -> BrandEmbeddingRequest.builder().id(brand.getId()).force(true).build())
+        .map(this::embed)
+        .toList();
+  }
 }
