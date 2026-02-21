@@ -13,7 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(
     basePackages = {
       "com.github.priyajitbera.carkg.service.mcp",
-      "com.github.priyajitbera.carkg.service.model.client.gemini"
+      "com.github.priyajitbera.carkg.service.model.client.gemini",
+      "com.github.priyajitbera.carkg.service.agent"
     })
 @SpringBootApplication
 public class CarKgAgentMainApp implements CommandLineRunner {
