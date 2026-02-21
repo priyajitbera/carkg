@@ -11,7 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StopWatch;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -27,8 +26,7 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
   protected void doFilterInternal(
       HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
-    StopWatch stopWatch = new StopWatch();
-    stopWatch.start();
+    final String durationKey = DurationMeter.start();
     request.setAttribute(REQUEST_ID_KEY, newRequestId());
     ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
     log.info("{} {} {}", requestIdLog(), request.getMethod(), request.getRequestURL().toString());
@@ -39,14 +37,13 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         request.getMethod(),
         request.getRequestURL().toString(),
         requestWrapper.getContentAsString());
-    stopWatch.stop();
     log.info(
-        "{} {} {} {} duration: {} ms",
+        "{} {} {} {} duration: {}",
         requestIdLog(),
         request.getMethod(),
         request.getRequestURL().toString(),
         response.getStatus(),
-        stopWatch.getTotalTimeMillis());
+        DurationMeter.durationLog(durationKey));
   }
 
   public static String requestIdLog() {
