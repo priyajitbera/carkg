@@ -1,5 +1,7 @@
 package com.github.priyajitbera.carkg.service.common;
 
+import static com.github.priyajitbera.carkg.service.common.SimpleDurationMeter.DURATION_METER;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +28,7 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
   protected void doFilterInternal(
       HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
-    final String durationKey = DurationMeter.start();
+    final String durationKey = DURATION_METER.start();
     request.setAttribute(REQUEST_ID_KEY, newRequestId());
     ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
     log.info("{} {} {}", requestIdLog(), request.getMethod(), request.getRequestURL().toString());
@@ -38,12 +40,12 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         request.getRequestURL().toString(),
         requestWrapper.getContentAsString());
     log.info(
-        "{} {} {} {} duration: {}",
+        "{} {} {} {} {}",
         requestIdLog(),
         request.getMethod(),
         request.getRequestURL().toString(),
         response.getStatus(),
-        DurationMeter.durationLog(durationKey));
+        DURATION_METER.durationLog(durationKey));
   }
 
   public static String requestIdLog() {
