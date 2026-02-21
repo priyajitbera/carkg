@@ -1,8 +1,5 @@
 package com.github.priyajitbera.carkg.service.api;
 
-import com.github.priyajitbera.carkg.service.data.jpa.entity.Car;
-import com.github.priyajitbera.carkg.service.data.jpa.view.serialization.CarView;
-import com.github.priyajitbera.carkg.service.data.rdf.OntologySchemaExtractor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +19,9 @@ public class Application implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
+    // TODO:
+    // Regenerate when schema changes and commit them to the code repository.
+    /*
     OntologySchemaExtractor extractor = new OntologySchemaExtractor();
     extractor.extract(
         "https://github.com/priyajitbera/carkg/ontology/",
@@ -29,5 +29,6 @@ public class Application implements CommandLineRunner {
         "carkg-service-core/src/main/resources/ontology",
         Car.class,
         CarView.class);
+     */
   }
 }
