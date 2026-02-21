@@ -3,17 +3,17 @@ package com.github.priyajitbera.carkg.service.api.service;
 import com.github.priyajitbera.carkg.service.api.client.JenaFusekiClient;
 import com.github.priyajitbera.carkg.service.api.model.request.AskFixedSchema;
 import com.github.priyajitbera.carkg.service.api.model.response.RegisteredSparqlProjectionSchema;
+import com.github.priyajitbera.carkg.service.api.prompt.PromptRepository;
+import com.github.priyajitbera.carkg.service.api.prompt.Prompts;
 import com.github.priyajitbera.carkg.service.jena.config.ProjectionRegistrar;
 import com.github.priyajitbera.carkg.service.jena.mapper.SparqlJsonMapper;
 import com.github.priyajitbera.carkg.service.model.client.GenerationClient;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,61 +22,42 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class ReasoningService {
 
-  private final String FORMAT = "RDF/XML";
-  private final GenerationClient geminiClient;
+  private final String ontologyFormat;
+  private final GenerationClient generationClient;
   private final JenaFusekiClient jenaFusekiClient;
   private final SparqlJsonMapper sparqlJsonMapper;
   private final ProjectionRegistrar.ProjectionsContainer projectionsContainer;
 
   private final Map<String, String> ontologySchemas;
 
-  private final String SPARQL_GENERATION_PROMPT_TEMPLATE;
-  private final String SPARQL_GENERATION_FIX_SCHEMA_PROMPT_TEMPLATE;
-  private final String SPARQL_RESPONSE_NL_RESPONSE_TEMPLATE;
+  private final PromptRepository promptRepository;
 
   public ReasoningService(
-      @Qualifier("GeminiGenerationClient") GenerationClient geminiClient,
+      @Value("${reasoning-service.ontology-format}") String ontologyFormat,
+      GenerationClient generationClient,
       JenaFusekiClient jenaFusekiClient,
       SparqlJsonMapper sparqlJsonMapper,
       @Qualifier("registeredSparqlProjections")
           ProjectionRegistrar.ProjectionsContainer projectionsContainer,
-      @Qualifier("ontologySchemas") Map<String, String> ontologySchemas) {
-    this.geminiClient = geminiClient;
+      @Qualifier("ontologySchemas") Map<String, String> ontologySchemas,
+      PromptRepository promptRepository) {
+    this.ontologyFormat = ontologyFormat;
+    this.generationClient = generationClient;
     this.jenaFusekiClient = jenaFusekiClient;
     this.sparqlJsonMapper = sparqlJsonMapper;
     this.projectionsContainer = projectionsContainer;
     this.ontologySchemas = ontologySchemas;
-    try {
-      this.SPARQL_GENERATION_PROMPT_TEMPLATE =
-          Files.readString(
-              Path.of("carkg-service-api/src/main/resources/prompts/sparql_generation.txt"));
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-    try {
-      this.SPARQL_GENERATION_FIX_SCHEMA_PROMPT_TEMPLATE =
-          Files.readString(
-              Path.of(
-                  "carkg-service-api/src/main/resources/prompts/sparql_generation_fixed_schema.txt"));
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-    try {
-      this.SPARQL_RESPONSE_NL_RESPONSE_TEMPLATE =
-          Files.readString(
-              Path.of(
-                  "carkg-service-api/src/main/resources/prompts/sparql_response_to_nl_response.txt"));
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    this.promptRepository = promptRepository;
   }
 
   public String generateSparql(String question) {
-    final String prompt =
-        String.format(SPARQL_GENERATION_PROMPT_TEMPLATE, ontologySchemas.get(FORMAT), question);
-    log.info("[generateSparql] prompts:\n{}", prompt);
+    final String promptTemplate =
+        promptRepository.getPrompt(Prompts.SPARQL_GENERATION_PROMPT.name());
+    final String ontologySchema = ontologySchemas.get(ontologyFormat);
+    final String prompt = String.format(promptTemplate, ontologySchema, question);
+    log.info("[generateSparql] prompt: {}", prompt);
 
-    String generatedSparql = geminiClient.generate(prompt);
+    String generatedSparql = generationClient.generate(prompt);
     log.info("[generateSparql] Generated SPARQL:\n{}", generatedSparql);
 
     return generatedSparql;
@@ -96,13 +77,13 @@ public class ReasoningService {
 
     final String prompt =
         String.format(
-            SPARQL_GENERATION_FIX_SCHEMA_PROMPT_TEMPLATE,
-            ontologySchemas.get(FORMAT),
+            promptRepository.getPrompt(Prompts.SPARQL_GENERATION_FIX_SCHEMA_PROMPT.name()),
+            ontologySchemas.get(ontologyFormat),
             question,
             projectionColumns);
     log.info("[generateSparqlFixedSchema] prompts:\n{}", prompt);
 
-    String generatedSparql = geminiClient.generate(prompt);
+    String generatedSparql = generationClient.generate(prompt);
     log.info("[generateSparqlFixedSchema] Generated SPARQL:\n{}", generatedSparql);
     return Map.entry(generatedSparql, projectionSchemaOpt.get().getKey());
   }
@@ -131,10 +112,13 @@ public class ReasoningService {
     final String jenaFusekiResponse =
         String.join("\n", jenaFusekiClient.runSelectQuery(sanitizedSparql));
     final String humanizePrompt =
-        String.format(SPARQL_RESPONSE_NL_RESPONSE_TEMPLATE, question, jenaFusekiResponse);
+        String.format(
+            promptRepository.getPrompt(Prompts.SPARQL_RESPONSE_NL_RESPONSE.name()),
+            question,
+            jenaFusekiResponse);
     log.info("[askHumanize] Humanize Prompt:\n{}", humanizePrompt);
 
-    final String response = geminiClient.generate(humanizePrompt);
+    final String response = generationClient.generate(humanizePrompt);
     log.info("[askRaw] response:\n{}", response);
 
     return response;

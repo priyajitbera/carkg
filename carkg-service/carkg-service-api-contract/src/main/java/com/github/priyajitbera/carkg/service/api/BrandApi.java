@@ -23,7 +23,10 @@ public interface BrandApi {
   ResponseEntity<BrandModel> get(@PathVariable("id") String id);
 
   @PostMapping("/embed")
-  ResponseEntity<BrandEmbeddingModel> embed(@RequestBody BrandEmbeddingRequest request);
+  ResponseEntity<BrandEmbeddingModel> embedBatch(@RequestBody BrandEmbeddingRequest request);
+
+  @PostMapping("/embed/all")
+  ResponseEntity<List<BrandEmbeddingModel>> embedAll();
 
   @GetMapping("/semantic-search")
   ResponseEntity<List<BrandSemanticSearchModel>> semanticSearch(

@@ -1,15 +1,16 @@
 package com.github.priyajitbera.carkg.service.api.controller;
 
+import com.github.priyajitbera.carkg.service.api.ReasoningApi;
 import com.github.priyajitbera.carkg.service.api.model.request.AskFixedSchema;
 import com.github.priyajitbera.carkg.service.api.model.response.RegisteredSparqlProjectionSchema;
 import com.github.priyajitbera.carkg.service.api.service.ReasoningService;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/reason")
-public class ReasoningController {
+public class ReasoningController implements ReasoningApi {
 
   private final ReasoningService reasoningService;
 
@@ -17,28 +18,28 @@ public class ReasoningController {
     this.reasoningService = reasoningService;
   }
 
-  @PostMapping("generate-sparql")
+  @Override
   public ResponseEntity<String> generateSparql(@RequestBody String question) {
     String sparqlResponse = reasoningService.generateSparql(question);
     return ResponseEntity.ok(sparqlResponse);
   }
 
-  @PostMapping("/ask-raw")
+  @Override
   public ResponseEntity<String> askRaw(@RequestBody String question) {
     return ResponseEntity.ok(reasoningService.askRaw(question));
   }
 
-  @PostMapping("/ask-humanize")
+  @Override
   public ResponseEntity<String> askHumanize(@RequestBody String question) {
     return ResponseEntity.ok(reasoningService.askHumanize(question));
   }
 
-  @PostMapping("/ask-fixed-schema")
+  @Override
   public ResponseEntity<Object> askFixedSchema(@RequestBody AskFixedSchema question) {
     return ResponseEntity.ok(reasoningService.askFixedSchema(question));
   }
 
-  @GetMapping("/ask-fixed-schema/available-projections")
+  @Override
   public ResponseEntity<List<RegisteredSparqlProjectionSchema>> getAvailableProjections() {
     return ResponseEntity.ok(reasoningService.getAvailableProjections());
   }

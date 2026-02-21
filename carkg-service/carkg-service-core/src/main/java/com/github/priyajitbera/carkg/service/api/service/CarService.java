@@ -140,6 +140,13 @@ public class CarService
     return embeddingRequests.stream().map(this::embed).toList();
   }
 
+  public List<CarEmbeddingModel> embedAll() {
+    return carRepository.findAll().stream()
+        .map(car -> CarEmbeddingRequest.builder().id(car.getId()).force(true).build())
+        .map(this::embed)
+        .toList();
+  }
+
   @Transactional
   public void syncKG(CarKgSyncRequest request) {
     Car carEntity =
@@ -184,5 +191,12 @@ public class CarService
   @Transactional
   public void syncKGBatch(List<CarKgSyncRequest> requests) {
     requests.forEach(this::syncKG);
+  }
+
+  @Transactional
+  public void syncKGAll() {
+    carRepository.findAll().stream()
+        .map(car -> CarKgSyncRequest.builder().id(car.getId()).force(true).build())
+        .forEach(this::syncKG);
   }
 }

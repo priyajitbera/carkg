@@ -30,6 +30,9 @@ public interface CarApi {
   ResponseEntity<List<CarEmbeddingModel>> embed(
       @RequestBody List<CarEmbeddingRequest> embeddingRequests);
 
+  @PostMapping("/embed/all")
+  ResponseEntity<List<CarEmbeddingModel>> embed();
+
   @GetMapping("/semantic-search")
   ResponseEntity<List<CarSemanticSearchModel>> semanticSearch(@RequestParam("query") String query);
 
@@ -37,5 +40,8 @@ public interface CarApi {
   ResponseEntity<Void> syncKG(@RequestBody CarKgSyncRequest request);
 
   @PostMapping("/sync/kg/batch")
-  ResponseEntity<Void> syncKG(@RequestBody List<CarKgSyncRequest> requests);
+  ResponseEntity<Void> syncKGBatch(@RequestBody List<CarKgSyncRequest> requests);
+
+  @PostMapping("/sync/kg/all")
+  ResponseEntity<Void> syncKGAll();
 }

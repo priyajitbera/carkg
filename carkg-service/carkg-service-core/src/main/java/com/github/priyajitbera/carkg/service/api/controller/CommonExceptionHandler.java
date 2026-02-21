@@ -14,8 +14,11 @@ public class CommonExceptionHandler {
 
   @ExceptionHandler
   public ResponseEntity<ErrorModel> handleResponseStatusException(ResponseStatusException ex) {
-    log.info(
-        "Logging ResponseStatusException: {} {}", ex.getClass().getSimpleName(), ex.getMessage());
+    log.error(
+        "[handleResponseStatusException] Logging :{}, :{}",
+        ex.getClass().getSimpleName(),
+        ex.getMessage(),
+        ex);
     return ResponseEntity.status(ex.getStatusCode())
         .body(
             ErrorModel.builder().code(ex.getStatusCode().value()).message(ex.getReason()).build());
@@ -23,7 +26,8 @@ public class CommonExceptionHandler {
 
   @ExceptionHandler
   public ResponseEntity<ErrorModel> handleException(Exception ex) {
-    log.info("Logging Exception: {} {}", ex.getClass().getSimpleName(), ex.getMessage());
+    log.error(
+        "[handleException] Logging: {}, :{}", ex.getClass().getSimpleName(), ex.getMessage(), ex);
     return ResponseEntity.badRequest()
         .body(
             ErrorModel.builder()
