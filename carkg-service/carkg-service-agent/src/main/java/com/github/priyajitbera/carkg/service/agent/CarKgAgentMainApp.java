@@ -16,16 +16,16 @@ import org.springframework.context.annotation.ComponentScan;
       "com.github.priyajitbera.carkg.service.model.client.gemini"
     })
 @SpringBootApplication
-public class CarKgAgentApplication implements CommandLineRunner {
+public class CarKgAgentMainApp implements CommandLineRunner {
 
   @Autowired private final SyncMcpToolCallbackProvider syncMcpToolCallbackProvider;
 
-  public CarKgAgentApplication(SyncMcpToolCallbackProvider syncMcpToolCallbackProvider) {
+  public CarKgAgentMainApp(SyncMcpToolCallbackProvider syncMcpToolCallbackProvider) {
     this.syncMcpToolCallbackProvider = syncMcpToolCallbackProvider;
   }
 
   public static void main(String[] args) {
-    SpringApplication.run(CarKgAgentApplication.class, args);
+    SpringApplication.run(CarKgAgentMainApp.class, args);
   }
 
   @Override
