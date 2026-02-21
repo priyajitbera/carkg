@@ -11,10 +11,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {"com.github.priyajitbera.carkg.service"})
 @EnableJpaRepositories(basePackages = {"com.github.priyajitbera.carkg.service.data.jpa.repository"})
 @EntityScan(basePackages = {"com.github.priyajitbera.carkg.service.data.jpa.entity"})
-public class Application implements CommandLineRunner {
+public class CarKgCoreAppMain implements CommandLineRunner {
 
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(CarKgCoreAppMain.class, args);
   }
 
   @Override
