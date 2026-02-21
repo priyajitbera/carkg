@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class AskFixedSchema {
-    private String ask;
-    private String schema;
+  private String ask;
+  private String schema;
 }

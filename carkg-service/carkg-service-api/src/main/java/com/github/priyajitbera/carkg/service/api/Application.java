@@ -16,17 +16,18 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = {"com.github.priyajitbera.carkg.service.data.jpa.entity"})
 public class Application implements CommandLineRunner {
 
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        OntologySchemaExtractor extractor = new OntologySchemaExtractor();
-        extractor.extract(
-                "https://github.com/priyajitbera/carkg/ontology/",
-                "https://github.com/priyajitbera/carkg/data/",
-                "carkg-service/carkg-service-api/src/main/resources/ontology", Car.class, CarView.class);
-    }
+  @Override
+  public void run(String... args) throws Exception {
+    OntologySchemaExtractor extractor = new OntologySchemaExtractor();
+    extractor.extract(
+        "https://github.com/priyajitbera/carkg/ontology/",
+        "https://github.com/priyajitbera/carkg/data/",
+        "carkg-service-api/src/main/resources/ontology",
+        Car.class,
+        CarView.class);
+  }
 }

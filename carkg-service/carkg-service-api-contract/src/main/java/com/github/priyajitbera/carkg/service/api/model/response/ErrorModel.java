@@ -7,6 +7,6 @@ import lombok.Getter;
 @Builder
 public class ErrorModel {
 
-    private Integer code;
-    private String message;
+  private Integer code;
+  private String message;
 }

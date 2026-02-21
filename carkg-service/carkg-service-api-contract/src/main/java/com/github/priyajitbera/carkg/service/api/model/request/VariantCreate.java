@@ -10,7 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VariantCreate {
-    private String name;
+  private String name;
 }
-
-

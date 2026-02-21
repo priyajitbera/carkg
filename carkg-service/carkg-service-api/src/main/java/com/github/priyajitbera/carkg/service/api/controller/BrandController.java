@@ -7,42 +7,41 @@ import com.github.priyajitbera.carkg.service.api.model.response.BrandEmbeddingMo
 import com.github.priyajitbera.carkg.service.api.model.response.BrandModel;
 import com.github.priyajitbera.carkg.service.api.model.response.semanticsearch.BrandSemanticSearchModel;
 import com.github.priyajitbera.carkg.service.api.service.BrandService;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class BrandController implements BrandApi {
 
-    private final BrandService brandService;
+  private final BrandService brandService;
 
-    public BrandController(BrandService brandService) {
-        this.brandService = brandService;
-    }
+  public BrandController(BrandService brandService) {
+    this.brandService = brandService;
+  }
 
-    @Override
-    public ResponseEntity<BrandModel> save(BrandCreate create) {
-        return ResponseEntity.ok(brandService.save(create));
-    }
+  @Override
+  public ResponseEntity<BrandModel> save(BrandCreate create) {
+    return ResponseEntity.ok(brandService.save(create));
+  }
 
-    @Override
-    public ResponseEntity<List<BrandModel>> saveBatch(List<BrandCreate> creates) {
-        return ResponseEntity.ok(brandService.saveBatch(creates));
-    }
+  @Override
+  public ResponseEntity<List<BrandModel>> saveBatch(List<BrandCreate> creates) {
+    return ResponseEntity.ok(brandService.saveBatch(creates));
+  }
 
-    @Override
-    public ResponseEntity<BrandModel> get(String id) {
-        return ResponseEntity.ok(brandService.get(id));
-    }
+  @Override
+  public ResponseEntity<BrandModel> get(String id) {
+    return ResponseEntity.ok(brandService.get(id));
+  }
 
-    @Override
-    public ResponseEntity<BrandEmbeddingModel> embed(BrandEmbeddingRequest request) {
-        return ResponseEntity.ok(brandService.embed(request));
-    }
+  @Override
+  public ResponseEntity<BrandEmbeddingModel> embed(BrandEmbeddingRequest request) {
+    return ResponseEntity.ok(brandService.embed(request));
+  }
 
-    @Override
-    public ResponseEntity<List<BrandSemanticSearchModel>> semanticSearch(String query) {
-        return ResponseEntity.ok(brandService.semanticSearch(query));
-    }
+  @Override
+  public ResponseEntity<List<BrandSemanticSearchModel>> semanticSearch(String query) {
+    return ResponseEntity.ok(brandService.semanticSearch(query));
+  }
 }

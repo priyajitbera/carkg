@@ -10,5 +10,5 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public abstract class EmbeddableModel {
-    private float[] embedding;
+  private float[] embedding;
 }

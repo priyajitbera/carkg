@@ -10,12 +10,10 @@ import org.mapstruct.MappingTarget;
 @Mapper(config = CommonMapperConfig.class)
 public abstract class BrandRequestMapper {
 
-    public abstract void map(@MappingTarget Brand brand, BrandCreate create);
+  public abstract void map(@MappingTarget Brand brand, BrandCreate create);
 
-    @AfterMapping
-    protected void afterMapping(@MappingTarget Brand target) {
-        target.deriveAndSetId();
-    }
+  @AfterMapping
+  protected void afterMapping(@MappingTarget Brand target) {
+    target.deriveAndSetId();
+  }
 }
-
-

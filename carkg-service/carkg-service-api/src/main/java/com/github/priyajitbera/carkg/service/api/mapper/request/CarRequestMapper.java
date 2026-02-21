@@ -4,105 +4,127 @@ import com.github.priyajitbera.carkg.service.api.mapper.CommonMapperConfig;
 import com.github.priyajitbera.carkg.service.api.mapper.request.context.CarRequestMappingContext;
 import com.github.priyajitbera.carkg.service.api.model.request.*;
 import com.github.priyajitbera.carkg.service.data.jpa.entity.*;
-import org.mapstruct.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
+import org.mapstruct.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Mapper(config = CommonMapperConfig.class, uses = {
-        ColorOptionRequestMapper.class, VariantRequestMapper.class, EngineRequestMapper.class, TransmissiongTypeRequestMapper.class})
+@Mapper(
+    config = CommonMapperConfig.class,
+    uses = {
+      ColorOptionRequestMapper.class,
+      VariantRequestMapper.class,
+      EngineRequestMapper.class,
+      TransmissiongTypeRequestMapper.class
+    })
 public abstract class CarRequestMapper {
 
-    @Autowired
-    private ColorOptionRequestMapper colorOptionRequestMapper;
-    @Autowired
-    private VariantRequestMapper variantRequestMapper;
-    @Autowired
-    private EngineRequestMapper engineRequestMapper;
-    @Autowired
-    private TransmissiongTypeRequestMapper transmissiongTypeRequestMapper;
-    @Autowired
-    private CombinationRequestMapper combinationRequestMapper;
+  @Autowired private ColorOptionRequestMapper colorOptionRequestMapper;
+  @Autowired private VariantRequestMapper variantRequestMapper;
+  @Autowired private EngineRequestMapper engineRequestMapper;
+  @Autowired private TransmissiongTypeRequestMapper transmissiongTypeRequestMapper;
+  @Autowired private CombinationRequestMapper combinationRequestMapper;
 
-    @Mappings({
-            @Mapping(target = "brand", source = ".", qualifiedBy = MapBrand.class),
-            @Mapping(target = "colorOptions", qualifiedBy = MapColorOptions.class, dependsOn = {"brand", "name"}),
-            @Mapping(target = "engineOptions", qualifiedBy = MapEngines.class, dependsOn = {"brand", "name"}),
-            @Mapping(target = "transmissionTypes", qualifiedBy = MapTransmissionTypes.class, dependsOn = {"brand", "name"}),
-            @Mapping(target = "variants", qualifiedBy = MapVariants.class, dependsOn = {"brand", "name"}),
-            @Mapping(target = "combinations", qualifiedBy = MapCombinations.class, dependsOn = {"brand", "name", "variants", "engineOptions", "transmissionTypes", "colorOptions"})
-    })
-    public abstract void map(@MappingTarget Car car, CarCreate create, @Context CarRequestMappingContext context);
+  @Mappings({
+    @Mapping(target = "brand", source = ".", qualifiedBy = MapBrand.class),
+    @Mapping(
+        target = "colorOptions",
+        qualifiedBy = MapColorOptions.class,
+        dependsOn = {"brand", "name"}),
+    @Mapping(
+        target = "engineOptions",
+        qualifiedBy = MapEngines.class,
+        dependsOn = {"brand", "name"}),
+    @Mapping(
+        target = "transmissionTypes",
+        qualifiedBy = MapTransmissionTypes.class,
+        dependsOn = {"brand", "name"}),
+    @Mapping(
+        target = "variants",
+        qualifiedBy = MapVariants.class,
+        dependsOn = {"brand", "name"}),
+    @Mapping(
+        target = "combinations",
+        qualifiedBy = MapCombinations.class,
+        dependsOn = {
+          "brand",
+          "name",
+          "variants",
+          "engineOptions",
+          "transmissionTypes",
+          "colorOptions"
+        })
+  })
+  public abstract void map(
+      @MappingTarget Car car, CarCreate create, @Context CarRequestMappingContext context);
 
+  @Qualifier
+  @Retention(RetentionPolicy.CLASS)
+  @interface MapBrand {}
 
-    @Qualifier
-    @Retention(RetentionPolicy.CLASS)
-    @interface MapBrand {
-    }
+  @MapBrand
+  protected Brand mapBrand(CarCreate create, @Context CarRequestMappingContext context) {
+    return context.brand();
+  }
 
-    @MapBrand
-    protected Brand mapBrand(CarCreate create, @Context CarRequestMappingContext context) {
-        return context.brand();
-    }
+  @Qualifier
+  @Retention(RetentionPolicy.CLASS)
+  @interface MapColorOptions {}
 
-    @Qualifier
-    @Retention(RetentionPolicy.CLASS)
-    @interface MapColorOptions {
-    }
+  @MapColorOptions
+  protected List<ColorOption> mapColorOptions(
+      List<ColorOptionCreate> childItemsCreate, @Context CarRequestMappingContext context) {
+    return ColorOptionRequestMapper.genericListItemMapper(colorOptionRequestMapper)
+        .map(context.car().getColorOptions(), childItemsCreate, context);
+  }
 
-    @MapColorOptions
-    protected List<ColorOption> mapColorOptions(List<ColorOptionCreate> childItemsCreate, @Context CarRequestMappingContext context) {
-        return ColorOptionRequestMapper.genericListItemMapper(colorOptionRequestMapper).map(context.car().getColorOptions(), childItemsCreate, context);
-    }
+  @Qualifier
+  @Retention(RetentionPolicy.CLASS)
+  @interface MapVariants {}
 
-    @Qualifier
-    @Retention(RetentionPolicy.CLASS)
-    @interface MapVariants {
-    }
+  @MapVariants
+  protected List<Variant> mapVariants(
+      List<VariantCreate> sourceItems, @Context CarRequestMappingContext context) {
+    return VariantRequestMapper.genericListItemMapper2(variantRequestMapper)
+        .map(context.car().getVariants(), sourceItems, context);
+  }
 
-    @MapVariants
-    protected List<Variant> mapVariants(List<VariantCreate> sourceItems, @Context CarRequestMappingContext context) {
-        return VariantRequestMapper.genericListItemMapper2(variantRequestMapper).map(context.car().getVariants(), sourceItems, context);
-    }
+  @Qualifier
+  @Retention(RetentionPolicy.CLASS)
+  @interface MapCombinations {}
 
-    @Qualifier
-    @Retention(RetentionPolicy.CLASS)
-    @interface MapCombinations {
-    }
+  @MapCombinations
+  protected List<Combination> mapCombinations(
+      List<CombinationCreate> sourceItems, @Context CarRequestMappingContext context) {
+    return CombinationRequestMapper.genericListItemMapper(combinationRequestMapper)
+        .map(context.car().getCombinations(), sourceItems, context);
+  }
 
-    @MapCombinations
-    protected List<Combination> mapCombinations(List<CombinationCreate> sourceItems, @Context CarRequestMappingContext context) {
-        return CombinationRequestMapper.genericListItemMapper(combinationRequestMapper).map(context.car().getCombinations(), sourceItems, context);
-    }
+  @Qualifier
+  @Retention(RetentionPolicy.CLASS)
+  @interface MapEngines {}
 
-    @Qualifier
-    @Retention(RetentionPolicy.CLASS)
-    @interface MapEngines {
-    }
+  @MapEngines
+  protected List<EngineOption> mapEngines(
+      List<EngineOptionCreate> childItemsCreate, @Context CarRequestMappingContext context) {
+    return EngineRequestMapper.genericListItemMapper(engineRequestMapper)
+        .map(context.car().getEngineOptions(), childItemsCreate, context);
+  }
 
-    @MapEngines
-    protected List<EngineOption> mapEngines(List<EngineOptionCreate> childItemsCreate, @Context CarRequestMappingContext context) {
-        return EngineRequestMapper.genericListItemMapper(engineRequestMapper).map(context.car().getEngineOptions(), childItemsCreate, context);
-    }
+  @Qualifier
+  @Retention(RetentionPolicy.CLASS)
+  @interface MapTransmissionTypes {}
 
-    @Qualifier
-    @Retention(RetentionPolicy.CLASS)
-    @interface MapTransmissionTypes {
-    }
+  @MapTransmissionTypes
+  protected List<TransmissionType> mapTransmissionTypes(
+      List<TransmissionTypeCreate> childItemsCreate, @Context CarRequestMappingContext context) {
+    return TransmissiongTypeRequestMapper.genericListItemMapper(transmissiongTypeRequestMapper)
+        .map(context.car().getTransmissionTypes(), childItemsCreate, context);
+  }
 
-    @MapTransmissionTypes
-    protected List<TransmissionType> mapTransmissionTypes(List<TransmissionTypeCreate> childItemsCreate, @Context CarRequestMappingContext context) {
-        return TransmissiongTypeRequestMapper.genericListItemMapper(transmissiongTypeRequestMapper).map(context.car().getTransmissionTypes(), childItemsCreate, context);
-    }
-
-    @AfterMapping
-    protected void afterMapping(@MappingTarget Car target) {
-        target.deriveAndSetId();
-    }
+  @AfterMapping
+  protected void afterMapping(@MappingTarget Car target) {
+    target.deriveAndSetId();
+  }
 }
-
-
-
-

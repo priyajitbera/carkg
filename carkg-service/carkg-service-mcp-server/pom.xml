@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <version>0.0.1-SNAPSHOT</version>
     <name>carkg-service-mcp-server</name>
-    <description>APIs</description>
+    <description>CarKg MCP(Model Context Protocolq) Server</description>
     <parent>
         <groupId>com.github.priyajitbera</groupId>
         <artifactId>carkg-service-parent</artifactId>
@@ -35,6 +35,10 @@
         <dependency>
             <groupId>com.github.priyajitbera</groupId>
             <artifactId>carkg-service-api-contract</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.priyajitbera</groupId>
+            <artifactId>carkg-service-common</artifactId>
         </dependency>
         <!-- MapStruct for code generation mappers -->
         <dependency>

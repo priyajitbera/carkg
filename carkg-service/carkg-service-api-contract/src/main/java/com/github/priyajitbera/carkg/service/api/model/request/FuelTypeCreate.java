@@ -10,8 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FuelTypeCreate {
-    private String name;
+  private String name;
 }
-
-
-

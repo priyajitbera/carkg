@@ -10,10 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CombinationCreate {
-    private String variant;
-    private String transmissionType;
-    private String engineOption;
-    private String colorOption;
+  private String variant;
+  private String transmissionType;
+  private String engineOption;
+  private String colorOption;
 }
-
-

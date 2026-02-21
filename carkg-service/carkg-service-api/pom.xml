@@ -71,6 +71,14 @@
             <groupId>com.github.priyajitbera</groupId>
             <artifactId>carkg-service-lib-data-rdf</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.priyajitbera</groupId>
+            <artifactId>carkg-service-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.priyajitbera</groupId>
+            <artifactId>carkg-service-model-client</artifactId>
+        </dependency>
         <!-- MapStruct for code generation mappers -->
         <dependency>
             <groupId>org.mapstruct</groupId>

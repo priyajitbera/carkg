@@ -5,12 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class FuelTypeModel {
-    private String id;
-    private String name;
+  private String id;
+  private String name;
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BrandModel {
-    private String id;
-    private String name;
-    private String countryOfOrigin;
+  private String id;
+  private String name;
+  private String countryOfOrigin;
 }

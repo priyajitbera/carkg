@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BrandCreate {
-    private String name;
-    private String countryOfOrigin;
+  private String name;
+  private String countryOfOrigin;
 }
