@@ -29,7 +29,9 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
       HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
     final String durationKey = DURATION_METER.start();
-    request.setAttribute(REQUEST_ID_KEY, newRequestId());
+    final String requestId = newRequestId();
+    request.setAttribute(REQUEST_ID_KEY, requestId);
+    response.setHeader(REQUEST_ID_KEY, requestId);
     ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
     log.info("{} {} {}", requestIdLog(), request.getMethod(), request.getRequestURL().toString());
     filterChain.doFilter(requestWrapper, response);
