@@ -2,13 +2,15 @@ package com.github.priyajitbera.carkg.service.agent.controller;
 
 import com.github.priyajitbera.carkg.service.agent.config.WorkflowContainer;
 import com.github.priyajitbera.carkg.service.agent.dto.request.WorkflowCreate;
+import com.github.priyajitbera.carkg.service.agent.dto.request.WorkflowInvoke;
 import com.github.priyajitbera.carkg.service.agent.dto.response.Workflow;
 import com.github.priyajitbera.carkg.service.agent.workflow.AbstractWorkflow;
 import com.github.priyajitbera.carkg.service.model.client.GenerationClient;
 import java.util.List;
 import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("workflow")
@@ -20,7 +22,7 @@ public class WorkflowController {
 
   public WorkflowController(
       WorkflowContainer workflowContainer,
-      @Qualifier("GeminiGenerationClient") GenerationClient generationClient,
+      GenerationClient generationClient,
       SyncMcpToolCallbackProvider toolCallbackProvider) {
     this.workflowContainer = workflowContainer;
     this.generationClient = generationClient;
@@ -60,6 +62,19 @@ public class WorkflowController {
   @GetMapping
   public List<Workflow> getWorkflows() {
     return workflowContainer.getWorkflows().stream().map(this::map).toList();
+  }
+
+  @PostMapping("/invoke")
+  public void invokeWorkFlow(@RequestBody WorkflowInvoke workflowInvoke) {
+    workflowContainer.getWorkflows().stream()
+        .filter(workflow -> workflow.getName().equals(workflowInvoke.getName()))
+        .findFirst()
+        .ifPresentOrElse(
+            workflow -> workflow.run(workflowInvoke.getTaskPrompt()),
+            () -> {
+              throw new ResponseStatusException(
+                  HttpStatus.NOT_FOUND, "No workflow found with name: " + workflowInvoke.getName());
+            });
   }
 
   private Workflow map(AbstractWorkflow workflow) {
