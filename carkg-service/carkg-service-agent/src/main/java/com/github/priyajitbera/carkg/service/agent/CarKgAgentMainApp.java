@@ -14,7 +14,8 @@ import org.springframework.context.annotation.ComponentScan;
     basePackages = {
       "com.github.priyajitbera.carkg.service.mcp",
       "com.github.priyajitbera.carkg.service.model.client",
-      "com.github.priyajitbera.carkg.service.agent"
+      "com.github.priyajitbera.carkg.service.agent",
+      "com.github.priyajitbera.carkg.service.common"
     })
 @SpringBootApplication
 public class CarKgAgentMainApp implements CommandLineRunner {
